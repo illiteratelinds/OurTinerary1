@@ -2,6 +2,7 @@ class ItinerariesController < ApplicationController
     before_action :set_itinerary, only: [:show, :edit, :update, :destroy]
 
   def index
+    @itineraries = Itinerary.all
   end  
 
   def show
@@ -49,10 +50,10 @@ class ItinerariesController < ApplicationController
 
   private
     def set_itinerary
-      @itinerary = itinerary.find(params[:id])
+      @itinerary = Itinerary.find(params[:id])
     end
 
     def itinerary_params
-      params[:itinerary]
+      params.require(:itinerary).permit(:title, :location, :start_date, :end_date, :user_id)
     end
 end

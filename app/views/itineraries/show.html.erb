@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+<h1> My Itinerary for <%=@itinerary.location%> </h1>
+<br><br>
+<h3> <%= @itinerary.title %></h3><br>
+Start Date: <%= @itinerary.start_date.strftime("%B %d, %Y")%><br>
+End Date: <%= @itinerary.end_date.strftime("%B %d, %Y")%>
