@@ -6,7 +6,10 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
-
+    @flight = Flight.new
+    @hotel = Hotel.new
+    @attraction = Attraction.new
+    @restaurant = Restaurant.new
   end
 
   def new

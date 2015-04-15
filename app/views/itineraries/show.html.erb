@@ -4,3 +4,37 @@
 <h3> <%= @itinerary.title %></h3><br>
 Start Date: <%= @itinerary.start_date.strftime("%B %d, %Y")%><br>
 End Date: <%= @itinerary.end_date.strftime("%B %d, %Y")%>
+
+<%= form_for [@itinerary, @flight] do |f| %>
+ <% if @flight.errors.any? %>
+   <div id="error_explanation">
+     <h2><%= pluralize(@flight.errors.count, "error") %> prohibited this itinerary from being saved:</h2>
+     <ul>
+     <% @flight.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+     <% end %>
+     </ul>
+   </div>
+ <% end %>
+
+  <div class = "form-group">
+    <%= f.label :airline %><br>
+    <%= f.text_field :airline, class: "form-control"%><br>
+  </div>
+  <div class = "form-group">
+    <%= f.label :from %><br>
+    <%= f.text_field :from, class: "form-control"%><br>
+  </div>
+  <div class = "form-group">
+    <%= f.label :to %><br>
+    <%= f.text_field :to, class: "form-control" %><br>
+  </div>
+  <div class = "form-group">
+    <%= f.label :review %><br>
+    <%= f.text_area :review, class: "form-control"%><br>
+  </div>
+
+  <div class="actions"><br>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+  <% end %>
