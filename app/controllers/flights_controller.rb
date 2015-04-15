@@ -9,7 +9,6 @@ class FlightsController < ApplicationController
     flight = Flight.new(flight_params)
     itinerary = Itinerary.find(params[:itinerary_id])
     flight.itinerary_id = params["itinerary_id"] 
-    # itinerary.flights.(flight_params)
     respond_to do |format|
       if flight.save
         format.html { redirect_to itinerary, notice: 'flight was successfully created.' }

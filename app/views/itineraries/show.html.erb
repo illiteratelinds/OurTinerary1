@@ -12,7 +12,34 @@ End Date: <%= @itinerary.end_date.strftime("%B %d, %Y")%><br>
   Destination: <%= flight.destination %><br>
   Review: <%= flight.review %><br>
   <br>
-  <% end %>
+<% end %>
+
+<h4> Hotel Reservations </h4>
+<%  @itinerary.hotels.each do |hotel| %>
+  Hotel name: <%= hotel.name %><br>
+  Location: <%= hotel.location %><br>
+  Date: <%= hotel.date.strftime("%B %d, %Y") %><br>
+  Review: <%= hotel.review %><br>
+<% end %>
+
+<h4> Restaurants </h4>
+<%  @itinerary.restaurants.each do |restaurant| %>
+  Restaurant name: <%= restaurant.name %><br>
+  Location: <%= restaurant.location %><br>
+  Date: <%= restaurant.date.strftime("%B %d, %Y") %><br>
+  Review: <%= restaurant.review %><br>
+<% end %>
+
+<h4> Attractions </h4>
+<%  @itinerary.attractions.each do |attraction| %>
+  Attraction name: <%= attraction.name %><br>
+  Location: <%= attraction.location %><br>
+  Date: <%= attraction.date.strftime("%B %d, %Y") %><br>
+  Review: <%= attraction.review %><br>
+<% end %>
 
 <br>
-<%= button_to "Add Flight", new_itinerary_flight_path(@itinerary),  :method => "get", class: "btn btn-primary" %>
+<%= button_to "Add Flight", new_itinerary_flight_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
+<%= button_to "Add a Hotel Reservation", new_itinerary_hotel_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
+<%= button_to "Add a Restaurant", new_itinerary_restaurant_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
+<%= button_to "Add an Attraction", new_itinerary_attraction_path(@itinerary),  :method => "get", class: "btn btn-primary" %>
