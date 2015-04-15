@@ -23,8 +23,6 @@
 body {
   padding-top: 0px;
   padding-bottom: 30px;
-  padding-right: 20px;
-  padding-left: 20px;
 }
 
 .theme-dropdown .dropdown-menu {
@@ -39,12 +37,35 @@ body {
 
 
 .navbar-default {
-    background-color:
+    background-color: #A16DAD;
+    width: 100%;
+}
+
+.navbar-default a.navbar-brand, .navbar-default .navbar-nav > li > a {
+    color: white;
+    text-decoration: none;
 }
 
 
+.navbar-default a.navbar-brand:hover, .navbar-default .navbar-nav > li > a:hover {
+    color: white;
+    text-decoration: none;
+}
 
+.wrapper {
 
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.btn-primary {
+  background-color: #A16DAD;
+    border-color: #7e5389;
+}
+.btn-primary:hover {
+  background-color: #500263;
+    border-color: #7e5389;
+
+}
 
 
 
