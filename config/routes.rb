@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :itineraries
+  resources :itineraries do
+    resources :attractions
+    resources :hotels
+    resources :flights
+    resources :restaurants
+  end
 
   get '/login', to: 'sessions#new'
 

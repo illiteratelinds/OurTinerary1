@@ -6,6 +6,7 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
+
   end
 
   def new
@@ -17,9 +18,9 @@ class ItinerariesController < ApplicationController
 
   def create
     @itinerary = Itinerary.new(itinerary_params)
+    @itinerary.user = current_user
     respond_to do |format|
       if @itinerary.save
-
         format.html { redirect_to @itinerary, notice: 'Itinerary was successfully created.' }
         format.json { render :show, status: :created, location: @itinerary }
       else
@@ -28,6 +29,7 @@ class ItinerariesController < ApplicationController
       end
     end
   end
+
   def update
     respond_to do |format|
       if @itinerary.update(itinerary_params)
