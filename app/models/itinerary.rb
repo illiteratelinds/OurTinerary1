@@ -7,4 +7,5 @@ class Itinerary < ActiveRecord::Base
   has_many :dining_experience
   has_many :restaurants, through: :dining_experience
   has_many :flights
+  validates_presence_of :title, :location, :user_id
 end

@@ -4,6 +4,7 @@ class CreateRestaurants < ActiveRecord::Migration
       t.string :name
       t.string :location
       t.text :review
+      t.datetime :date
       t.timestamps null: false
     end
   end

@@ -3,15 +3,17 @@ class FlightsController < ApplicationController
   end
 
   def create
-    @flight = Flight.new(flight_params)
-    @flight.user = current_user
+    flight = Flight.new(flight_params)
+    itinerary = Itinerary.find(params[:itinerary_id])
+    flight.itinerary_id = params["itinerary_id"] 
+    # itinerary.flights.(flight_params)
     respond_to do |format|
-      if @flight.save
-        format.html { redirect_to @itinerary, notice: 'flight was successfully created.' }
-        format.json { render :show, status: :created, location: @flight }
+      if flight.save
+        format.html { redirect_to itinerary, notice: 'flight was successfully created.' }
+        format.json { render :show, status: :created, location: flight }
       else
         format.html { render :new }
-        format.json { render json: @flight.errors, status: :unprocessable_entity }
+        format.json { render json: flight.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -22,11 +24,6 @@ class FlightsController < ApplicationController
     end
 
     def flight_params
-      params.require(:flight).permit(:airline, :from, :to, :review, :itinerary_id)
+      params.require(:flight).permit(:airline, :origin, :destination, :date, :review, :itinerary_id)
     end
-
-
-
-
-
 end

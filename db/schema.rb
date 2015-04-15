@@ -40,8 +40,9 @@ ActiveRecord::Schema.define(version: 20150414195358) do
 
   create_table "flights", force: :cascade do |t|
     t.string   "airline"
-    t.string   "from"
-    t.string   "to"
+    t.datetime "date"
+    t.string   "origin"
+    t.string   "destination"
     t.text     "review"
     t.integer  "itinerary_id"
     t.datetime "created_at",   null: false
@@ -94,13 +95,13 @@ ActiveRecord::Schema.define(version: 20150414195358) do
     t.string   "name"
     t.string   "location"
     t.text     "review"
+    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "uid"
