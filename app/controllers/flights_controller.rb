@@ -1,5 +1,8 @@
 class FlightsController < ApplicationController
+
   def new
+    @itinerary = Itinerary.find(params["itinerary_id"])
+    @flight = Flight.new
   end
 
   def create

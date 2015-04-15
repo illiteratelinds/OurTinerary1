@@ -6,7 +6,6 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
-    @flight = Flight.new
   end
 
   def new
