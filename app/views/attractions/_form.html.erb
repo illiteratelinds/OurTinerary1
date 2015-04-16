@@ -15,11 +15,6 @@
     <%= f.label :date %><br>
     <%= f.date_field :date %><br>
   </div>
-  <div class = "form-group">
-    <%= f.fields_for(:activities, Activity.new) do |activity_form| %>
-      <%= activity_form.hidden_field :itinerary_id, :value => @itinerary.id %>
-    <% end %>
-  </div>
   <div class = "actions"><br>
     <%= f.submit class: "btn btn-primary" %>
   </div>

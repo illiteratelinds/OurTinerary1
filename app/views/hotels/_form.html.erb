@@ -16,11 +16,6 @@
     <%= f.label :review %><br>
     <%= f.text_field :review, class: "form-control" %><br>
   </div>
-  <div class = "form-group">
-    <%= f.fields_for(:reservations, Reservation.new) do |res_form| %>
-      <%= res_form.hidden_field :itinerary_id, :value => @itinerary.id %>
-    <% end %>
-  </div>
 
   <div class="actions"><br>
     <%= f.submit class: "btn btn-primary" %>
