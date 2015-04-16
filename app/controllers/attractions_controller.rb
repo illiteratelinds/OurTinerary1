@@ -26,6 +26,6 @@ class AttractionsController < ApplicationController
     end
 
     def attraction_params
-      params.require(:attraction).permit(:name, :location, :date, :review, activities_attributes: [:itinerary_id, :attraction_id])
+      params.require(:attraction).permit(:name, :location, :date, :review)
     end
 end

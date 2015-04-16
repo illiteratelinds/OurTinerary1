@@ -9,10 +9,6 @@ class HotelsController < ApplicationController
     itinerary = Itinerary.find(params[:itinerary_id])
     hotel = Hotel.new(hotel_params)
     itinerary.hotels << hotel
-    # reservation = Reservation.new
-    # reservation.itinerary = itinerary
-    # reservation.hotel = hotel
-
     respond_to do |format|
       if itinerary.save
         format.html { redirect_to itinerary, notice: 'hotel was successfully created.' }

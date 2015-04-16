@@ -9,7 +9,6 @@ class RestaurantsController < ApplicationController
     itinerary = Itinerary.find(params[:itinerary_id])
     restaurant = Restaurant.new(restaurant_params)
     itinerary.restaurants << restaurant
-
     respond_to do |format|
       if itinerary.save
         format.html { redirect_to itinerary, notice: 'restaurant was successfully created.' }
