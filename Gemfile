@@ -22,6 +22,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'ranked-model'
 
+gem "nifty-generators", :group => :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -60,6 +61,7 @@ group :test, :development do
   gem 'thin'
 end
 
+
 group :production do
   gem 'pg'
   gem 'google-analytics-rails'
@@ -67,3 +69,5 @@ group :production do
 end
 
 gem 'bootstrap-sass', '~> 3.1.1'
+
+gem 'mocha', group: :test

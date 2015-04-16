@@ -1,7 +1,12 @@
 <p id="notice"><%= notice %></p>
 <h2>My Itineraries:</h2>
+
+
+
+
 <ul>
-<% current_user.itineraries.each do |itinerary| %>
+<%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
+<% @user.itineraries.each do |itinerary| %>
   <li><h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3></li>
 <% end %>
 </ul>
