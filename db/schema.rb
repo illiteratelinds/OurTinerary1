@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150416142720) do
-=======
 ActiveRecord::Schema.define(version: 20150416150454) do
-85f8013d86cf16a3c1ea917375b348d220dac845
 
   create_table "activities", force: :cascade do |t|
     t.integer  "itinerary_id"
@@ -105,12 +101,6 @@ ActiveRecord::Schema.define(version: 20150416150454) do
     t.string   "location"
     t.text     "review"
     t.datetime "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "temps", force: :cascade do |t|
-    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
