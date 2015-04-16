@@ -8,8 +8,13 @@ class HotelsController < ApplicationController
   def create
     itinerary = Itinerary.find(params[:itinerary_id])
     hotel = Hotel.new(hotel_params)
+    itinerary.hotels << hotel
+    # reservation = Reservation.new
+    # reservation.itinerary = itinerary
+    # reservation.hotel = hotel
+
     respond_to do |format|
-      if hotel.save
+      if itinerary.save
         format.html { redirect_to itinerary, notice: 'hotel was successfully created.' }
         format.json { render :show, status: :created, location: hotel }
       else
@@ -25,7 +30,7 @@ class HotelsController < ApplicationController
     end
 
     def hotel_params
-      params.require(:hotel).permit(:name, :location, :date, :review, reservations_attributes: [:itinerary_id, :hotel_id])
+      params.require(:hotel).permit(:name, :location, :date, :review)
     end
 end
   

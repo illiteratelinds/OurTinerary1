@@ -8,8 +8,10 @@ class RestaurantsController < ApplicationController
   def create
     itinerary = Itinerary.find(params[:itinerary_id])
     restaurant = Restaurant.new(restaurant_params)
+    itinerary.restaurants << restaurant
+
     respond_to do |format|
-      if restaurant.save
+      if itinerary.save
         format.html { redirect_to itinerary, notice: 'restaurant was successfully created.' }
         format.json { render :show, status: :created, location: restaurant }
       else
@@ -25,6 +27,6 @@ class RestaurantsController < ApplicationController
     end
 
     def restaurant_params
-      params.require(:restaurant).permit(:name, :location, :date, :review, meals_attributes: [:itinerary_id, :restaurant_id])
+      params.require(:restaurant).permit(:name, :location, :date, :review)
     end
 end
