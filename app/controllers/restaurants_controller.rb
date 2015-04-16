@@ -4,6 +4,10 @@ class RestaurantsController < ApplicationController
     @itinerary = Itinerary.find(params["itinerary_id"])
     @restaurant = Restaurant.new
   end
+  
+  def show
+    @restaurant = Restaurant.find(params[:id])
+  end
 
   def create
     itinerary = Itinerary.find(params[:itinerary_id])

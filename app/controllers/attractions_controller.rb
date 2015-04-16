@@ -4,6 +4,10 @@ class AttractionsController < ApplicationController
     @itinerary = Itinerary.find(params["itinerary_id"])
     @attraction = Attraction.new
   end
+  
+  def show
+    @attraction = Attraction.find(params[:id])
+  end
 
   def create
     itinerary = Itinerary.find(params[:itinerary_id])

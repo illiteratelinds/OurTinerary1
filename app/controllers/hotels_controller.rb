@@ -4,6 +4,14 @@ class HotelsController < ApplicationController
     @itinerary = Itinerary.find(params["itinerary_id"])
     @hotel = Hotel.new
   end
+  
+  def show
+    @hotel = Hotel.find(params[:id])
+  end
+
+  def index
+    @hotel = Hotel.all
+  end
 
   def create
     itinerary = Itinerary.find(params[:itinerary_id])

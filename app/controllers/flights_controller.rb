@@ -5,6 +5,14 @@ class FlightsController < ApplicationController
     @flight = Flight.new
   end
 
+  def show
+    @flight = Flight.find(params[:id])
+  end
+  
+  def index
+    @flight = Flight.all
+  end 
+
   def create
     flight = Flight.new(flight_params)
     itinerary = Itinerary.find(params[:itinerary_id])
