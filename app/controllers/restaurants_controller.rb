@@ -33,3 +33,5 @@ class RestaurantsController < ApplicationController
       params.require(:restaurant).permit(:name, :location, :date, :review)
     end
 end
+
+

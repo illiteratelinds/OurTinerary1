@@ -1,4 +1,7 @@
 <h3>Select an itinerary:</h3>
-<% @itineraries.each do |i| %>
-  <h4><%= link_to i.title, itinerary_path(i) %></h4>
-<% end %><br>
+<ul>
+  <% @itineraries.each do |i| %>
+    <li><%= link_to i.title, itinerary_path(i) %></li>
+  <% end %>
+</ul>
+
