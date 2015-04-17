@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   def current
     
   end
+  
   # POST /users
   # POST /users.json
   def create

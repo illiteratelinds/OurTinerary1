@@ -14,11 +14,17 @@ class HotelsController < ApplicationController
   end
 
   def create
+    binding.pry
     itinerary = Itinerary.find(params[:itinerary_id])
-    hotel = Hotel.new(hotel_params)
-    itinerary.hotels << hotel
+    hotel = Hotel.find_by_id(params[:hotel][:id])
+    if hotel
+    
+    else
+      hotel = Hotel.create(hotel_params)
+    end
+    hotel.reservations.build(:itinerary_id => params[:itinerary_id], :date => params[:date] )
     respond_to do |format|
-      if itinerary.save
+      if hotel.save
         format.html { redirect_to itinerary, notice: 'hotel was successfully created.' }
         format.json { render :show, status: :created, location: hotel }
       else

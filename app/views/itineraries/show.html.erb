@@ -8,7 +8,7 @@
     <h3> <%= @itinerary.title %></h3><br>
     <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br>
 
-    <h4><%= link_to "Flights", itinerary_flight_path(itinerary_id) %> </h4><br>
+    <h4>Flights</h4><br>
     <% @itinerary.flights.each do |flight| %>
       Airline: <%= link_to flight.airline, [@itinerary, flight] %><br>
       Date: <%= flight.date.strftime("%B %d, %Y") %><br>
