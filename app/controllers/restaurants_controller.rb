@@ -11,10 +11,16 @@ class RestaurantsController < ApplicationController
 
   def create
     itinerary = Itinerary.find(params[:itinerary_id])
-    restaurant = Restaurant.new(restaurant_params)
-    itinerary.restaurants << restaurant
+    restaurant = Restaurant.find_by_id(params[:restaurant][:id])
+    if restaurant
+    else
+      restaurant = Restaurant.new(restaurant_params)
+    end
+    date = params["date"]
+    date = Date.new(date["year"].to_i,date["month"].to_i,date["day"].to_i).to_s
+    restaurant.meals.build(:itinerary_id => params[:itinerary_id], :date => date)
     respond_to do |format|
-      if itinerary.save
+      if restaurant.save
         format.html { redirect_to itinerary, notice: 'restaurant was successfully created.' }
         format.json { render :show, status: :created, location: restaurant }
       else
@@ -30,7 +36,7 @@ class RestaurantsController < ApplicationController
     end
 
     def restaurant_params
-      params.require(:restaurant).permit(:name, :location)
+      params.require(:restaurant).permit(:name, :address)
     end
 end
 

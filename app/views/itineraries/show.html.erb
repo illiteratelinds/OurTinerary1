@@ -10,23 +10,28 @@
     <h4> Hotel Reservations </h4>
     <%  @itinerary.hotels.each do |hotel| %>
       Hotel name: <%= link_to hotel.name, [@itinerary, hotel] %><br>
-      Location: <%= hotel.address %><br><br>
+      Address: <%= hotel.address %><br>
+      <% hotel.reservations.each do |reservation|%>
+        Stayed: <%= reservation.start_date.strftime("%B %d, %Y") %> - <%= reservation.end_date.strftime("%B %d, %Y") %>
+      <% end %>
     <% end %>
 
     <h4> Restaurants </h4>
     <%  @itinerary.restaurants.each do |restaurant| %>
       Restaurant name: <%= link_to restaurant.name, [@itinerary, restaurant] %><br>
       Address: <%= restaurant.address %><br>
-      Date: <%= restaurant.date.strftime("%B %d, %Y") %><br>
-      Review: <%= restaurant.review %><br>
+      <% restaurant.meals.each do |meal| %>
+        Date: <%= meal.date.strftime("%B %d, %Y") %>
+      <% end %>
     <% end %>
 
     <h4> Attractions </h4>
     <%  @itinerary.attractions.each do |attraction| %>
       Attraction name: <%= link_to attraction.name, [@itinerary, attraction] %><br>
       Address: <%= attraction.address %><br>
-      Date: <%= attraction.date.strftime("%B %d, %Y") %><br>
-      Review: <%= attraction.review %><br>
+      <% attraction.activities.each do |activity| %>
+        Date: <%= activity.date.strftime("%B %d, %Y") %>
+      <% end %>
     <% end %>
   </div>
   <br>
