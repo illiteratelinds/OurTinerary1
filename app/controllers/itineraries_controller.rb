@@ -6,6 +6,9 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
+    @reservations = Reservation.all
+    @meals = Meal.all 
+    @activities = Activity.all
   end
 
   def new

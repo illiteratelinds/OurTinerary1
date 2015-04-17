@@ -10,7 +10,6 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    binding.pry
     itinerary = Itinerary.find(params[:itinerary_id])
     restaurant = Restaurant.find_by_id(params[:restaurant][:id])
     if restaurant

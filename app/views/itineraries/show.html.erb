@@ -8,31 +8,26 @@
     <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br>
 
     <h4> Hotel Reservations </h4>
-    <%  @itinerary.hotels.each do |hotel| %>
-      Hotel name: <%= link_to hotel.name, [@itinerary, hotel] %><br>
-      Address: <%= hotel.address %><br>
-      <% hotel.reservations.each do |reservation|%>
-        Stayed: <%= reservation.start_date.strftime("%B %d, %Y") %> - <%= reservation.end_date.strftime("%B %d, %Y") %>
-      <% end %>
+    <% @reservations.each do |reservation| %>
+      Hotel name: <%= reservation.hotel.name %><br>
+      Address: <%= reservation.hotel.address %><br>
+      Stayed: <%= reservation.start_date.strftime("%B %d, %Y") %> - 
+      <%= reservation.end_date.strftime("%B %d, %Y") %><br><br>
     <% end %>
 
     <h4> Restaurants </h4>
-    <%  @itinerary.restaurants.each do |restaurant| %>
-      Restaurant name: <%= link_to restaurant.name, [@itinerary, restaurant] %><br>
-      Address: <%= restaurant.address %><br>
-      <% restaurant.meals.each do |meal| %>
-        Date: <%= meal.date.strftime("%B %d, %Y") %>
-      <% end %>
+    <% @meals.each do |meal| %>
+      Restaurant name: <%= meal.restaurant.name %><br>
+      Address: <%= meal.restaurant.address %><br>
+      Date: <%= meal.date.strftime("%B %d, %Y") %><br><br>
     <% end %>
 
     <h4> Attractions </h4>
-    <%  @itinerary.attractions.each do |attraction| %>
-      Attraction name: <%= link_to attraction.name, [@itinerary, attraction] %><br>
-      Address: <%= attraction.address %><br>
-      <% attraction.activities.each do |activity| %>
-        Date: <%= activity.date.strftime("%B %d, %Y") %>
+    <%  @activities.each do |activity| %>
+      Attraction name: <%= activity.attraction.name %><br>
+      Address: <%= activity.attraction.address %><br>
+      Date: <%= activity.date.strftime("%B %d, %Y") %><br><br>
       <% end %>
-    <% end %>
   </div>
   <br>
   <div class = "col-md-4">
