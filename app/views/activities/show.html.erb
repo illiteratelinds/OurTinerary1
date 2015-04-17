@@ -1,0 +1,7 @@
+Activity Name: <%= @activity.attraction.name %><br>
+Address: <%= @activity.attraction.address %><br>
+Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
+
+<br><br>
+<%= link_to "Back", itinerary_path(@activity.itinerary) %>
+

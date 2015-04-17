@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :itineraries do
       resources :flights
       resources :attractions
+      resources :reservations, only: [:show]
+      resources :activities, only: [:show]
+      resources :meals, only: [:show]
       resources :hotels
       resources :restaurants
   end

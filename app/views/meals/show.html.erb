@@ -1,0 +1,5 @@
+Restaurant Name: <%= @meal.restaurant.name %><br>
+Address: <%= @meal.restaurant.address %><br>
+Date: <%= @meal.date.strftime("%B %d, %Y") %>
+<br><br>
+<%= link_to "Back", itinerary_path(@meal.itinerary) %>

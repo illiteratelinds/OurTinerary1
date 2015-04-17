@@ -1,0 +1,8 @@
+Hotel Name: <%= @reservation.hotel.name %><br>
+Address: <%= @reservation.hotel.address %><br>
+Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.end_date.strftime("%B %d, %Y") %><br>
+
+
+
+<br><br>
+<%= link_to "Back", itinerary_path(@reservation.itinerary) %>
