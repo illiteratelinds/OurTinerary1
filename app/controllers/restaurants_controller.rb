@@ -10,6 +10,7 @@ class RestaurantsController < ApplicationController
   end
 
   def create
+    binding.pry
     itinerary = Itinerary.find(params[:itinerary_id])
     restaurant = Restaurant.new(restaurant_params)
     itinerary.restaurants << restaurant
