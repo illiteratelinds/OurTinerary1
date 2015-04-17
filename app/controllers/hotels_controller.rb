@@ -14,15 +14,17 @@ class HotelsController < ApplicationController
   end
 
   def create
-    binding.pry
     itinerary = Itinerary.find(params[:itinerary_id])
     hotel = Hotel.find_by_id(params[:hotel][:id])
     if hotel
-    
     else
-      hotel = Hotel.create(hotel_params)
+      hotel = Hotel.new(hotel_params)
     end
-    hotel.reservations.build(:itinerary_id => params[:itinerary_id], :date => params[:date] )
+    startdate = params["start_date"]
+    enddate = params["end_date"]
+    start_date = Date.new(startdate["year"].to_i, startdate["month"].to_i, startdate["day"].to_i).to_s
+    end_date = Date.new(enddate["year"].to_i, enddate["month"].to_i, enddate["day"].to_i).to_s
+    hotel.reservations.build(:itinerary_id => params[:itinerary_id], :start_date => start_date, :end_date => end_date )
     respond_to do |format|
       if hotel.save
         format.html { redirect_to itinerary, notice: 'hotel was successfully created.' }
@@ -40,7 +42,7 @@ class HotelsController < ApplicationController
     end
 
     def hotel_params
-      params.require(:hotel).permit(:name, :location, :date, :review)
+      params.require(:hotel).permit(:name, :address)
     end
 end
   

@@ -16,15 +16,14 @@ ActiveRecord::Schema.define(version: 20150416150454) do
   create_table "activities", force: :cascade do |t|
     t.integer  "itinerary_id"
     t.integer  "attraction_id"
+    t.datetime "date"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
   create_table "attractions", force: :cascade do |t|
     t.string   "name"
-    t.string   "location"
-    t.datetime "date"
-    t.text     "review"
+    t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,34 +37,21 @@ ActiveRecord::Schema.define(version: 20150416150454) do
 
   add_index "comments", ["discussion_type", "discussion_id"], name: "index_comments_on_discussion_type_and_discussion_id"
 
-  create_table "flights", force: :cascade do |t|
-    t.string   "airline"
-    t.datetime "date"
-    t.string   "origin"
-    t.string   "destination"
-    t.text     "review"
-    t.integer  "itinerary_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
+    t.string  "status"
   end
 
   create_table "hotels", force: :cascade do |t|
     t.string   "name"
-    t.string   "location"
-    t.datetime "date"
-    t.text     "review"
+    t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "itineraries", force: :cascade do |t|
     t.string   "title"
-    t.string   "location"
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "user_id"
@@ -76,6 +62,7 @@ ActiveRecord::Schema.define(version: 20150416150454) do
   create_table "meals", force: :cascade do |t|
     t.integer  "itinerary_id"
     t.integer  "restaurant_id"
+    t.datetime "date"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -92,15 +79,15 @@ ActiveRecord::Schema.define(version: 20150416150454) do
   create_table "reservations", force: :cascade do |t|
     t.integer  "itinerary_id"
     t.integer  "hotel_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
   create_table "restaurants", force: :cascade do |t|
     t.string   "name"
-    t.string   "location"
-    t.text     "review"
-    t.datetime "date"
+    t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

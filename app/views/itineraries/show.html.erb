@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-<h1> My Itinerary for <%=@itinerary.location%> </h1>
 <br><br>
 
 <div class="row">
@@ -8,28 +7,16 @@
     <h3> <%= @itinerary.title %></h3><br>
     <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br>
 
-    <h4>Flights</h4><br>
-    <% @itinerary.flights.each do |flight| %>
-      Airline: <%= link_to flight.airline, [@itinerary, flight] %><br>
-      Date: <%= flight.date.strftime("%B %d, %Y") %><br>
-      Origin: <%= flight.origin %><br>
-      Destination: <%= flight.destination %><br>
-      Review: <%= flight.review %><br>
-      <br>
-    <% end %>
-
     <h4> Hotel Reservations </h4>
     <%  @itinerary.hotels.each do |hotel| %>
       Hotel name: <%= link_to hotel.name, [@itinerary, hotel] %><br>
-      Location: <%= hotel.location %><br>
-      Date: <%= hotel.date.strftime("%B %d, %Y") %><br>
-      Review: <%= hotel.review %><br>
+      Location: <%= hotel.address %><br><br>
     <% end %>
 
     <h4> Restaurants </h4>
     <%  @itinerary.restaurants.each do |restaurant| %>
       Restaurant name: <%= link_to restaurant.name, [@itinerary, restaurant] %><br>
-      Location: <%= restaurant.location %><br>
+      Address: <%= restaurant.address %><br>
       Date: <%= restaurant.date.strftime("%B %d, %Y") %><br>
       Review: <%= restaurant.review %><br>
     <% end %>
@@ -37,14 +24,13 @@
     <h4> Attractions </h4>
     <%  @itinerary.attractions.each do |attraction| %>
       Attraction name: <%= link_to attraction.name, [@itinerary, attraction] %><br>
-      Location: <%= attraction.location %><br>
+      Address: <%= attraction.address %><br>
       Date: <%= attraction.date.strftime("%B %d, %Y") %><br>
       Review: <%= attraction.review %><br>
     <% end %>
   </div>
   <br>
   <div class = "col-md-4">
-    <%= button_to "Add Flight", new_itinerary_flight_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
     <%= button_to "Add a Hotel Reservation", new_itinerary_hotel_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
     <%= button_to "Add a Restaurant", new_itinerary_restaurant_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
     <%= button_to "Add an Attraction", new_itinerary_attraction_path(@itinerary),  :method => "get", class: "btn btn-primary" %>

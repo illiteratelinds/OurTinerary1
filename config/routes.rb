@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   resources :friendships, only: [:create, :destroy]
 
   resources :itineraries do
-    resources :flights
-    resources :attractions
-    resources :hotels
-    resources :restaurants
+      resources :flights
+      resources :attractions
+      resources :hotels
+      resources :restaurants
   end
 
   get '/login', to: 'sessions#new'
