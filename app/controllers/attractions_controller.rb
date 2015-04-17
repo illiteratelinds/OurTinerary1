@@ -15,10 +15,16 @@ class AttractionsController < ApplicationController
 
   def create
     itinerary = Itinerary.find(params[:itinerary_id])
-    attraction = Attraction.new(attraction_params)
-    itinerary.attractions << attraction
+    attraction = Attraction.find_by_id(params[:attraction][:id])
+    if attraction
+    else
+      attraction = Attraction.new(attraction_params)
+    end
+    date = params["date"]
+    date = Date.new(date["year"].to_i,date["month"].to_i,date["day"].to_i).to_s
+    attraction.activities.build(:itinerary_id => params[:itinerary_id], :date => date)
     respond_to do |format|
-      if itinerary.save
+      if attraction.save
         format.html { redirect_to itinerary, notice: 'attraction was successfully created.' }
         format.json { render :show, status: :created, location: attraction }
       else
@@ -34,6 +40,6 @@ class AttractionsController < ApplicationController
     end
 
     def attraction_params
-      params.require(:attraction).permit(:name, :location, :date, :review)
+      params.require(:attraction).permit(:name, :address)
     end
 end
