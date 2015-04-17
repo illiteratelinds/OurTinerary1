@@ -3,6 +3,18 @@ Address: <%= @reservation.hotel.address %><br>
 Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.end_date.strftime("%B %d, %Y") %><br>
 
 
+<h2>New Comment</h2>
 
-<br><br>
+<%= form_for [@commentable, Comment.new] do |f| %>
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+    <%= f.submit "Submit" %><br>
+<% end %>
+
+<h2>All Comments</h2>
+  <% @commentable.comments.each do |comment| %>
+    <%= comment.content %>
+  <% end %>
+<br><br><br>
+
 <%= link_to "Back", itinerary_path(@reservation.itinerary) %>

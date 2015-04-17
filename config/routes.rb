@@ -12,11 +12,20 @@ Rails.application.routes.draw do
   resources :itineraries do
       resources :flights
       resources :attractions
-      resources :reservations, only: [:show]
-      resources :activities, only: [:show]
-      resources :meals, only: [:show]
+      resources :reservations, only: [:show] do 
+        resources :comments 
+      end
+      resources :activities, only: [:show] do 
+        resources :comments
+      end
+      resources :meals, only: [:show] do
+        resources :comments
+      end
       resources :hotels
       resources :restaurants
+  end
+  resources :reservations, only: [:show] do 
+    resources :comments 
   end
 
   get '/login', to: 'sessions#new'

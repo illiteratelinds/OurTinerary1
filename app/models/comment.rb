@@ -1,3 +1,3 @@
 class Comment < ActiveRecord::Base
-  belongs_to :discussion, polymorphic: true
+  belongs_to :commentable, polymorphic: true
 end
