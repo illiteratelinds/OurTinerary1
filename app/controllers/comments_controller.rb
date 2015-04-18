@@ -1,10 +1,5 @@
 class CommentsController < ApplicationController
 
-  def index
-    @commentable = find_commentable
-    @comments = @commentable.comments
-  end
-
   def create
     @commentable = find_commentable
     @comment = @commentable.comments.build(comment_params)

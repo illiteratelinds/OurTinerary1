@@ -5,7 +5,7 @@ Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.e
 
 <h2>New Comment</h2>
 
-<%= form_for [@commentable, Comment.new] do |f| %>
+<%= form_for [@reservation.itinerary, @commentable, Comment.new] do |f| %>
     <%= f.label :content %><br>
     <%= f.text_area :content %>
     <%= f.submit "Submit" %><br>
