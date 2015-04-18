@@ -22,6 +22,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'ranked-model'
 
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+
 gem "nifty-generators", :group => :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

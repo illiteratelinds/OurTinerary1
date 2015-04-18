@@ -1,18 +1,22 @@
-d<p id="notice"><%= notice %></p>
-<h2>My Itineraries:</h2>
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-4">
+    <h2><%=@user.name%></h2>
+    <%= image_tag @user.avatar.url(:medium) %><br>
+    User since: <%= @user.created_at.strftime("%B %d, %Y") %><br><br>
+    <%= button_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary" %>
+  </div>
+  <div class="col-md-8">
+    <h2>My Itineraries:</h2>
+    <ul>
+    <% @user.itineraries.each do |itinerary| %>
+      <li><h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3></li>
+    <% end %>
+    </ul>
+    <br><br>
+  </div>
+</div>
 
 
 
-
-<ul>
-<%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
-<% @user.itineraries.each do |itinerary| %>
-  <li><h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3></li>
-<% end %>
-</ul>
-<br><br>
-
-
-
-
-<%= link_to 'Back', users_path %>
+<br><br><br><br><br><%= link_to 'Back', users_path %>

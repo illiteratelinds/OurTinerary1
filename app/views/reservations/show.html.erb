@@ -1,21 +1,31 @@
-Hotel Name: <%= @reservation.hotel.name %><br>
+<h2><%= @reservation.hotel.name %></h2>
 Address: <%= @reservation.hotel.address %><br>
 Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.end_date.strftime("%B %d, %Y") %><br>
 
-
-<% if logged_in? %>
-  <h2>New Comment</h2>
-  <%= form_for [@commentable, Comment.new] do |f| %>
-      <%= f.label :content %><br>
-      <%= f.text_area :content %>
-      <%= f.submit "Submit" %><br>
+<div class="form-group">
+  <% if logged_in? %>
+    <h2>New Comment</h2>
+    <%= form_for [@commentable, Comment.new] do |f| %>
+        <%= f.label :content %><br>
+        <%= f.text_area :content, class: "form-control" %><br>
+        <%= f.submit "Submit", class: "btn btn-primary" %><br>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 
 <h2>All Comments</h2>
   <% @commentable.comments.each do |comment| %>
-    <%= comment.commenter_name %>: <strong><%= comment.content %><strong>
+  <div class="row">
+  <div class="col-md-1">
+    <%= comment.commenter_name %>
+    </div>
+    <div class= "col-md-6">
+    <%= comment.created_at.strftime("%B %d, %Y") %><br>
+    <strong><%= comment.content %></strong>
+    </div>
   <% end %>
 <br><br><br>
+  </div>
 <%= link_to "Back", itinerary_path(@reservation.itinerary) %>
+

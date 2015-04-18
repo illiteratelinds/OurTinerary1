@@ -8,6 +8,12 @@
 </ul>
 <br>
 
+<%= form_for current_user,  :html => { :multipart => true } do |form| %>
+  <%= form.file_field :avatar %>
+   <div class = "actions"><br>
+      <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
 
 
 <h4> My Friends List </h4>
@@ -15,3 +21,4 @@
   <%= link_to friendship.friend.name, user_path(friendship.friend) %> <%= link_to "remove friend", friendship_path(friendship), :method => :delete %>
 <% end %>
 <br><br>
+
