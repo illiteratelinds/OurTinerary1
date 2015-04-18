@@ -27,6 +27,12 @@ Rails.application.routes.draw do
   resources :reservations, only: [:show] do 
     resources :comments 
   end
+  resources :activities, only: [:show] do 
+      resources :comments
+  end
+  resources :meals, only: [:show] do
+    resources :comments
+  end
 
   get '/login', to: 'sessions#new'
 

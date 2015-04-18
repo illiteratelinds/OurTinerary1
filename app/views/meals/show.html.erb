@@ -2,4 +2,19 @@ Restaurant Name: <%= @meal.restaurant.name %><br>
 Address: <%= @meal.restaurant.address %><br>
 Date: <%= @meal.date.strftime("%B %d, %Y") %>
 <br><br>
+
+<% if logged_in? %>
+  <h2>New Comment</h2>
+  <%= form_for [@commentable, Comment.new] do |f| %>
+      <%= f.label :content %><br>
+      <%= f.text_area :content %>
+      <%= f.submit "Submit" %><br>
+  <% end %>
+<% end %>
+
+<h2>All Comments</h2>
+  <% @commentable.comments.each do |comment| %>
+    <%= comment.commenter_name %>: <strong><%= comment.content %><strong>
+  <% end %>
+<br><br><br>
 <%= link_to "Back", itinerary_path(@meal.itinerary) %>

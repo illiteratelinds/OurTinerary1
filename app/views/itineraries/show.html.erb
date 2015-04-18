@@ -8,7 +8,7 @@
     <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br>
 
     <h4> Hotel Reservations </h4>
-    <% @reservations.each do |reservation| %>
+    <% @itinerary.reservations.each do |reservation| %>
       Hotel name: <%= link_to reservation.hotel.name, [@itinerary, reservation] %><br>
       Address: <%= reservation.hotel.address %><br>
       Stayed: <%= reservation.start_date.strftime("%B %d, %Y") %> - 
@@ -16,14 +16,14 @@
     <% end %>
 
     <h4> Restaurants </h4>
-    <% @meals.each do |meal| %>
+    <% @itinerary.meals.each do |meal| %>
       Restaurant name: <%= link_to meal.restaurant.name, [@itinerary, meal] %><br>
       Address: <%= meal.restaurant.address %><br>
       Date: <%= meal.date.strftime("%B %d, %Y") %><br><br>
     <% end %>
 
     <h4> Attractions </h4>
-    <%  @activities.each do |activity| %>
+    <%  @itinerary.activities.each do |activity| %>
       Attraction name: <%= link_to activity.attraction.name, [@itinerary, activity] %><br>
       Address: <%= activity.attraction.address %><br>
       Date: <%= activity.date.strftime("%B %d, %Y") %><br><br>
