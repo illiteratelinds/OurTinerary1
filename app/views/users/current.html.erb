@@ -1,6 +1,7 @@
 <h1> My Profile Page </h1>
 <br>
 <h2><u><%= current_user.name %></u></h2>
+<%= image_tag current_user.avatar.url(:medium) %><br>
 <h3> My Itineraries </h3>
 <% current_user.itineraries.each do |itinerary| %>
   <li><h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3></li>
@@ -8,6 +9,8 @@
 </ul>
 <br>
 
+
+<u><h4> Add/Change a profile picture! </h4></u>
 <%= form_for current_user,  :html => { :multipart => true } do |form| %>
   <%= form.file_field :avatar %>
    <div class = "actions"><br>
