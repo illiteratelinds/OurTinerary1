@@ -14,7 +14,6 @@ Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.e
       <% end %>
     <% end %>
 
-
     <h2>All Comments</h2>
       <ul>
         <% @commentable.comments.each do |comment| %>
@@ -29,7 +28,7 @@ Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.e
           </div></div></li>
         <% end %>
       </ul>
-    <br><br><br><br><br>
+    <br><br>
     
       <div class="form-group">
         <% if logged_in? %>
