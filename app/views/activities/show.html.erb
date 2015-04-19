@@ -19,7 +19,7 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
         <% @commentable.comments.each do |comment| %>
         <li><div class="row">
           <div class="col-md-3">
-            <%= image_tag comment.commenter.avatar.url(:medium), :class => "profile-icon" %>
+            <%= image_tag comment.commenter.avatar.url(:medium), :class => "profile-icon img-responsive" %>
             <%= comment.commenter_name %>
           </div>
           <div class= "col-md-6">
