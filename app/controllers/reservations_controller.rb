@@ -8,23 +8,25 @@ class ReservationsController < ApplicationController
     @photos = @imageable.photos
 
   end
+  
+  private
 
-  def find_commentable
-    params.each do |name, value|
-      if name =~ /^id$/
-        return Reservation.find(value)
+    def find_commentable
+      params.each do |name, value|
+        if name =~ /^id$/
+          return Reservation.find(value)
+        end
       end
+      nil
     end
-    nil
-  end
 
-  def find_imageable
-    params.each do |name, value|
-      if name =~ /^id$/
-        return Reservation.find(value)
+    def find_imageable
+      params.each do |name, value|
+        if name =~ /^id$/
+          return Reservation.find(value)
+        end
       end
+      nil
     end
-    nil
-  end
   
 end

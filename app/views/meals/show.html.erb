@@ -32,7 +32,7 @@ Date: <%= @meal.date.strftime("%B %d, %Y") %>
   <div class="col-md-4 pic-container">
     <h4> All Pics </h4>
     <% @meal.photos.each do |photo| %>
-      <%= image_tag photo.image.url(:medium) %><br><br>
+      <%= link_to (image_tag photo.image.url(:medium)), [@meal, photo] %><br><br>
     <% end %>
   </div>
 </div>

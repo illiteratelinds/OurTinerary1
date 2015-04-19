@@ -1,0 +1,23 @@
+<%= image_tag @photo.image.url(:medium) %><br><br><br>
+
+    <h2>All Comments</h2>
+      <% @commentable.comments.each do |comment| %>
+      <div class="row">
+      <div class="col-md-1">
+        <%= comment.photo_commenter_name %>
+        </div>
+        <div class= "col-md-6">
+        <%= comment.created_at.strftime("%B %d, %Y") %><br>
+        <strong><%= comment.content %></strong>
+        </div>
+      <% end %>
+    <br><br><br><br><br>
+
+  <div class="form-group">
+      <% if logged_in? %>
+        <%= form_for [@commentable, Comment.new] do |f| %>
+            <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
+            <%= f.submit "Comment", class: "btn btn-primary" %><br>
+        <% end %>
+      <% end %>
+    </div>

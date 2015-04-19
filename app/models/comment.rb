@@ -4,4 +4,8 @@ class Comment < ActiveRecord::Base
   def commenter_name
     self.commentable.itinerary.user.name
   end
+
+  def photo_commenter_name
+    commentable.imageable.itinerary.user.name
+  end
 end

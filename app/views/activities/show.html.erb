@@ -31,7 +31,7 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
   <div class="col-md-4 pic-container">
     <h4> All Pics </h4>
     <% @activity.photos.each do |photo| %>
-      <%= image_tag photo.image.url(:medium) %><br><br>
+    <%= link_to (image_tag photo.image.url(:medium)), [@activity, photo] %><br><br>
     <% end %>
   </div>
 </div>

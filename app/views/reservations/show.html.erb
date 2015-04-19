@@ -27,6 +27,7 @@ Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.e
         </div>
       <% end %>
     <br><br><br><br><br>
+    
     <div class="form-group">
       <% if logged_in? %>
         <%= form_for [@commentable, Comment.new] do |f| %>
@@ -40,7 +41,7 @@ Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.e
     <div class="col-md-4 pic-container">
     <h4> All Pics </h4>
       <% @reservation.photos.each do |photo| %>
-        <%= image_tag photo.image.url(:medium) %><br>
+        <%= link_to (image_tag photo.image.url(:medium)), [@reservation, photo] %><br>
       <% end %>
     </div>
 </div>

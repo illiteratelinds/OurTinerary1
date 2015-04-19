@@ -2,7 +2,7 @@
 <br><br>
 
 <div class="row">
-  <div class = "col-md-8">
+  <div class = "col-md-6">
     <h3><%= link_to @itinerary.user.name, user_path(@itinerary.user) %></h3>
     <h3> <%= @itinerary.title %></h3><br>
     <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br>
@@ -31,6 +31,7 @@
   </div>
   <br>
   <div class = "col-md-4">
+    <h3>Add items to your itinerary!</h3><br><br>
     <%= button_to "Add a Hotel Reservation", new_itinerary_hotel_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
     <%= button_to "Add a Restaurant", new_itinerary_restaurant_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
     <%= button_to "Add an Attraction", new_itinerary_attraction_path(@itinerary),  :method => "get", class: "btn btn-primary" %>
