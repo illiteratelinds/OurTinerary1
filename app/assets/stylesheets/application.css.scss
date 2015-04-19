@@ -25,6 +25,9 @@ body {
   padding-bottom: 30px;
   background-color: #c7d5f9;
 }
+.thumbnail {
+  background-color: #e5e7fc;
+}
 .theme-dropdown .dropdown-menu {
   position: static;
   display: block;
@@ -54,6 +57,12 @@ body {
   background-color: #A16DAD;
     border-color: #7e5389;
     text-decoration: none;
+}
+
+a.btn-primary {
+  &:visited {
+    color: white;
+  }
 }
 .btn-primary:hover {
   background-color: #500263;
@@ -87,9 +96,7 @@ body {
   position: absolute;
   top: 60px;
 }
-a:visited {
-  color: white;
-}
+
 
 
 
