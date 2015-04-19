@@ -8,11 +8,13 @@ Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.e
 <% end %>
 
 <u><h4> Add an image! </h4></u>
-<%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
-  <%= form.file_field :image %>
-   <div class = "actions"><br>
-      <%= form.submit class: "btn btn-primary" %>
-  </div>
+<% if logged_in? && current_user.id == @reservation.itinerary.user.id %>
+  <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
+    <%= form.file_field :image %>
+     <div class = "actions"><br>
+        <%= form.submit "Add Photo", class: "btn btn-primary" %>
+    </div>
+  <% end %>
 <% end %>
 
 <div class="form-group">
