@@ -13,25 +13,33 @@ Rails.application.routes.draw do
       resources :flights
       resources :attractions
       resources :reservations, only: [:show] do 
-        resources :comments 
+        resources :comments, only: [:create, :show]
+        resources :photos, only: [:create, :show]
+
       end
       resources :activities, only: [:show] do 
-        resources :comments
+        resources :comments, only: [:create, :show]
+        resources :photos, only: [:create, :show]
+
       end
       resources :meals, only: [:show] do
-        resources :comments
+        resources :comments, only: [:create, :show]
+        resources :photos, only: [:create, :show]
       end
       resources :hotels
       resources :restaurants
   end
   resources :reservations, only: [:show] do 
-    resources :comments 
+    resources :comments, only: [:create, :show] 
+    resources :photos, only: [:create, :show]
   end
   resources :activities, only: [:show] do 
-      resources :comments
+      resources :comments, only: [:create, :show]
+      resources :photos, only: [:create, :show]
   end
   resources :meals, only: [:show] do
-    resources :comments
+    resources :comments, only: [:create, :show]
+    resources :photos, only: [:create, :show]
   end
 
   get '/login', to: 'sessions#new'
