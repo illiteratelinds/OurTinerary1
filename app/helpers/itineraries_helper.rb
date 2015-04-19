@@ -2,9 +2,9 @@ module ItinerariesHelper
 
   def create_itinerary_conditional
     if logged_in? 
-      link_to "Create New Itinerary", new_itinerary_path
+      link_to "Create New Itinerary", new_itinerary_path, class: "btn btn-primary"
     else 
-      "Please log in to create your itinerary"
+      link_to "Login with Facebook to create an itinerary", login_path, class: "btn btn-primary"
     end 
   end
 end

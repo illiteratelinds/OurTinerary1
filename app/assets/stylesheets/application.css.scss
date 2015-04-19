@@ -23,56 +23,47 @@
 body {
   padding-top: 0px;
   padding-bottom: 30px;
+  background-color: #c7d5f9;
 }
-
 .theme-dropdown .dropdown-menu {
   position: static;
   display: block;
   margin-bottom: 20px;
 }
-
 .theme-showcase > p > .btn {
   margin: 5px 0;
 }
-
-
 .navbar-default {
     background-color: #A16DAD;
     width: 100%;
 }
-
 .navbar-default a.navbar-brand, .navbar-default .navbar-nav > li > a {
     color: white;
     text-decoration: none;
 }
-
-
 .navbar-default a.navbar-brand:hover, .navbar-default .navbar-nav > li > a:hover {
     color: white;
     text-decoration: none;
 }
-
 .wrapper {
-
-  padding-left: 55px;
+  padding-left: 40px;
   padding-right: 25px;
+  text-decoration: none;
 }
 .btn-primary {
   background-color: #A16DAD;
     border-color: #7e5389;
+    text-decoration: none;
 }
 .btn-primary:hover {
   background-color: #500263;
     border-color: #7e5389;
-
 }
-
 .pic-container{ 
   width:400px;
   height:600px;
   overflow:auto;
 }
-
 .friend-icon {
   width: 150px;
   height: 120px;
@@ -84,6 +75,43 @@ body {
 .center{
   text-align: center;
 }
+.jumbotron {
+  text-align: center;
+  background-image: url(/assets/hotelpic.jpg);
+  border-radius: 15px;
+  width: 100%;
+  height: 310px;
+  color: white;
+}
+#welcome {
+  position: absolute;
+  top: 60px;
+}
+a:visited {
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

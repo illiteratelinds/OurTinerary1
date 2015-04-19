@@ -1,19 +1,24 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
   <div class="col-md-8">
+    <div class="center">
     <h2><%= @user.name %>'s Itineraries:</h2>
-    <ul>
     <% @user.itineraries.each do |itinerary| %>
-      <li>
-      <% if itinerary.itinerary_display_pic? %>
-        <%= image_tag itinerary.activities.first.photos.first.image.url(:medium) %>
-        <% else %>
-        <%= image_tag "default.jpg", size: "300x200" %>
-      <% end %>
-      <h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3></li>
+    <div class="col-sm-6 col-md-5">
+      <div class="thumbnail">
+        <% if itinerary.itinerary_display_pic? %>
+          <%= link_to (image_tag itinerary.activities.first.photos.first.image.url(:medium)), itinerary_path(itinerary) %>
+          <% else %>
+          <%= image_tag "default.jpg", size: "300x200" %>
+        <% end %>
+        <h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3>
+    </div>
+  </div>
     <% end %>
-    </ul>
     <br><br>
+  </div>
+
+
   </div>
 
   <div class="col-md-4">
