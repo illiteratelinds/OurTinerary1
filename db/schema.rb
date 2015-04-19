@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419002851) do
+ActiveRecord::Schema.define(version: 20150419190113) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "itinerary_id"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150419002851) do
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
-    t.string  "status"
+    t.boolean "status"
   end
 
   create_table "hotels", force: :cascade do |t|

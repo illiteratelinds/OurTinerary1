@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :friendships, only: [:create, :destroy]
+  resources :friendships, only: [:create, :update, :destroy]
 
   resources :itineraries do
       resources :flights
