@@ -1,34 +1,39 @@
-Restaurant Name: <%= @meal.restaurant.name %><br>
+<h1><%= @meal.restaurant.name %></h1><br>
 Address: <%= @meal.restaurant.address %><br>
 Date: <%= @meal.date.strftime("%B %d, %Y") %>
 <br><br>
-<h4> All Pics </h4>
-<% @meal.photos.each do |photo| %>
-  <%= image_tag photo.image.url(:medium) %><br><br>
-<% end %>
+<div class="row">
+  <div class="col-md-6">
 
-<u><h4> Add an image! </h4></u>
-<% if logged_in? && current_user.id == @meal.itinerary.user.id %>
-  <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
-    <%= form.file_field :image %>
-     <div class = "actions"><br>
-        <%= form.submit "Add Photo", class: "btn btn-primary" %>
+    <u><h4> Add an image! </h4></u>
+    <% if logged_in? && current_user.id == @meal.itinerary.user.id %>
+      <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
+        <%= form.file_field :image %>
+         <div class = "actions"><br>
+            <%= form.submit "Add Photo", class: "btn btn-primary" %>
+        </div><br>
+      <% end %>
+    <% end %>
+
+    <h2>All Comments</h2>
+      <% @commentable.comments.each do |comment| %>
+        <%= comment.commenter_name %>: <strong><%= comment.content %></strong>
+      <% end %>
+    <br><br><br>
+    <div class="form-group">
+    <% if logged_in? %>
+      <%= form_for [@commentable, Comment.new] do |f| %>
+          <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
+          <%= f.submit "Comment", class: "btn btn-primary" %><br>
+      <% end %>
+    <% end %>
     </div>
-  <% end %>
-<% end %>
-
-<% if logged_in? %>
-  <h2>New Comment</h2>
-  <%= form_for [@commentable, Comment.new] do |f| %>
-      <%= f.label :content %><br>
-      <%= f.text_area :content %>
-      <%= f.submit "Submit" %><br>
-  <% end %>
-<% end %>
-
-<h2>All Comments</h2>
-  <% @commentable.comments.each do |comment| %>
-    <%= comment.commenter_name %>: <strong><%= comment.content %><strong>
-  <% end %>
-<br><br><br>
+  </div>
+  <div class="col-md-4 pic-container">
+    <h4> All Pics </h4>
+    <% @meal.photos.each do |photo| %>
+      <%= image_tag photo.image.url(:medium) %><br><br>
+    <% end %>
+  </div>
+</div>
 <%= link_to "Back", itinerary_path(@meal.itinerary) %>

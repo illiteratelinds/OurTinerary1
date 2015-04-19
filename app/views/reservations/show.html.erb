@@ -1,46 +1,50 @@
-<h2><%= @reservation.hotel.name %></h2>
+<h1><%= @reservation.hotel.name %></h1>
 Address: <%= @reservation.hotel.address %><br>
-Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.end_date.strftime("%B %d, %Y") %><br>
+Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.end_date.strftime("%B %d, %Y") %><br><br><br>
+<div class="row">
+  <div class="col-md-6">
 
-<h4> All Pics </h4>
-<% @reservation.photos.each do |photo| %>
-  <%= image_tag photo.image.url(:medium) %><br>
-<% end %>
-
-<u><h4> Add an image! </h4></u>
-<% if logged_in? && current_user.id == @reservation.itinerary.user.id %>
-  <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
-    <%= form.file_field :image %>
-     <div class = "actions"><br>
-        <%= form.submit "Add Photo", class: "btn btn-primary" %>
-    </div>
-  <% end %>
-<% end %>
-
-<div class="form-group">
-  <% if logged_in? %>
-    <h2>New Comment</h2>
-    <%= form_for [@commentable, Comment.new] do |f| %>
-        <%= f.label :content %><br>
-        <%= f.text_area :content, class: "form-control" %><br>
-        <%= f.submit "Submit", class: "btn btn-primary" %><br>
+    <u><h4> Add an image! </h4></u>
+    <% if logged_in? && current_user.id == @reservation.itinerary.user.id %>
+      <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
+        <%= form.file_field :image %>
+         <div class = "actions"><br>
+            <%= form.submit "Add Photo", class: "btn btn-primary" %>
+        </div><br><br>
+      <% end %>
     <% end %>
-  <% end %>
+
+
+    <h2>All Comments</h2>
+      <% @commentable.comments.each do |comment| %>
+      <div class="row">
+      <div class="col-md-1">
+        <%= comment.commenter_name %>
+        </div>
+        <div class= "col-md-6">
+        <%= comment.created_at.strftime("%B %d, %Y") %><br>
+        <strong><%= comment.content %></strong>
+        </div>
+      <% end %>
+    <br><br><br><br><br>
+    <div class="form-group">
+      <% if logged_in? %>
+        <%= form_for [@commentable, Comment.new] do |f| %>
+            <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
+            <%= f.submit "Comment", class: "btn btn-primary" %><br>
+        <% end %>
+      <% end %>
+    </div>
+      </div>
+    </div>
+    <div class="col-md-4 pic-container">
+    <h4> All Pics </h4>
+      <% @reservation.photos.each do |photo| %>
+        <%= image_tag photo.image.url(:medium) %><br>
+      <% end %>
+    </div>
 </div>
 
 
-<h2>All Comments</h2>
-  <% @commentable.comments.each do |comment| %>
-  <div class="row">
-  <div class="col-md-1">
-    <%= comment.commenter_name %>
-    </div>
-    <div class= "col-md-6">
-    <%= comment.created_at.strftime("%B %d, %Y") %><br>
-    <strong><%= comment.content %></strong>
-    </div>
-  <% end %>
-<br><br><br>
-  </div>
 <%= link_to "Back", itinerary_path(@reservation.itinerary) %>
 
