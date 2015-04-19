@@ -12,6 +12,10 @@ class CommentsController < ApplicationController
   end
 
   private
+    def commentar
+      id = current_user.id
+      @commentar = User.find(id)
+    end
 
     def find_commentable
       params.each do |name, value|
@@ -23,7 +27,7 @@ class CommentsController < ApplicationController
     end
 
     def comment_params
-      params.require(:comment).permit(:content)
+      params.require(:comment).permit(:content, :user_id)
     end
   
 end

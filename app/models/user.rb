@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :flights, through: :itineraries
   has_many :restaurants, through: :itineraries
   has_many :friendships
+  has_many :comments
   has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :active_friends, -> { where(friendships: { status: true}) }, :through => :friendships, :source => :friend
   has_many :passive_friends, -> { where(friendships: { status: true}) }, :through => :passive_friendships, :source => :user

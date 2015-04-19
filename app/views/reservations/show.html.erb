@@ -21,7 +21,7 @@ Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.e
         <li><div class="row">
           <div class="col-md-3">
             <%= image_tag comment.commenter.avatar.url(:medium), :class => "profile-icon" %>
-            <%= current_user.name %>
+            <%= comment.commenter_name %>
           </div>
           <div class= "col-md-6">
             <%= comment.created_at.strftime("%B %d, %Y") %><br>
@@ -35,6 +35,7 @@ Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.e
         <% if logged_in? %>
           <%= form_for [@commentable, Comment.new] do |f| %>
               <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
+              <%= f.hidden_field :user_id, :value => current_user.id %>
               <%= f.submit "Comment", class: "btn btn-primary" %><br>
           <% end %>
         <% end %>
