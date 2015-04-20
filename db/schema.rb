@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417194526) do
+ActiveRecord::Schema.define(version: 20150420153020) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "itinerary_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20150417194526) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.text     "content"
+    t.integer  "user_id"
   end
 
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
@@ -41,7 +42,7 @@ ActiveRecord::Schema.define(version: 20150417194526) do
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
-    t.string  "status"
+    t.boolean "status"
   end
 
   create_table "hotels", force: :cascade do |t|
@@ -71,8 +72,12 @@ ActiveRecord::Schema.define(version: 20150417194526) do
   create_table "photos", force: :cascade do |t|
     t.integer  "imageable_id"
     t.string   "imageable_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "photos", ["imageable_type", "imageable_id"], name: "index_photos_on_imageable_type_and_imageable_id"
@@ -95,10 +100,15 @@ ActiveRecord::Schema.define(version: 20150417194526) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "uid"
     t.string   "provider"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "image"
   end
 
 end

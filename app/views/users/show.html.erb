@@ -1,18 +1,41 @@
-d<p id="notice"><%= notice %></p>
-<h2>My Itineraries:</h2>
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-7">
+    <div class="center">
+      <h2><%= @user.name %>'s Itineraries:</h2>
+      <% @user.itineraries.each do |itinerary| %>
+      <div class="col-sm-6 col-md-5">
+        <div class="thumbnail">
+          <% if itinerary.itinerary_display_pic? %>
+            <%= link_to (image_tag itinerary.activities.first.photos.first.image.url(:medium)), itinerary_path(itinerary) %>
+            <% else %>
+            <%= image_tag "default.jpg", size: "300x200" %>
+          <% end %>
+          <h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+    <br><br>
 
+  <div class="col-md-4">
+    <h2><%=@user.name%></h2>
+    User since: <%= @user.created_at.strftime("%B %d, %Y") %><br><br>
+    <%= image_tag @user.avatar.url(:medium) %><br>
+    <% if current_user != @user && !current_user.already_friends(@user)%>
+      <%= button_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary" %>
+    <% end %>
+<br><br><br>
 
-
-
-<ul>
-<%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
-<% @user.itineraries.each do |itinerary| %>
-  <li><h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3></li>
-<% end %>
-</ul>
+  <h4>Friends</h4>
+        <% @user.friends.each do |friend| %>
+          <%= link_to (image_tag friend.avatar.url(:medium), :class => "friend-icon"), user_path(friend) %>
+          <%= friend.name %> 
+      <% end %>
 <br><br>
+    
+  </div>
+</div>
 
-
-
-
-<%= link_to 'Back', users_path %>
+<br><br><br><br><br><%= link_to 'Back', users_path %>

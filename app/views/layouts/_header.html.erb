@@ -12,7 +12,10 @@
      <div class="collapse navbar-collapse">
        <ul class="nav navbar-nav">
          <% if logged_in? %>
+
          <li><%= link_to current_user.name, users_current_path %></li>
+
+
          <% end %>
          <li><%= login_logout_links %></li>
        </ul>

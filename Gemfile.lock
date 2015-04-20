@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/thoughtbot/paperclip.git
+  revision: c276ad8282cd743775cdeb97335739be66e9c4a2
+  specs:
+    paperclip (4.2.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.5)
+      mime-types
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -58,6 +68,10 @@ GEM
       timers (~> 4.0.0)
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.7)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -299,6 +313,7 @@ DEPENDENCIES
   nifty-generators
   omniauth
   omniauth-facebook
+  paperclip!
   pg
   pry
   pry-nav
