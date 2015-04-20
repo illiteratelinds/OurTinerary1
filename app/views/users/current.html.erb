@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-8">
     <h3> My Itineraries </h3>
-    <% current_user.itineraries.each do |itinerary| %>
+    <% @user.itineraries.each do |itinerary| %>
       <li><h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3></li>
     <% end %>
     </ul>
@@ -11,7 +11,7 @@
     
      <h4>My Friends List</h4>
         <ul>
-            <% current_user.friends.each do |friend| %>
+            <% @user.friends.each do |friend| %>
               <%= link_to (image_tag friend.avatar.url(:medium), :class => "friend-icon"), user_path(friend) %>
               <%= link_to friend.name, user_path(friend) %> 
                 <%= link_to "Remove Friend", friendship_path(:id => friend), :method => :delete, class: "btn btn-default" %>
@@ -22,7 +22,7 @@
 
       <h4>Friend Requests</h4>
         <ul>
-            <% current_user.requested_friendships.each do |request| %>
+            <% @user.requested_friendships.each do |request| %>
             <li>
               <%= request.name %> 
               <%= link_to "Accept", friendship_path(:id => request), :method => "put" %> 
@@ -32,14 +32,24 @@
         </ul>
   </div>
   <div class="col-md-4">
-    <h2><u><%= link_to current_user.name, user_path(current_user) %></u></h2>
-    <%= link_to (image_tag current_user.avatar.url(:medium), :class => "friend-icon"), user_path(current_user) %><br>
+    <h2><u><%= link_to @user.name, user_path(@user) %></u></h2>
+    <%= link_to (image_tag @user.avatar.url(:medium)), user_path(@user) %><br>
     <u><h4> Add/Change a profile picture! </h4></u>
-    <%= form_for current_user,  :html => { :multipart => true } do |form| %>
-      <%= form.file_field :avatar %>
-       <div class = "actions"><br>
-          <%= form.submit "Update Profile", class: "btn btn-primary" %>
-      </div>
+    <%= form_for @user,  :html => { :multipart => true } do |form| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this itinerary from being saved:</h2>
+            <ul>
+           <% @user.errors.full_messages.each do |message| %>
+             <li><%= message %></li>
+           <% end %>
+           </ul>
+       </div>
+       <% end %>
+        <%= form.file_field :avatar %>
+         <div class = "actions"><br>
+            <%= form.submit "Update Profile", class: "btn btn-primary" %>
+        </div>
     <% end %>
   </div>
 </div>

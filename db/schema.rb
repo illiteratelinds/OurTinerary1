@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419195907) do
+ActiveRecord::Schema.define(version: 20150420153020) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "itinerary_id"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20150419195907) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "image"
   end
 
 end

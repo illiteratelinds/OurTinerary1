@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :pending_friends, -> { where(friendships: { status: false}) }, :through => :friendships, :source => :friend
   has_many :requested_friendships, -> { where(friendships: { status: false}) }, :through => :passive_friendships, :source => :user
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "default.jpg"
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
 
   def friends
     active_friends | passive_friends
@@ -23,11 +23,12 @@ class User < ActiveRecord::Base
   end
 
   def self.create_with_omniauth(auth)
-     create! do |user|
-       user.provider = auth["provider"]
-       user.uid = auth["uid"]
-       user.name = auth["info"]["name"]
-     end
+    create! do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["info"]["name"]
+      user.image = auth["info"]["image"]
+    end
   end
- 
+
 end
