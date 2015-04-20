@@ -1,2 +1,8 @@
 <h3><%= @attraction.name %></h3><br>
 Location: <%= @attraction.address %><br>
+
+<% @attraction.activities.each do |activity| %>
+  <% activity.photos.each do |photo| %>
+    <%= image_tag photo.image.url(:medium) %>
+  <% end %>
+<% end %>

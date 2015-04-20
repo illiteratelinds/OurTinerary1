@@ -1,2 +1,8 @@
-<h3><%= @hotel.name %></h3><br>
+<h3><%= @hotel.name %></h3>
 Location: <%= @hotel.address %><br>
+
+<% @hotel.reservations.each do |reservation| %>
+  <% reservation.photos.each do |photo| %>
+    <%= image_tag photo.image.url(:medium) %>
+  <% end %>
+<% end %>
