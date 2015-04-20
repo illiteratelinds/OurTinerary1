@@ -3,16 +3,13 @@ Address: <%= @activity.attraction.address %><br>
 Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
 <br><br>
 <div class="row">
-  <div class="col-md-6">
-    <u><h4> Add an image! </h4></u>
-    <% if logged_in? && current_user.id == @activity.itinerary.user.id %>
-      <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
-        <%= form.file_field :image %>
-         <div class = "actions"><br>
-            <%= form.submit "Add Photo", class: "btn btn-primary" %>
-        </div>
-      <% end %>
+  <div class="col-md-4 pic-container">
+    <h4> All Pics </h4>
+    <% @activity.photos.each do |photo| %>
+    <%= link_to (image_tag photo.image.url(:medium)), [@activity, photo] %><br><br>
     <% end %>
+  </div>
+  <div class="col-md-8">
     
     <h2>All Comments</h2>
       <ul>
@@ -40,12 +37,15 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
       <% end %>
     </div>
   </div>
-  <div class="col-md-4 pic-container">
-    <h4> All Pics </h4>
-    <% @activity.photos.each do |photo| %>
-    <%= link_to (image_tag photo.image.url(:medium)), [@activity, photo] %><br><br>
-    <% end %>
-  </div>
 </div>
-<%= link_to "Back", itinerary_path(@activity.itinerary) %>
 
+    <u><h4> Add an image! </h4></u>
+    <% if logged_in? && current_user.id == @activity.itinerary.user.id %>
+      <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
+        <%= form.file_field :image %>
+         <div class = "actions"><br>
+            <%= form.submit "Add Photo", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    <% end %>
+<%= link_to "Back", itinerary_path(@activity.itinerary) %>

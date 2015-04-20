@@ -2,18 +2,15 @@
 Address: <%= @meal.restaurant.address %><br>
 Date: <%= @meal.date.strftime("%B %d, %Y") %>
 <br><br>
-<div class="row">
-  <div class="col-md-6">
 
-    <u><h4> Add an image! </h4></u>
-    <% if logged_in? && current_user.id == @meal.itinerary.user.id %>
-      <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
-        <%= form.file_field :image %>
-         <div class = "actions"><br>
-            <%= form.submit "Add Photo", class: "btn btn-primary" %>
-        </div><br>
-      <% end %>
+<div class="row">
+  <div class="col-md-4 pic-container">
+    <h4> All Pics </h4>
+    <% @meal.photos.each do |photo| %>
+      <%= link_to (image_tag photo.image.url(:medium)), [@meal, photo] %><br><br>
     <% end %>
+  </div>
+  <div class="col-md-8">
 
    <h2>All Comments</h2>
       <ul>
@@ -41,11 +38,14 @@ Date: <%= @meal.date.strftime("%B %d, %Y") %>
     <% end %>
     </div>
   </div>
-  <div class="col-md-4 pic-container">
-    <h4> All Pics </h4>
-    <% @meal.photos.each do |photo| %>
-      <%= link_to (image_tag photo.image.url(:medium)), [@meal, photo] %><br><br>
-    <% end %>
-  </div>
 </div>
+    <u><h4> Add an image! </h4></u>
+    <% if logged_in? && current_user.id == @meal.itinerary.user.id %>
+      <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
+        <%= form.file_field :image %>
+         <div class = "actions"><br>
+            <%= form.submit "Add Photo", class: "btn btn-primary" %>
+        </div><br>
+      <% end %>
+    <% end %>
 <%= link_to "Back", itinerary_path(@meal.itinerary) %>

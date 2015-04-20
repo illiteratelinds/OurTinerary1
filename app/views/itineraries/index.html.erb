@@ -1,11 +1,11 @@
-<h2>User's Itineraries</h2><br><br>
+<h2 align="center">User's Itineraries</h2><br><br>
 
 
 <div class="center">
 <% @users.each do |user| %>
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <%= image_tag user.avatar.url(:medium) %>
+      <%= link_to (image_tag user.avatar.url(:medium)), user_path(user) %>
         <div class="caption">
           <h3><%= link_to user.name, user_path(user) %></h3>
           <% user.itineraries.each do |i| %>

@@ -1,27 +1,45 @@
 <h1> My Profile Page </h1>
 <br>
-<h2><u><%= current_user.name %></u></h2>
-<%= image_tag current_user.avatar.url(:medium) %><br>
-<h3> My Itineraries </h3>
-<% current_user.itineraries.each do |itinerary| %>
-  <li><h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3></li>
-<% end %>
-</ul>
-<br>
+<div class="row">
+  <div class="col-md-8">
+    <h3> My Itineraries </h3>
+    <% current_user.itineraries.each do |itinerary| %>
+      <li><h3><%= link_to itinerary.title, itinerary_path(itinerary) %></h3></li>
+    <% end %>
+    </ul>
+    <br>
+    
+     <h4>My Friends List</h4>
+        <ul>
+            <% current_user.friends.each do |friend| %>
+              <%= link_to (image_tag friend.avatar.url(:medium), :class => "friend-icon"), user_path(friend) %>
+              <%= link_to friend.name, user_path(friend) %> 
+                <%= link_to "Remove Friend", friendship_path(:id => friend), :method => :delete, class: "btn btn-default" %>
+            </li>
+          <% end %>
+        </ul>
+    <br><br>
 
-
-<u><h4> Add/Change a profile picture! </h4></u>
-<%= form_for current_user,  :html => { :multipart => true } do |form| %>
-  <%= form.file_field :avatar %>
-   <div class = "actions"><br>
-      <%= form.submit class: "btn btn-primary" %>
+      <h4>Friend Requests</h4>
+        <ul>
+            <% current_user.requested_friendships.each do |request| %>
+            <li>
+              <%= request.name %> 
+              <%= link_to "Accept", friendship_path(:id => request), :method => "put" %> 
+              <%= link_to "Decline", friendship_path(:id => request), :method => :delete %>
+            </li>
+          <% end %>
+        </ul>
   </div>
-<% end %>
-
-
-<h4> My Friends List </h4>
-<% current_user.friendships.each do |friendship| %>
-  <%= link_to friendship.friend.name, user_path(friendship.friend) %> <%= link_to "remove friend", friendship_path(friendship), :method => :delete %>
-<% end %>
-<br><br>
-
+  <div class="col-md-4">
+    <h2><u><%= link_to current_user.name, user_path(current_user) %></u></h2>
+    <%= link_to (image_tag current_user.avatar.url(:medium)), user_path(current_user) %><br>
+    <u><h4> Add/Change a profile picture! </h4></u>
+    <%= form_for current_user,  :html => { :multipart => true } do |form| %>
+      <%= form.file_field :avatar %>
+       <div class = "actions"><br>
+          <%= form.submit "Update Profile", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

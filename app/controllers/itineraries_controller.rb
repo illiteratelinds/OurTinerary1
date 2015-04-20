@@ -7,7 +7,6 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
-
   end
 
   def new

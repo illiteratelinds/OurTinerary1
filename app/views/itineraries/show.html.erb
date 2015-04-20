@@ -4,8 +4,9 @@
 <div class="row">
   <div class = "col-md-8">
     <h3><%= link_to @itinerary.user.name, user_path(@itinerary.user) %></h3>
-    <h3> <%= @itinerary.title %></h3><br>
-    <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br>
+    <%= image_tag @itinerary.user.avatar.url(:medium) %><br><br>
+    <h3> <%= @itinerary.title %></h3>
+    <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br><br>
 
     <h4> Hotel Reservations </h4>
     <% @itinerary.reservations.each do |reservation| %>
@@ -31,9 +32,11 @@
   </div>
   <br>
   <div class = "col-md-4">
-    <h3>Add items to your itinerary!</h3><br><br>
-    <%= button_to "Add a Hotel Reservation", new_itinerary_hotel_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
-    <%= button_to "Add a Restaurant", new_itinerary_restaurant_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
-    <%= button_to "Add an Attraction", new_itinerary_attraction_path(@itinerary),  :method => "get", class: "btn btn-primary" %>
+    <% if current_user == @itinerary.user %>
+      <h3>Add items to your itinerary!</h3><br><br>
+      <%= button_to "Add a Hotel Reservation", new_itinerary_hotel_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
+      <%= button_to "Add a Restaurant", new_itinerary_restaurant_path(@itinerary),  :method => "get", class: "btn btn-primary" %><br>
+      <%= button_to "Add an Attraction", new_itinerary_attraction_path(@itinerary),  :method => "get", class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
