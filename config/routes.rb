@@ -9,37 +9,42 @@ Rails.application.routes.draw do
 
  resources :friendships, only: [:create, :update, :destroy]
 
+
+
  resources :itineraries do
-     resources :flights
-     resources :attractions
      resources :reservations, only: [:show] do 
        resources :comments, only: [:create, :show]
        resources :photos, only: [:create, :show]
-
+       resources :reviews, only: [:create, :new]
      end
      resources :activities, only: [:show] do 
        resources :comments, only: [:create, :show]
        resources :photos, only: [:create, :show]
+       resources :reviews, only: [:create, :new]
 
      end
      resources :meals, only: [:show] do
        resources :comments, only: [:create]
        resources :photos, only: [:create, :show]
+       resources :reviews, only: [:create, :new]
      end
      resources :hotels
      resources :restaurants
  end
  resources :reservations, only: [:show] do 
-   resources :comments, only: [:create] 
+   resources :comments, only: [:create]
    resources :photos, only: [:create, :show]
+   resources :reviews, only: [:create, :new]
  end
  resources :activities, only: [:show] do 
      resources :comments, only: [:create]
      resources :photos, only: [:create, :show]
+     resources :reviews, only: [:create, :new]
  end
  resources :meals, only: [:show] do
    resources :comments, only: [:create]
    resources :photos, only: [:create, :show] 
+   resources :reviews, only: [:create, :new]
  end
 
  resources :photos, only: [:create, :show] do

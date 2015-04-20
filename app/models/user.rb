@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :pending_friends, -> { where(friendships: { status: false}) }, :through => :friendships, :source => :friend
   has_many :requested_friendships, -> { where(friendships: { status: false}) }, :through => :passive_friendships, :source => :user
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "default.jpg"
+  has_many :reviews, foreign_key: :creator_id
 
 
   def friends

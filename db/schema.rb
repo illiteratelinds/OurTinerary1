@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420153020) do
+ActiveRecord::Schema.define(version: 20150420185232) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "itinerary_id"
@@ -97,6 +97,18 @@ ActiveRecord::Schema.define(version: 20150420153020) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "reviewable_id"
+    t.string   "reviewable_type"
+    t.integer  "rating"
+    t.text     "content"
+    t.integer  "creator_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

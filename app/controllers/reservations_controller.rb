@@ -28,5 +28,14 @@ class ReservationsController < ApplicationController
       end
       nil
     end
+
+    def find_reviewable
+      params.each do |name, value|
+        if name =~ /^id$/
+          return Reservation.find(value)
+        end
+      end
+      nil
+    end
   
 end
