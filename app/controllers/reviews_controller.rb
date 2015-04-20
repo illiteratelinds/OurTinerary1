@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-
+  
   def create
     @reviewable = find_reviewable
     @review = @reviewable.reviews.build(review_params)
@@ -7,7 +7,8 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Successfully created review."
       redirect_to :back
     else
-      render :action => 'new'
+      flash[:notice] = "Please input text to submit a review."
+      redirect_to :back
     end
   end
 
@@ -23,7 +24,7 @@ class ReviewsController < ApplicationController
     end
 
     def review_params
-      params.require(:comment).permit(:content, :creator_id, :rating)
+      params.require(:review).permit(:content, :creator_id, :rating)
     end
 
 end
