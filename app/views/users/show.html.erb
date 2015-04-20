@@ -23,7 +23,7 @@
     <h2><%=@user.name%></h2>
     User since: <%= @user.created_at.strftime("%B %d, %Y") %><br><br>
     <%= image_tag @user.avatar.url(:medium) %><br>
-    <% if current_user != @user && !current_user.already_friends(@user)%>
+    <% if logged_in? && current_user != @user && !current_user.already_friends(@user)%>
       <%= button_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary" %>
     <% end %>
 <br><br><br>
