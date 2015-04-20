@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     active_friends | passive_friends
   end
 
+  def already_friends
+    friends.include? @user 
+  end
+
   def self.create_with_omniauth(auth)
      create! do |user|
        user.provider = auth["provider"]
