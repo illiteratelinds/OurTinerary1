@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
  resources :friendships, only: [:create, :update, :destroy]
 
-
+ resources :hotels
+ resources :restaurants
+ resources :attractions
 
  resources :itineraries do
      resources :reservations, only: [:show] do 
@@ -28,8 +30,9 @@ Rails.application.routes.draw do
        resources :photos, only: [:create, :show]
        resources :reviews, only: [:create, :new]
      end
-     resources :hotels
-     resources :restaurants
+    resources :hotels
+    resources :restaurants
+    resources :attractions
  end
  resources :reservations, only: [:show] do 
    resources :comments, only: [:create]

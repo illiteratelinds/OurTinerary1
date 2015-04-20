@@ -17,4 +17,5 @@ class Itinerary < ActiveRecord::Base
       return true
     end
   end
+
 end
