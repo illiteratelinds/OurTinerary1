@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <div class="row">
   <div class="col-md-7">
     <div class="center">
@@ -23,8 +22,13 @@
     <h2><%=@user.name%></h2>
     User since: <%= @user.created_at.strftime("%B %d, %Y") %><br><br>
     <%= image_tag @user.avatar.url(:medium) %><br>
-    <% if logged_in? && current_user != @user && !current_user.already_friends(@user)%>
+    <% if logged_in? && current_user.add_friend_conditional(@user) %>
+      <% if current_user.requested?(@user) %>
+        <p> Friend request sent </p>
+        <% else %>
       <%= button_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary" %>
+
+    <% end %>
     <% end %>
 <br><br><br>
 
