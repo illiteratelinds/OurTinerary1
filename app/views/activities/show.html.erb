@@ -17,9 +17,10 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
       <% end %>
     <% end %>
   </div>
-<div id="owl-demo" class ="owl-carousel">
+
+<div id="owl-demo" class="owl-carousel">
   <% @activity.photos.each do |photo| %>
-  <div class="item"> <%= link_to (image_tag photo.image.url(:medium)), [@activity, photo] %> </div>
+  <div class="item"><center> <%= link_to (image_tag photo.image.url), [@activity, photo] %> </center></div>
   <% end %>
 </div>
 

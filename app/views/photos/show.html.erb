@@ -1,7 +1,9 @@
-<%= image_tag @photo.image.url(:medium) %><br><br><br>
+<div class= "text-center">
+  <%= image_tag @photo.image.url, id: "photo_show" %><br><br><br>
+</div>
 
-    <div class="col-md-8">
-   <h2>All Comments</h2>
+<div class="col-md-8">
+  <h2>All Comments</h2>
      <ul>
        <% @commentable.comments.each do |comment| %>
        <li><div class="row">
@@ -15,16 +17,16 @@
          </div></div></li>
        <% end %>
      </ul><br><br>
-   
-     <div class="form-group">
-       <% if logged_in? %>
-         <%= form_for [@commentable, Comment.new] do |f| %>
-             <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
-             <%= f.hidden_field :user_id, :value => current_user.id %>
-             <%= f.submit "Comment", class: "btn btn-primary" %><br>
-         <% end %>
+
+   <div class="form-group">
+     <% if logged_in? %>
+       <%= form_for [@commentable, Comment.new] do |f| %>
+           <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
+           <%= f.hidden_field :user_id, :value => current_user.id %>
+           <%= f.submit "Comment", class: "btn btn-primary" %><br>
        <% end %>
-     </div>
+     <% end %>
    </div>
+  </div>
 
 </div>

@@ -1,11 +1,14 @@
 // Place all the styles related to the activites controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#owl-demo .item{
-  margin: 3px;
+#owl-demo .owl-item div{
+  padding:5px;
 }
-#owl-demo .item img{
+#owl-demo .owl-item img{
   display: block;
-  width: 100%;
+  width: 50%;
   height: auto;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }

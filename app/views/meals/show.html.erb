@@ -18,13 +18,13 @@ Date: <%= @meal.date.strftime("%B %d, %Y") %>
     <% end %>
   </div>
 
-<div class="row">
-  <div class="col-md-4 pic-container">
-    <h4> All Pics </h4>
+  <div id="owl-demo" class="owl-carousel">
     <% @meal.photos.each do |photo| %>
-      <%= link_to (image_tag photo.image.url(:medium)), [@meal, photo] %><br><br>
+    <div class="item"><center> <%= link_to (image_tag photo.image.url), [@activity, photo] %> </center></div>
     <% end %>
   </div>
+
+<div class="row">
   <div class="col-md-8">
 
    <h2>All Comments</h2>
