@@ -2,6 +2,14 @@
 Address: <%= @activity.attraction.address %><br>
 Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
 <br><br>
+
+<div id="owl-demo">
+  <% @activity.photos.each do |photo| %>
+  <div class="item"> <%= link_to (image_tag photo.image.url(:medium)), [@activity, photo] %> </div>
+  <% end %>
+</div>
+
+
 <div class="row">
   <div class="col-md-4 pic-container">
     <h4> All Pics </h4>
