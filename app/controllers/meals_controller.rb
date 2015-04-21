@@ -6,6 +6,8 @@ class MealsController < ApplicationController
     @comments = @commentable.comments
     @imageable = find_imageable
     @photos = @imageable.photos
+    @reviewable = find_reviewable
+    @review = @reviewable.review
   end
 
   def find_commentable
@@ -25,4 +27,14 @@ class MealsController < ApplicationController
     end
     nil
   end
+
+
+  def find_reviewable
+      params.each do |name, value|
+        if name =~ /^id$/
+          return Meal.find(value)
+        end
+      end
+      nil
+    end
 end

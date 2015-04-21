@@ -7,7 +7,7 @@ class ReservationsController < ApplicationController
     @imageable = find_imageable
     @photos = @imageable.photos
     @reviewable = find_reviewable
-    @reviews = @reviewable.reviews
+    @review = @reviewable.review
   end
   
   private

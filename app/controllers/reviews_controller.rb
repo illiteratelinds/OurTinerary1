@@ -2,7 +2,8 @@ class ReviewsController < ApplicationController
   
   def create
     @reviewable = find_reviewable
-    @review = @reviewable.reviews.build(review_params)
+    @review = Review.new(review_params)
+    @reviewable.review = @review
     if @review.save
       flash[:notice] = "Successfully created review."
       redirect_to :back

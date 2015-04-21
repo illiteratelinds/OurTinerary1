@@ -3,7 +3,21 @@ Address: <%= @activity.attraction.address %><br>
 Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
 <br><br>
 
-<div id="owl-demo">
+<% if @review %>
+  <%= @review.content %><br>
+  <%= @review.creator.name %>
+<% end %>
+
+  <div class="form-group">
+    <% if logged_in? && !@review %>
+      <%= form_for [@reviewable, Review.new] do |f| %>
+         <%= f.text_area :content, :placeholder => "Write a review", class: "form-control" %><br>
+         <%= f.hidden_field :creator_id, :value => current_user.id %>
+         <%= f.submit "Submit Review", class: "btn btn-primary" %><br>
+      <% end %>
+    <% end %>
+  </div>
+<div id="owl-demo" class ="owl-carousel">
   <% @activity.photos.each do |photo| %>
   <div class="item"> <%= link_to (image_tag photo.image.url(:medium)), [@activity, photo] %> </div>
   <% end %>
@@ -11,13 +25,7 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
 
 
 <div class="row">
-  <div class="col-md-4 pic-container">
-    <h4> All Pics </h4>
-    <% @activity.photos.each do |photo| %>
-    <%= link_to (image_tag photo.image.url(:medium)), [@activity, photo] %><br><br>
-    <% end %>
-  </div>
-  <div class="col-md-8">
+  <div class="col-md-4">
     
     <h2>All Comments</h2>
       <ul>

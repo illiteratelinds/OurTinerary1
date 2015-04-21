@@ -3,6 +3,21 @@ Address: <%= @meal.restaurant.address %><br>
 Date: <%= @meal.date.strftime("%B %d, %Y") %>
 <br><br>
 
+<% if @review %>
+  <%= @review.content %><br>
+  <%= @review.creator.name %>
+<% end %>
+
+  <div class="form-group">
+    <% if logged_in? && !@review %>
+      <%= form_for [@reviewable, Review.new] do |f| %>
+         <%= f.text_area :content, :placeholder => "Write a review", class: "form-control" %><br>
+         <%= f.hidden_field :creator_id, :value => current_user.id %>
+         <%= f.submit "Submit Review", class: "btn btn-primary" %><br>
+      <% end %>
+    <% end %>
+  </div>
+
 <div class="row">
   <div class="col-md-4 pic-container">
     <h4> All Pics </h4>
