@@ -7,6 +7,7 @@ class Itinerary < ActiveRecord::Base
   has_many :meals
   has_many :restaurants, through: :meals
   has_many :flights
+
   validates_presence_of :title, :user_id
 
 
@@ -18,4 +19,18 @@ class Itinerary < ActiveRecord::Base
     end
   end
 
+  def itinerary_item_photos
+    photos = []
+    ["reservations", "meals", "activities"].each do |itinerary_item| 
+      itinerary_items = self.public_send(itinerary_item) 
+      itinerary_items.each do |t| 
+        t.public_send("photos").each do |photo| 
+            photos << photo.image
+        end 
+      end 
+    end 
+    photos
+  end
+
 end
+
