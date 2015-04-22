@@ -32,6 +32,35 @@ class Itinerary < ActiveRecord::Base
     photos
   end
 
+  def itinerary_waypoints
+    way_points = []
+    ["reservations", "meals", "activities"].each do |itinerary_item| 
+      itinerary_items = self.public_send(itinerary_item)
+      itinerary_items.each do |item|
+        way_points << find_parent(item)
+      end
+    end
+    way_points
+  end
+
+  def find_parent(item)
+    if item.class == Reservation 
+      return item.public_send("hotel")
+    elsif item.class == Meal
+      return item.public_send("restaurant")
+    elsif item.class == Activity
+      return item.public_send("attraction")
+    end
+  end
 
 end
+    # @waypoints = @itinerary.reservations.each do |reservation|
+    #   reservation.hotel.address
+    # end
+
+
+
+
+
+
 
