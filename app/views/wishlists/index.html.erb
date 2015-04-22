@@ -1,0 +1,8 @@
+<h1>My Wishlist</h1>
+<ul>
+<% current_user.wishlists.each do |wishlist| %>
+
+  <li><%= link_to wishlist.wishlistable.name, self.send("#{wishlist.wishlistable.class.to_s.downcase}_path", wishlist.wishlistable) %><br>
+  <%= wishlist.wishlistable.address %></li>
+<% end %>
+</ul>

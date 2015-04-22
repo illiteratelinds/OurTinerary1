@@ -8,7 +8,12 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
     <%= @review.content %><br>
     <%= @review.creator.name %>
   <% end %>
-
+  <% if !@wishlist_exists && !@my_item%>
+    <%= form_for [@wishlistable, Wishlist.new] do |f| %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <%= f.submit "Add to Wishlist", class: "btn btn-primary" %><br>
+    <% end %>
+  <% end %>
   <iframe
     width="400"
     height="450"

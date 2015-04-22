@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "default.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   has_many :reviews, foreign_key: :creator_id
+  has_many :wishlists
 
   def self.create_with_omniauth(auth)
     create! do |user|
@@ -40,4 +41,13 @@ class User < ActiveRecord::Base
     self != user && !self.already_friends(user)
   end
 
+
+
 end
+
+
+
+
+
+
+

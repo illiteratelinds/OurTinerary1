@@ -1,59 +1,64 @@
 Rails.application.routes.draw do
- get '/users/current', to: 'users#current'
- 
- resources :users
+  get '/users/current', to: 'users#current'
+  
+  resources :users
 
- root to: 'welcome#index'
+  root to: 'welcome#index'
 
- resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
 
- resources :friendships, only: [:create, :update, :destroy]
+  resources :friendships, only: [:create, :update, :destroy]
 
- resources :hotels
- resources :restaurants
- resources :attractions
+  resources :hotels do 
+    resources :wishlists, only: [:create]
+  end
+  resources :restaurants do 
+    resources :wishlists, only: [:create]
+  end
+  resources :attractions do
+    resources :wishlists, only: [:create]
+  end
 
- resources :itineraries do
-     resources :reservations, only: [:show] do 
-       resources :comments, only: [:create, :show]
-       resources :photos, only: [:create, :show]
-       resources :reviews, only: [:create, :new]
-     end
-     resources :activities, only: [:show] do 
-       resources :comments, only: [:create, :show]
-       resources :photos, only: [:create, :show]
-       resources :reviews, only: [:create, :new]
+  resources :wishlists, only: [:index]
 
-     end
-     resources :meals, only: [:show] do
-       resources :comments, only: [:create]
-       resources :photos, only: [:create, :show]
-       resources :reviews, only: [:create, :new]
-     end
+  resources :itineraries do
+    resources :reservations, only: [:show] do 
+      resources :comments, only: [:create, :show]
+      resources :photos, only: [:create, :show]
+      resources :reviews, only: [:create, :new]
+   end
+    resources :activities, only: [:show] do 
+      resources :comments, only: [:create, :show]
+      resources :photos, only: [:create, :show]
+      resources :reviews, only: [:create, :new]
+    end
+    resources :meals, only: [:show] do
+      resources :comments, only: [:create]
+      resources :photos, only: [:create, :show]
+      resources :reviews, only: [:create, :new]
+   end
     resources :hotels
     resources :restaurants
     resources :attractions
+  end
+resources :reservations, only: [:show] do 
+  resources :comments, only: [:create]
+  resources :photos, only: [:create, :show]
+  resources :reviews, only: [:create, :new]
+end
+  resources :activities, only: [:show] do 
+      resources :comments, only: [:create]
+      resources :photos, only: [:create, :show]
+      resources :reviews, only: [:create, :new]
  end
- resources :reservations, only: [:show] do 
-   resources :comments, only: [:create]
-   resources :photos, only: [:create, :show]
-   resources :reviews, only: [:create, :new]
+  resources :meals, only: [:show] do
+    resources :comments, only: [:create]
+    resources :photos, only: [:create, :show] 
+    resources :reviews, only: [:create, :new]
  end
- resources :activities, only: [:show] do 
-     resources :comments, only: [:create]
-     resources :photos, only: [:create, :show]
-     resources :reviews, only: [:create, :new]
+  resources :photos, only: [:create, :show] do
+    resources :comments, only:[:create]
  end
- resources :meals, only: [:show] do
-   resources :comments, only: [:create]
-   resources :photos, only: [:create, :show] 
-   resources :reviews, only: [:create, :new]
- end
-
- resources :photos, only: [:create, :show] do
-   resources :comments, only:[:create]
- end
-
  get '/login', to: 'sessions#new'
 
  get '/logout', to: 'sessions#destroy'

@@ -41,6 +41,15 @@ class HotelsController < ApplicationController
       @hotel = Hotel.find(params[:id])
     end
 
+    def find_wishlistable
+      params.each do |name, value|
+        if name =~ /^id$/
+          return Hotel.find(value)
+        end
+      end
+      nil
+    end
+
     def hotel_params
       params.require(:hotel).permit(:name, :address)
     end

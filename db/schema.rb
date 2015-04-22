@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420185232) do
+ActiveRecord::Schema.define(version: 20150422172852) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "itinerary_id"
@@ -87,12 +87,8 @@ ActiveRecord::Schema.define(version: 20150420185232) do
     t.integer  "hotel_id"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -126,5 +122,15 @@ ActiveRecord::Schema.define(version: 20150420185232) do
     t.datetime "avatar_updated_at"
     t.string   "image"
   end
+
+  create_table "wishlists", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "wishlistable_id"
+    t.string   "wishlistable_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "wishlists", ["wishlistable_type", "wishlistable_id"], name: "index_wishlists_on_wishlistable_type_and_wishlistable_id"
 
 end
