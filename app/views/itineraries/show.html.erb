@@ -2,9 +2,11 @@
     <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br><br><br><br> 
 <div id="owl-demo" class="owl-carousel owl-theme">
 <% @itinerary.itinerary_item_photos.each do |photo| %>
-  <div class="item"><%= image_tag photo.url %> </center></div>
+  <div class="item"><%= image_tag(photo.url)%> </center></div>
 <% end %>
 </div>
+
+
 <div class="row">
   <div class = "col-md-8">
 

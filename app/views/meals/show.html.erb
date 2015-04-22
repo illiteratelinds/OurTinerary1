@@ -3,10 +3,12 @@ Address: <%= @meal.restaurant.address %><br>
 Date: <%= @meal.date.strftime("%B %d, %Y") %>
 <br><br>
 
-<% if @review %>
-  <%= @review.content %><br>
-  <%= @review.creator.name %>
-<% end %>
+  <% if @review %>
+    <%= @review.content %><br>
+    <%= @review.creator.name %>
+  <% end %>
+
+
 
   <div class="form-group">
     <% if logged_in? && !@review %>

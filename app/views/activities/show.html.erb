@@ -3,11 +3,11 @@ Address: <%= @activity.attraction.address %><br>
 Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
 <br><br>
 
-<% if @review %>
-  <%= @review.content %><br>
-  <%= @review.creator.name %>
-<% end %>
-
+  <% if @review %>
+    <%= @review.content %><br>
+    <%= @review.creator.name %>
+  <% end %>
+  
   <div class="form-group">
     <% if logged_in? && !@review %>
       <%= form_for [@reviewable, Review.new] do |f| %>
