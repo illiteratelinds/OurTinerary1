@@ -1,14 +1,20 @@
 <div align = "center">
- <h1><%= @reservation.hotel.name %></h1>
- Address: <%= @reservation.hotel.address %><br>
- Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.end_date.strftime("%B %d, %Y") %><br><br><br>
-<% if @review %>
-  <%= @review.content %><br>
-  <%= @review.creator.name %>
-<% end %>
+  <h1><%= @reservation.hotel.name %></h1>
+   Address: <%= @reservation.hotel.address %><br>
+   Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.end_date.strftime("%B %d, %Y") %><br>
+  <% if @review %>
+    <%= @review.content %><br>
+    <%= @review.creator.name %>
+  <% end %><br>
+  <iframe
+    width="600"
+    height="450"
+    frameborder="0" style="border:0"
+    src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@reservation.hotel.name+@reservation.hotel.address%>'>
+  </iframe>
 
   <div class="form-group">
-    <% if logged_in? && !@review %>
+    <% if logged_in? && !@review && current_user == @reservation.itinerary.user %>
       <%= form_for [@reviewable, Review.new] do |f| %>
          <%= f.text_area :content, :placeholder => "Write a review", class: "form-control" %><br>
          <%= f.hidden_field :creator_id, :value => current_user.id %>
