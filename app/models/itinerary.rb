@@ -32,5 +32,6 @@ class Itinerary < ActiveRecord::Base
     photos
   end
 
+
 end
 

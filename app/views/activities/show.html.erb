@@ -1,3 +1,4 @@
+<h2><%= link_to @activity.itinerary.title, itinerary_path(@activity.itinerary) %></h2>
 <h1><%= @activity.attraction.name %><br></h1>
 Address: <%= @activity.attraction.address %><br>
 Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
@@ -7,6 +8,13 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
     <%= @review.content %><br>
     <%= @review.creator.name %>
   <% end %>
+
+  <iframe
+    width="400"
+    height="450"
+    frameborder="0" style="border:0"
+    src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@activity.attraction.name+@activity.attraction.address%>'>
+  </iframe>
   
   <div class="form-group">
     <% if logged_in? && !@review %>

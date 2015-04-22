@@ -1,3 +1,4 @@
+<h2><%= link_to @reservation.itinerary.title, itinerary_path(@reservation.itinerary) %></h2>
 <div align = "center">
   <h1><%= @reservation.hotel.name %></h1>
    Address: <%= @reservation.hotel.address %><br>
@@ -7,7 +8,7 @@
     <%= @review.creator.name %>
   <% end %><br>
   <iframe
-    width="600"
+    width="400"
     height="450"
     frameborder="0" style="border:0"
     src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@reservation.hotel.name+@reservation.hotel.address%>'>
