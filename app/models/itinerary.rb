@@ -10,7 +10,6 @@ class Itinerary < ActiveRecord::Base
 
   validates_presence_of :title, :user_id
 
-
   def itinerary_display_pic?
     if activities.first.nil? || activities.first.photos.first.nil?
       return false
@@ -37,7 +36,7 @@ class Itinerary < ActiveRecord::Base
     ["reservations", "meals", "activities"].each do |itinerary_item| 
       itinerary_items = self.public_send(itinerary_item)
       itinerary_items.each do |item|
-        way_points << find_parent(item)
+        way_points << find_parent(item).public_send("address") + " | "
       end
     end
     way_points
@@ -54,10 +53,6 @@ class Itinerary < ActiveRecord::Base
   end
 
 end
-    # @waypoints = @itinerary.reservations.each do |reservation|
-    #   reservation.hotel.address
-    # end
-
 
 
 

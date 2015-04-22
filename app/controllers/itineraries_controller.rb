@@ -9,13 +9,8 @@ class ItinerariesController < ApplicationController
   def show
     @origin = @itinerary.hotels.first.address
     @destination = @itinerary.attractions.last.address
-    @waypoints = []
-    @itinerary.itinerary_waypoints.each do |waypoint| 
-      @waypoints << waypoint.address.gsub(/\|/, "") 
-    end
+
   end
-
-
 
   def new
     @itinerary = Itinerary.new
