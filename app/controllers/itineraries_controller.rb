@@ -7,8 +7,10 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
-    @origin = @itinerary.hotels.first.address
-    @destination = @itinerary.attractions.last.address
+    if @itinerary.hotels.count > 0 && @itinerary.attractions.count > 0 
+      @origin = @itinerary.hotels.first.address
+      @destination = @itinerary.attractions.last.address
+    end
 
   end
 
@@ -61,4 +63,6 @@ class ItinerariesController < ApplicationController
     def itinerary_params
       params.require(:itinerary).permit(:title, :start_date, :end_date, :user_id)
     end
+
 end
+
