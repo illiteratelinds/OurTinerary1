@@ -8,12 +8,13 @@
 
     <% if wishlist.find_join_table.class == Meal || wishlist.find_join_table.class == Activity %>
        <%= form_for wishlist.find_join_table do |f| %>
+        <%= hidden_field_tag :wishlist_id, wishlist.id %>
         <%= f.hidden_field "#{wishlist.wishlistable.class.to_s.downcase}_id".to_sym, :value => wishlist.wishlistable.id %>
         <%= f.label :itinerary_id, "Select your itinerary" %>
         <%= f.collection_select(:itinerary_id, current_user.itineraries, :id, :title) %>
         <div class = "form-group">
           <%= f.label :date %><br>
-          <%= f.date_select :date %> <%#=, Date.current, :prefix => 'start_date' %>
+          <%= f.date_select :date %>
         </div>
         <div class="actions"><br>
           <%= f.submit "Add this #{wishlist.wishlistable.class} to your itinerary", class: "btn btn-primary" %>
@@ -21,16 +22,17 @@
       <% end %>
     <% else %>
       <%= form_for wishlist.find_join_table do |f| %>
+        <%= hidden_field_tag :wishlist_id, wishlist.id %>
         <%= f.hidden_field "#{wishlist.wishlistable.class.to_s.downcase}_id".to_sym, :value => wishlist.wishlistable.id %>
         <%= f.label :itinerary_id, "Select your itinerary" %>
         <%= f.collection_select(:itinerary_id, current_user.itineraries, :id, :title) %>
         <div class = "form-group">
           <%= f.label :start_date %><br>
-          <%= f.date_select :start_date %> <%#=, Date.current, :prefix => 'start_date' %>
+          <%= f.date_select :start_date %>
         </div>
         <div class = "form-group">
           <%= f.label :end_date %><br>
-          <%= f.date_select :end_date %>  <%#= Date.current, :prefix => 'end_date' %>
+          <%= f.date_select :end_date %> 
         </div>
         <div class="actions"><br>
           <%= f.submit "Add this #{wishlist.wishlistable.class} to your itinerary", class: "btn btn-primary" %>

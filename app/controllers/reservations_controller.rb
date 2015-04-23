@@ -16,7 +16,9 @@ class ReservationsController < ApplicationController
   
   def create
     @reservation = Reservation.new(reservation_params)
+    @wishlist = Wishlist.find(params[:wishlist_id]) #destroy wishlist item from wishlist page
     if @reservation.save
+      @wishlist.destroy
       redirect_to :back, notice: 'Hotel was successfully added.'
     else
       redirect_to :back

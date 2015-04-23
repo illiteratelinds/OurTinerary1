@@ -15,15 +15,17 @@ class ActivitiesController < ApplicationController
   
   def create
     @activity = Activity.new(activity_params)
+    @wishlist = Wishlist.find(params[:wishlist_id]) #destroy wishlist item from wishlist page
     if @activity.save
-      redirect_to :back, notice: 'Hotel was successfully added.'
+      @wishlist.destroy
+      redirect_to :back, notice: 'Attraction was successfully added.'
     else
       redirect_to :back
     end
   end
 private
   def activity_params
-      params.require(:activity).permit(:attraction_id, :itinerary_id, :start_date, :end_date)
+      params.require(:activity).permit(:attraction_id, :itinerary_id, :date)
     end
 
   def find_commentable

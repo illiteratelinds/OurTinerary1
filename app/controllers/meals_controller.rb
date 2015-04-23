@@ -16,7 +16,9 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_params)
+    @wishlist = Wishlist.find(params[:wishlist_id]) #destroy wishlist item from wishlist page
     if @meal.save
+      @wishlist.destroy
       redirect_to :back, notice: 'Restaurant was successfully added.'
     else
       redirect_to :back
@@ -24,7 +26,7 @@ class MealsController < ApplicationController
   end
 private
   def meal_params
-      params.require(:meal).permit(:restaurant_id, :itinerary_id, :start_date, :end_date)
+      params.require(:meal).permit(:restaurant_id, :itinerary_id, :date)
     end
 
   def find_commentable

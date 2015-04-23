@@ -18,5 +18,5 @@
 //= require_tree .
 $(document).ready(function(){
   setTimeout(function(){
-    $('#flash-wrapper').fadeOut();}, 2500);
+    $('#flash-wrapper').fadeOut();}, 1200);
 });
