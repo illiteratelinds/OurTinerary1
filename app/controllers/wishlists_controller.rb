@@ -1,6 +1,7 @@
 class WishlistsController < ApplicationController
   
   def index
+
   end
 
   def create
@@ -14,8 +15,13 @@ class WishlistsController < ApplicationController
     end
   end
 
-  def show
-
+  def destroy
+    @wishlist = Wishlist.find(params[:id])
+    @wishlist.destroy
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'Wishlist item was successfully removed.' }
+      format.json { head :no_content }
+    end
   end
 
   private

@@ -1,3 +1,19 @@
 // Place all the styles related to the activites controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#notice_wrapper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  background: #4ECCEA;
+  .notice {
+    text-align: center;
+    padding: 2.5rem;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+  }
+}

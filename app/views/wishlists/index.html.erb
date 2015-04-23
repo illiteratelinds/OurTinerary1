@@ -3,6 +3,8 @@
 <% current_user.wishlists.each do |wishlist| %>
 
   <li><%= link_to wishlist.wishlistable.name, self.send("#{wishlist.wishlistable.class.to_s.downcase}_path", wishlist.wishlistable) %><br>
-  <%= wishlist.wishlistable.address %></li>
+  <%= wishlist.wishlistable.address %>
+  <%= button_to "Remove from wishlist", [wishlist.wishlistable, wishlist], :method => :delete, class: "btn btn-primary" %> 
+  </li>
 <% end %>
 </ul>

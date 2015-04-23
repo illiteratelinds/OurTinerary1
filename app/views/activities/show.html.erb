@@ -1,3 +1,8 @@
+<% if notice %>
+  <div id="notice_wrapper">
+    <p class="notice"><%= notice %></p>
+  </div>
+<% end %>
 <h2><%= link_to @activity.itinerary.title, itinerary_path(@activity.itinerary) %></h2>
 <h1><%= @activity.attraction.name %><br></h1>
 Address: <%= @activity.attraction.address %><br>
@@ -8,7 +13,8 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
     <%= @review.content %><br>
     <%= @review.creator.name %>
   <% end %>
-  <% if !@wishlist_exists && !@my_item%>
+
+  <% if @wishlist_exists!=true && !@my_item %>
     <%= form_for [@wishlistable, Wishlist.new] do |f| %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
       <%= f.submit "Add to Wishlist", class: "btn btn-primary" %><br>

@@ -8,7 +8,7 @@ Date: <%= @meal.date.strftime("%B %d, %Y") %>
     <%= @review.content %><br>
     <%= @review.creator.name %>
   <% end %>
-  <% if !@wishlist_exists && !@my_item%>
+  <% if @wishlist_exists!=true && !@my_item%>
     <%= form_for [@wishlistable, Wishlist.new] do |f| %>
        <%= f.hidden_field :user_id, :value => current_user.id %>
        <%= f.submit "Add to Wishlist", class: "btn btn-primary" %><br>

@@ -5,12 +5,11 @@
   <div class="item"><%= image_tag(photo.url)%> </center></div>
 <% end %>
 </div>
-
 <iframe
   width="600"
   height="450"
   frameborder="0" style="border:0"
-  src='https://www.google.com/maps/embed/v1/directions?key=<%="#{ENV["GOOGLE_KEY"]}"%>&origin=<%=@origin%>&waypoints=Via Vittorio Veneto 191 000187 Rome Italy | Piazza del Fico 29 00186 Rome Italy | Via Nazionale 194 00184 Rome Italy&destination=<%=@destination%>'>
+  src='https://www.google.com/maps/embed/v1/directions?key=<%="#{ENV["GOOGLE_KEY"]}"%>&origin=<%=@origin%>&destination=<%=@destination%>'>
 </iframe>
 
 <div class="row">

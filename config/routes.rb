@@ -10,13 +10,13 @@ Rails.application.routes.draw do
   resources :friendships, only: [:create, :update, :destroy]
 
   resources :hotels do 
-    resources :wishlists, only: [:create]
+    resources :wishlists, only: [:create, :destroy]
   end
   resources :restaurants do 
-    resources :wishlists, only: [:create]
+    resources :wishlists, only: [:create, :destroy]
   end
   resources :attractions do
-    resources :wishlists, only: [:create]
+    resources :wishlists, only: [:create, :destroy]
   end
 
   resources :wishlists, only: [:index]
