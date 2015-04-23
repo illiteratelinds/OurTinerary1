@@ -41,17 +41,17 @@ Rails.application.routes.draw do
     resources :restaurants
     resources :attractions
   end
-resources :reservations, only: [:show] do 
+resources :reservations, only: [:show, :create] do 
   resources :comments, only: [:create]
   resources :photos, only: [:create, :show]
   resources :reviews, only: [:create, :new]
 end
-  resources :activities, only: [:show] do 
+  resources :activities, only: [:show, :create] do 
       resources :comments, only: [:create]
       resources :photos, only: [:create, :show]
       resources :reviews, only: [:create, :new]
  end
-  resources :meals, only: [:show] do
+  resources :meals, only: [:show, :create] do
     resources :comments, only: [:create]
     resources :photos, only: [:create, :show] 
     resources :reviews, only: [:create, :new]
@@ -62,7 +62,11 @@ end
  get '/login', to: 'sessions#new'
 
  get '/logout', to: 'sessions#destroy'
+ 
+ get '/my_itineraries', to: 'wishlists#my_itineraries'
 
  get '/auth/facebook/callback', to: 'sessions#create'
+ 
+
 
 end

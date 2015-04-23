@@ -14,6 +14,19 @@ class MealsController < ApplicationController
     @my_item = my_itinerary_item?
   end
 
+  def create
+    @meal = Meal.new(meal_params)
+    if @meal.save
+      redirect_to :back, notice: 'Restaurant was successfully added.'
+    else
+      redirect_to :back
+    end
+  end
+private
+  def meal_params
+      params.require(:meal).permit(:restaurant_id, :itinerary_id, :start_date, :end_date)
+    end
+
   def find_commentable
     params.each do |name, value|
       if name =~ /^id$/

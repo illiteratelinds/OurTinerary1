@@ -14,7 +14,19 @@ class ReservationsController < ApplicationController
     @my_item = my_itinerary_item?
   end
   
+  def create
+    @reservation = Reservation.new(reservation_params)
+    if @reservation.save
+      redirect_to :back, notice: 'Hotel was successfully added.'
+    else
+      redirect_to :back
+    end
+  end
+
   private
+   def reservation_params
+      params.require(:reservation).permit(:hotel_id, :itinerary_id, :start_date, :end_date)
+    end
 
     def find_commentable
       params.each do |name, value|

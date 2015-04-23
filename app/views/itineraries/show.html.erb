@@ -5,14 +5,7 @@
   <div class="item"><%= image_tag(photo.url)%> </center></div>
 <% end %>
 </div>
-<% if @itinerary.hotels.count > 0 && @itinerary.attractions.count %>
-<iframe
-  width="600"
-  height="450"
-  frameborder="0" style="border:0"
-  src='https://www.google.com/maps/embed/v1/directions?key=<%="#{ENV["GOOGLE_KEY"]}"%>&origin=<%=@origin%>&destination=<%=@destination%>'>
-</iframe>
-<% end %>
+
 
 <div class="row">
   <div class = "col-md-8">
