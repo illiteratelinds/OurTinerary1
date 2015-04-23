@@ -16,3 +16,7 @@
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require owl.carousel
 //= require_tree .
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#flash-wrapper').fadeOut();}, 2500);
+});
