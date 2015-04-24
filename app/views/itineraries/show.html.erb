@@ -1,3 +1,9 @@
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
+
 <h1> <%= @itinerary.title %></h1>
     <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br><br><br><br> 
 <div id="owl-demo" class="owl-carousel owl-theme">
@@ -6,33 +12,48 @@
 <% end %>
 </div>
 
-
-<div class="row">
-  <div class = "col-md-8">
-
-    <h4> Hotel Reservations </h4>
-    <% @itinerary.reservations.each do |reservation| %>
-      Hotel name: <%= link_to reservation.hotel.name, [@itinerary, reservation] %><br>
-      Address: <%= reservation.hotel.address %><br>
-      Stayed: <%= reservation.start_date.strftime("%B %d, %Y") %> - 
-      <%= reservation.end_date.strftime("%B %d, %Y") %><br><br>
-    <% end %>
-
-    <h4> Restaurants </h4>
-    <% @itinerary.meals.each do |meal| %>
-      Restaurant name: <%= link_to meal.restaurant.name, [@itinerary, meal] %><br>
-      Address: <%= meal.restaurant.address %><br>
-      Date: <%= meal.date.strftime("%B %d, %Y") %><br><br>
-    <% end %>
-
-    <h4> Attractions </h4>
-    <%  @itinerary.activities.each do |activity| %>
-      Attraction name: <%= link_to activity.attraction.name, [@itinerary, activity] %><br>
-      Address: <%= activity.attraction.address %><br>
-      Date: <%= activity.date.strftime("%B %d, %Y") %><br><br>
+<table class="table table-bordered">
+  <tr class="info">
+    <% if @itinerary_dates.count < 8 %>
+    <% @itinerary_dates.each do |date| %>
+      <th><%= date %>
+      <ul id="sortable1" class="connectedSortable">
+      <% @itinerary.reservations.each do |reservation| %>
+        <% if (reservation.start_date.strftime("%B %d, %Y")..reservation.end_date.strftime("%B %d, %Y")).include? date %>
+          <li>Hotel:<%= link_to reservation.hotel.name, [@itinerary, reservation] %><br>Address:<%=reservation.hotel.address %></li>
+        <% end %>
       <% end %>
-  </div>
-  <br>
+      <% @itinerary.activities.each do |activity| %>
+        <% if activity.date.strftime("%B %d, %Y") == date %>
+          <li>Attraction:<%= activity.attraction.name %><br>Address:<%=activity.attraction.address %></li>
+        <% end %>
+      <% end %>
+      <% @itinerary.meals.each do |meal| %>
+        <% if meal.date.strftime("%B %d, %Y") == date %>
+          <li>Restaurant:<%= meal.restaurant.name %><br>Address:<%=meal.restaurant.address %></li>
+        <% end %>
+      <% end %>
+      </ul>
+      </th>
+      <% end %>
+  </tr>
+
+    <% else %>
+    <tr class = "info">
+      <% @itinerary_dates[0..6].each do |date| %>
+        <td><%= date %></td>
+      <% end %>
+    </tr>
+
+  <tr class="info">
+    <% @itinerary_dates[7..@itinerary_dates.length-1].each do |date| %>
+    <td><%= date %></td>
+    <% end %>
+  </tr>
+    <% end%>
+</table>
+<div class="row">
+
   <div class = "col-md-4">
     <h3><%= link_to @itinerary.user.name, user_path(@itinerary.user) %></h3>
     <%= image_tag @itinerary.user.avatar.url(:medium) %><br><br>
@@ -44,3 +65,10 @@
     <% end %>
   </div>
 </div>
+      <script>
+  $(function() {
+    $( "#sortable1, #sortable2" ).sortable({
+      connectWith: ".connectedSortable"
+    }).disableSelection();
+  });
+  </script>

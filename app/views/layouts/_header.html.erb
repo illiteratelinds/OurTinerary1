@@ -15,7 +15,9 @@
            <li><%= link_to current_user.name, users_current_path %></li>
          <% end %>
          <li><%= login_logout_links %></li>
+         <% if logged_in? %>
          <li><%= link_to "Wishlist", wishlists_path %>
+         <% end %>
         <li id="back"><%= link_to 'Back', :back %></li>
        </ul>
      </div><!-- nav-collapse -->

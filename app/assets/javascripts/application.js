@@ -19,4 +19,9 @@
 $(document).ready(function(){
   setTimeout(function(){
     $('#flash-wrapper').fadeOut();}, 1200);
+  $(function() {
+    $( "#sortable1, #sortable2" ).sortable({
+      connectWith: ".connectedSortable"
+    }).disableSelection();
+  });
 });
