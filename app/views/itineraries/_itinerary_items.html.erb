@@ -1,0 +1,23 @@
+<tr class="info">
+    <% @itinerary_dates.each do |date| %>
+      <th><%= date %>
+        <ul id="sortable1" class="connectedSortable">
+        <% @itinerary.reservations.each do |reservation| %>
+          <% if (reservation.start_date.strftime("%B %d, %Y")..reservation.end_date.strftime("%B %d, %Y")).include? date %>
+            <li>Hotel:<%= link_to reservation.hotel.name, [@itinerary, reservation] %><br>Address:<%=reservation.hotel.address %></li>
+          <% end %>
+        <% end %>
+        <% @itinerary.activities.each do |activity| %>
+          <% if activity.date.strftime("%B %d, %Y") == date %>
+            <li>Attraction:<%= activity.attraction.name %><br>Address:<%=activity.attraction.address %></li>
+          <% end %>
+        <% end %>
+        <% @itinerary.meals.each do |meal| %>
+          <% if meal.date.strftime("%B %d, %Y") == date %>
+            <li>Restaurant:<%= meal.restaurant.name %><br>Address:<%=meal.restaurant.address %></li>
+          <% end %>
+        <% end %>
+        </ul>
+      </th>
+      <% end %>
+  </tr>

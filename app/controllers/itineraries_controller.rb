@@ -7,14 +7,9 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
-    if @itinerary.hotels.count > 0 && @itinerary.attractions.count > 0 
-      @origin = @itinerary.hotels.first.address
-      @destination = @itinerary.attractions.last.address
-    end
     @start_date = @itinerary.start_date.to_date
     @end_date = @itinerary.end_date.to_date
     @itinerary_dates = (@start_date..@end_date).map{|date|date.strftime("%B %d, %Y")}
-    
   end
 
   def new

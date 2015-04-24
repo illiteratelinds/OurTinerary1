@@ -2,8 +2,6 @@
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
-
-
 <h1> <%= @itinerary.title %></h1>
     <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br><br><br><br> 
 <div id="owl-demo" class="owl-carousel owl-theme">
@@ -13,43 +11,13 @@
 </div>
 
 <table class="table table-bordered">
-  <tr class="info">
     <% if @itinerary_dates.count < 8 %>
-    <% @itinerary_dates.each do |date| %>
-      <th><%= date %>
-      <ul id="sortable1" class="connectedSortable">
-      <% @itinerary.reservations.each do |reservation| %>
-        <% if (reservation.start_date.strftime("%B %d, %Y")..reservation.end_date.strftime("%B %d, %Y")).include? date %>
-          <li>Hotel:<%= link_to reservation.hotel.name, [@itinerary, reservation] %><br>Address:<%=reservation.hotel.address %></li>
-        <% end %>
-      <% end %>
-      <% @itinerary.activities.each do |activity| %>
-        <% if activity.date.strftime("%B %d, %Y") == date %>
-          <li>Attraction:<%= activity.attraction.name %><br>Address:<%=activity.attraction.address %></li>
-        <% end %>
-      <% end %>
-      <% @itinerary.meals.each do |meal| %>
-        <% if meal.date.strftime("%B %d, %Y") == date %>
-          <li>Restaurant:<%= meal.restaurant.name %><br>Address:<%=meal.restaurant.address %></li>
-        <% end %>
-      <% end %>
-      </ul>
-      </th>
-      <% end %>
-  </tr>
-
+  <%= render 'itinerary_items' %>
     <% else %>
-    <tr class = "info">
-      <% @itinerary_dates[0..6].each do |date| %>
-        <td><%= date %></td>
-      <% end %>
-    </tr>
+            <%= render 'itinerary_item_two' %>
 
-  <tr class="info">
-    <% @itinerary_dates[7..@itinerary_dates.length-1].each do |date| %>
-    <td><%= date %></td>
-    <% end %>
-  </tr>
+ 
+
     <% end%>
 </table>
 <div class="row">
@@ -71,4 +39,9 @@
       connectWith: ".connectedSortable"
     }).disableSelection();
   });
+  $(document).ready(function(){
+  setTimeout(function(){
+    $('#flash-wrapper').fadeOut();}, 1200);
+});
+
   </script>
