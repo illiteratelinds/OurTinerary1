@@ -1,12 +1,17 @@
 <h2><%= link_to @activity.itinerary.title, itinerary_path(@activity.itinerary) %></h2>
-<h1><%= @activity.attraction.name %><br></h1>
+<div align = "center">
+<h1><%= link_to @activity.attraction.name, attraction_path(@activity.attraction) %></h1>
 Address: <%= @activity.attraction.address %><br>
 Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
-<br><br>
+<% if logged_in? && !@review && @activity.itinerary_creator(current_user) %>
+  <div class="form-group">
+    <%= link_to "Write a Review",  new_activity_review_path(@activity), class: "btn btn-primary" %>
+  </div>
+<% end %>
 
   <% if @review %>
-    <%= @review.content %><br>
-    <%= @review.creator.name %>
+    <div class="star-rating" data-score= <%= @review.rating %>></div> 
+    <%= @review.creator.name %> reviewed: <%= @review.content %>
   <% end %>
 
   <% if @wishlist_exists!=true && !@my_item %>
@@ -15,22 +20,14 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
       <%= f.submit "Add to Wishlist", class: "btn btn-primary" %><br>
     <% end %>
   <% end %>
+  <br>
   <iframe
     width="400"
     height="450"
     frameborder="0" style="border:0"
     src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@activity.attraction.name+@activity.attraction.address%>'>
   </iframe>
-  
-  <div class="form-group">
-    <% if logged_in? && !@review %>
-      <%= form_for [@reviewable, Review.new] do |f| %>
-         <%= f.text_area :content, :placeholder => "Write a review", class: "form-control" %><br>
-         <%= f.hidden_field :creator_id, :value => current_user.id %>
-         <%= f.submit "Submit Review", class: "btn btn-primary" %><br>
-      <% end %>
-    <% end %>
-  </div>
+</div>
 
 <div id="owl-demo" class="owl-carousel">
   <% @activity.photos.each do |photo| %>
@@ -80,3 +77,13 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
       <% end %>
     <% end %>
 <%= link_to "Back", itinerary_path(@activity.itinerary) %>
+
+<script>
+ $('.star-rating').raty({
+    path: 'https://s3.amazonaws.com/ourtinerary/stars',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

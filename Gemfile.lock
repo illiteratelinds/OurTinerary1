@@ -47,6 +47,14 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
+    aws-sdk (2.0.40)
+      aws-sdk-resources (= 2.0.40)
+    aws-sdk-core (2.0.40)
+      builder (~> 3.0)
+      jmespath (~> 1.0)
+      multi_json (~> 1.0)
+    aws-sdk-resources (2.0.40)
+      aws-sdk-core (= 2.0.40)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -118,11 +126,14 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     hashie (3.4.1)
+    hirb (0.7.3)
     hitimes (1.2.2)
     i18n (0.7.0)
     jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jmespath (1.0.2)
+      multi_json (~> 1.0)
     jquery-rails (4.0.3)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -149,7 +160,6 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     nenv (0.2.0)
-    nifty-generators (0.4.6)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     notiffany (0.0.6)
@@ -298,6 +308,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk
   better_errors
   binding_of_caller
   bootstrap-sass (~> 3.1.1)
@@ -309,10 +320,10 @@ DEPENDENCIES
   figaro
   google-analytics-rails
   guard-rspec
+  hirb (~> 0.7.3)
   jbuilder (~> 2.0)
   jquery-rails
   mocha
-  nifty-generators
   omniauth
   omniauth-facebook
   owlcarousel-rails

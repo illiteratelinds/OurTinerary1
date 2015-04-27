@@ -12,7 +12,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+gem 'hirb', '~> 0.7.3'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -26,7 +26,6 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 gem 'owlcarousel-rails'
 
-gem "nifty-generators", :group => :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -38,6 +37,8 @@ gem "nifty-generators", :group => :development
 gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-facebook'
+
+gem 'aws-sdk'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

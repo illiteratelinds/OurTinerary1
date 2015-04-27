@@ -16,6 +16,8 @@ class ReservationsController < ApplicationController
   
   def create
     @reservation = Reservation.new(reservation_params)
+    @reservation.itinerary_items.build(:itinerary_id => params[:itinerary_id])
+    @reservation.itinerary_items.build(:itinerary_id => params[:reservation][:itinerary_id])
     @wishlist = Wishlist.find(params[:wishlist_id]) #destroy wishlist item from wishlist page
     if @reservation.save
       @wishlist.destroy

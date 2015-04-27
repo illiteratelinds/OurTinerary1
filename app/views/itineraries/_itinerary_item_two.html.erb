@@ -1,23 +1,29 @@
 <% @itinerary_dates.each_slice(7).to_a.each do |slice| %>
 <tr class="info">
+<% i = 0 %>
 <% slice.each do |date| %>
-<th><%= date %>
+  <% i += 1 %>
+  <th class="date<%=i%>"><%= date %>
         <ul id="sortable1" class="connectedSortable">
-        <% @itinerary.reservations.each do |reservation| %>
-          <% if (reservation.start_date.strftime("%B %d, %Y")..reservation.end_date.strftime("%B %d, %Y")).include? date %>
-            <li>Hotel:<%= link_to reservation.hotel.name, [@itinerary, reservation] %><br>Address:<%=reservation.hotel.address %></li>
+          <% @itinerary.itinerary_items.order(:position).each do |ii| %>
+            <% item = ii.itemable %>
+            <% itinerary_type = @itinerary_types[item.class] %>
+            <% if item.class == Reservation %>
+              <% if (item.start_date.strftime("%B %d, %Y")..item.end_date.strftime("%B %d, %Y")).include? date %>
+                <%= content_tag :li, data: {position: ii.position}, id: "#{ii.id}" do -%>
+                  <%= content_tag :p, link_to("#{itinerary_type}: #{item.send(itinerary_type.downcase).name}", [@itinerary, item]) %>    
+                  <%= content_tag :p, "Address: #{item.send(itinerary_type.downcase).address}" %>
+                <% end -%>
+              <% end %>
+            <% else %>
+              <% if item.date.strftime("%B %d, %Y") == date %>
+                <%= content_tag :li, data: {position: ii.position}, id: "#{ii.id}" do -%>
+                  <%= content_tag :p, link_to("#{itinerary_type}: #{item.send(itinerary_type.downcase).name}", [@itinerary, item]) %>
+                  <%= content_tag :p, "Address: #{item.send(itinerary_type.downcase).address}" %>
+              <% end %>
+            <% end %>
           <% end %>
-        <% end %>
-        <% @itinerary.activities.each do |activity| %>
-          <% if activity.date.strftime("%B %d, %Y") == date %>
-            <li>Attraction:<%= activity.attraction.name %><br>Address:<%=activity.attraction.address %></li>
-          <% end %>
-        <% end %>
-        <% @itinerary.meals.each do |meal| %>
-          <% if meal.date.strftime("%B %d, %Y") == date %>
-            <li>Restaurant:<%= meal.restaurant.name %><br>Address:<%=meal.restaurant.address %></li>
-          <% end %>
-        <% end %>
+        <% end %> 
         </ul>
       </th>
       <% end %>

@@ -12,16 +12,13 @@
 
 <table class="table table-bordered">
     <% if @itinerary_dates.count < 8 %>
-  <%= render 'itinerary_items' %>
+      <%= render 'itinerary_items' %>
     <% else %>
-            <%= render 'itinerary_item_two' %>
-
- 
-
+      <%= render 'itinerary_item_two' %>
     <% end%>
 </table>
-<div class="row">
 
+<div class="row">
   <div class = "col-md-4">
     <h3><%= link_to @itinerary.user.name, user_path(@itinerary.user) %></h3>
     <%= image_tag @itinerary.user.avatar.url(:medium) %><br><br>
@@ -33,15 +30,28 @@
     <% end %>
   </div>
 </div>
-      <script>
+<script>
   $(function() {
     $( "#sortable1, #sortable2" ).sortable({
-      connectWith: ".connectedSortable"
-    }).disableSelection();
+      connectWith: ".connectedSortable",
+      stop: function(event, ui) {
+        var order = $(this).parent().children($('#sortable1')).sortable('toArray').toString();
+        $.ajax({
+          url: '/update_position',
+          method: 'PUT',
+          dataType: 'json',
+          data: {
+            data: order,
+            itinerary_item_id: ui.item.prop('id')
+          }
+        })
+      }
+    });
   });
+  
   $(document).ready(function(){
   setTimeout(function(){
     $('#flash-wrapper').fadeOut();}, 1200);
 });
 
-  </script>
+</script>

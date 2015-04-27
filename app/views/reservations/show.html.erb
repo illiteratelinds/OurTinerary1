@@ -3,8 +3,15 @@
   <h1><%= @reservation.hotel.name %></h1>
    Address: <%= @reservation.hotel.address %><br>
    Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.end_date.strftime("%B %d, %Y") %><br>
+  <% if logged_in? && !@review && @reservation.itinerary_creator(current_user) %>
+    <div class="form-group">
+      <%= link_to "Write a Review",  new_reservation_review_path(@reservation), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  
   <% if @review %>
     <%= @review.content %><br>
+    <div class="star-rating" data-score= <%= @review.rating %>></div>
     <%= @review.creator.name %>
   <% end %><br>
   <% if @wishlist_exists!=true && !@my_item%>
@@ -21,15 +28,7 @@
     src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@reservation.hotel.name+@reservation.hotel.address%>'>
   </iframe>
 
-  <div class="form-group">
-    <% if logged_in? && !@review && current_user == @reservation.itinerary.user %>
-      <%= form_for [@reviewable, Review.new] do |f| %>
-         <%= f.text_area :content, :placeholder => "Write a review", class: "form-control" %><br>
-         <%= f.hidden_field :creator_id, :value => current_user.id %>
-         <%= f.submit "Submit Review", class: "btn btn-primary" %><br>
-      <% end %>
-    <% end %>
-  </div>
+
 </div>
 
   <div id="owl-demo" class="owl-carousel">
@@ -66,7 +65,6 @@
        <% end %>
      </div>
    </div>
-
 </div>
 
    <u><h4> Add an image! </h4></u>
@@ -80,3 +78,13 @@
    <% end %>
 
 <%= link_to "Back", itinerary_path(@reservation.itinerary) %>
+
+<script>
+ $('.star-rating').raty({
+    path: 'https://s3.amazonaws.com/ourtinerary/stars',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

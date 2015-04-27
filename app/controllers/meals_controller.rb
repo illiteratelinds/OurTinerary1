@@ -17,6 +17,7 @@ class MealsController < ApplicationController
   def create
     @meal = Meal.new(meal_params)
     @wishlist = Wishlist.find(params[:wishlist_id]) #destroy wishlist item from wishlist page
+    @meal.itinerary_items.build(:itinerary_id => params[:meal][:itinerary_id])
     if @meal.save
       @wishlist.destroy
       redirect_to :back, notice: 'Restaurant was successfully added.'

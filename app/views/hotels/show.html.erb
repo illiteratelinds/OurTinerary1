@@ -6,3 +6,28 @@ Location: <%= @hotel.address %><br>
     <%= image_tag photo.image.url(:medium) %>
   <% end %>
 <% end %>
+
+<% @hotel.reservations.each do |reservation| %>
+  <% if reservation.review %>
+    <div class="star-rating" data-score= <%= reservation.review.rating %>></div>
+    <%= reservation.review.creator.name %> reviewed: <%= reservation.review.content %>
+  <% end %>
+<% end %>
+
+
+
+
+
+
+
+
+
+<script>
+ $('.star-rating').raty({
+    path: 'https://s3.amazonaws.com/ourtinerary/stars',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

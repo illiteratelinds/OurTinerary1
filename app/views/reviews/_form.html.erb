@@ -1,0 +1,17 @@
+<div class="form-group">
+  <%= form_for [@reviewable, Review.new] do |f| %>
+    <div id="star-rating"></div>
+    <div class="form-group">
+    </div>
+    <%= f.text_area :content, :placeholder => "Write a review", class: "form-control" %><br>
+    <%= f.hidden_field :creator_id, :value => current_user.id %>
+    <%= f.submit "Submit Review", class: "btn btn-primary" %><br>
+  <% end %>
+</div>
+
+  <script>
+  $('#star-rating').raty({
+    path: 'https://s3.amazonaws.com/ourtinerary/stars',
+    scoreName: 'review[rating]'
+  });
+</script>
