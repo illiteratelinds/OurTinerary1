@@ -9,6 +9,14 @@ class Itinerary < ActiveRecord::Base
   has_many :itinerary_items
   validates_presence_of :title, :user_id
 
+  def pins
+    pins = []
+    reservations = self.reservations.collect do |reservation, json|
+      [reservation.id, reservation.hotel.latitude, reservation.hotel.longitude]
+    end.to_json
+  end
+
+
   def itinerary_display_pic?
     if activities.first.nil? || activities.first.photos.first.nil?
       return false

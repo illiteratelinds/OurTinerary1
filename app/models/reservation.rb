@@ -9,5 +9,9 @@ class Reservation < ActiveRecord::Base
   def itinerary_creator(user)
     itinerary.user == user
   end
+
+  def first_res_pin
+    [hotel.latitude, hotel.longitude]
+  end
   
 end

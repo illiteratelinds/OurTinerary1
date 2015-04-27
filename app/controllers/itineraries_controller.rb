@@ -8,6 +8,8 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
+    @itinerary.pins
+    @first_res = @itinerary.reservations.first.first_res_pin
     @itinerary_types = {
       Meal => "Restaurant",
       Reservation => "Hotel",
