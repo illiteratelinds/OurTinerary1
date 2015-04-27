@@ -25,11 +25,10 @@ Date: <%= @meal.date.strftime("%B %d, %Y") %>
     frameborder="0" style="border:0"
     src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@meal.restaurant.name+@meal.restaurant.address%>'>
   </iframe>
-
-
+<br><br><br>
   <div id="owl-demo" class="owl-carousel">
     <% @meal.photos.each do |photo| %>
-    <div class="item"><center> <%= link_to (image_tag photo.image.url), [@activity, photo] %> </center></div>
+    <div class="item"><center> <%= link_to (image_tag photo.image.url), [@meal, photo] %> </center></div>
     <% end %>
   </div>
 

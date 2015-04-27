@@ -1,14 +1,28 @@
 <h2><%= link_to @reservation.itinerary.title, itinerary_path(@reservation.itinerary) %></h2>
 <div align = "center">
-  <h1><%= @reservation.hotel.name %></h1>
+  <h1><%= link_to @reservation.hotel.name, hotel_path(@reservation.hotel) %></h1>
    Address: <%= @reservation.hotel.address %><br>
    Stayed: <%=@reservation.start_date.strftime("%B %d, %Y") %> - <%= @reservation.end_date.strftime("%B %d, %Y") %><br>
   <% if logged_in? && !@review && @reservation.itinerary_creator(current_user) %>
     <div class="form-group">
       <%= link_to "Write a Review",  new_reservation_review_path(@reservation), class: "btn btn-primary" %>
     </div>
-  <% end %>
+  <% end %><br>
+
+   <iframe
+    width="400"
+    height="450"
+    frameborder="0" style="border:0"
+    src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@reservation.hotel.name+@reservation.hotel.address%>'>
+  </iframe>
   
+  <ul>
+  <% for @reservation.hotel in @reservation.hotel.nearbys(10) %>
+    <li><%= @reservation.hotel.address %>(<%=@reservation.hotel.distance.round(2)%> miles)</li>
+    <% end %>
+  </ul>
+
+
   <% if @review %>
     <%= @review.content %><br>
     <div class="star-rating" data-score= <%= @review.rating %>></div>
@@ -20,16 +34,16 @@
        <%= f.submit "Add to Wishlist", class: "btn btn-primary" %><br>
      <% end %>
    <% end %>
-
-  <iframe
-    width="400"
-    height="450"
-    frameborder="0" style="border:0"
-    src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@reservation.hotel.name+@reservation.hotel.address%>'>
-  </iframe>
-
-
 </div>
+
+
+
+
+
+
+
+
+
 
   <div id="owl-demo" class="owl-carousel">
     <% @reservation.photos.each do |photo| %>
