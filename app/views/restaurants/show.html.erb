@@ -6,3 +6,21 @@ Location: <%= @restaurant.address %><br>
     <%= image_tag photo.image.url(:medium) %>
   <% end %>
 <% end %>
+
+<% @restaurant.meals.each do |meal| %>
+  <% if  meal.review %>
+    <div class="star-rating" data-score= <%= meal.review.rating %>></div>
+    <%= meal.review.creator.name %> reviewed: <%= meal.review.content %>
+  <%end %>
+<% end %>
+
+
+<script>
+ $('.star-rating').raty({
+    path: 'https://s3.amazonaws.com/ourtinerary/stars',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

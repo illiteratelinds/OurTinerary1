@@ -1,7 +1,9 @@
 <% @itinerary_dates.each_slice(7).to_a.each do |slice| %>
 <tr class="info">
+<% i = 0 %>
 <% slice.each do |date| %>
-<th><span class="date"> <%= date %> </span>
+  <% i += 1 %>
+  <th class="date<%=i%>"><%= date %>
         <ul id="sortable1" class="connectedSortable">
           <% @itinerary.itinerary_items.order(:position).each do |ii| %>
             <% item = ii.itemable %>

@@ -1,6 +1,6 @@
 <h2><%= link_to @activity.itinerary.title, itinerary_path(@activity.itinerary) %></h2>
 <div align = "center">
-<h1><%= @activity.attraction.name %><br></h1>
+<h1><%= link_to @activity.attraction.name, attraction_path(@activity.attraction) %></h1>
 Address: <%= @activity.attraction.address %><br>
 Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
 <% if logged_in? && !@review && @activity.itinerary_creator(current_user) %>
@@ -8,12 +8,10 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
     <%= link_to "Write a Review",  new_activity_review_path(@activity), class: "btn btn-primary" %>
   </div>
 <% end %>
-<br><br>
 
   <% if @review %>
     <div class="star-rating" data-score= <%= @review.rating %>></div> 
-    <%= @review.content %><br>
-    <%= @review.creator.name %>
+    <%= @review.creator.name %> reviewed: <%= @review.content %>
   <% end %>
 
   <% if @wishlist_exists!=true && !@my_item %>
@@ -22,6 +20,7 @@ Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
       <%= f.submit "Add to Wishlist", class: "btn btn-primary" %><br>
     <% end %>
   <% end %>
+  <br>
   <iframe
     width="400"
     height="450"

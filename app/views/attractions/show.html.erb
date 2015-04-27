@@ -1,8 +1,38 @@
 <h3><%= @attraction.name %></h3><br>
 Location: <%= @attraction.address %><br>
 
+<iframe
+  width="250"
+  height="250"
+  frameborder="0" style="border:0"
+  src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@attraction.name+@attraction.address%>'>
+</iframe>
+
 <% @attraction.activities.each do |activity| %>
-  <% activity.photos.each do |photo| %>
-    <%= image_tag photo.image.url(:medium) %>
+  <% if activity.photos.count > 0 %>
+  <h4>All photos</h4>
+    <% activity.photos.each do |photo| %>
+      <%= image_tag photo.image.url(:medium) %>
+    <% end %>
   <% end %>
 <% end %>
+
+<% @attraction.activities.each do |activity| %>
+  <% if  activity.review %>
+  <h4>All Reviews</h4>
+    <div class="star-rating" data-score= <%= activity.review.rating %>></div>
+    <%= activity.review.creator.name %> reviewed: <%= activity.review.content %>
+  <%end %>
+<% end %>
+<br><br>
+
+
+<script>
+ $('.star-rating').raty({
+    path: 'https://s3.amazonaws.com/ourtinerary/stars',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

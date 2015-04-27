@@ -7,6 +7,9 @@ class AttractionsController < ApplicationController
   
   def show
     @attraction = Attraction.find(params[:id])
+    @attraction.activities.each do |review|
+      
+    end
   end
 
   def index

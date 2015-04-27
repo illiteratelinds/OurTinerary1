@@ -1,5 +1,5 @@
 <h2><%= link_to @meal.itinerary.title, itinerary_path(@meal.itinerary) %></h2>
-<h1><%= @meal.restaurant.name %></h1><br>
+<h1><%= link_to @meal.restaurant.name, restaurant_path(@meal.restaurant) %></h1><br>
 Address: <%= @meal.restaurant.address %><br>
 Date: <%= @meal.date.strftime("%B %d, %Y") %>
 <% if logged_in? && !@review && @meal.itinerary_creator(current_user) %>
