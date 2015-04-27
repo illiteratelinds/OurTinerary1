@@ -1,5 +1,6 @@
 class ItinerariesController < ApplicationController
-    before_action :set_itinerary, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery except: :update_position
+  before_action :set_itinerary, only: [:show, :edit, :update, :destroy]
 
   def index
     @itineraries = Itinerary.all
@@ -7,9 +8,28 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
+    @itinerary_types = {
+      Meal => "Restaurant",
+      Reservation => "Hotel",
+      Activity => "Attraction"
+    }
     @start_date = @itinerary.start_date.to_date
     @end_date = @itinerary.end_date.to_date
     @itinerary_dates = (@start_date..@end_date).map{|date|date.strftime("%B %d, %Y")}
+  end
+
+  def update_position
+    data = params[:data].split(",").map{|num| num.to_i}
+    ii_id = params[:itinerary_item_id]
+    itinerary = ItineraryItem.find(ii_id).itinerary
+    i = 0
+    data.each do |num|
+      iti = ItineraryItem.find(num)
+      iti.position = i
+      iti.save
+      i += 1
+    end
+    render json: 'hi'
   end
 
   def new

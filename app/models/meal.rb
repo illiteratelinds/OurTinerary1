@@ -4,4 +4,5 @@ class Meal < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :photos, as: :imageable
   has_one :review, as: :reviewable
+  has_many :itinerary_items, as: :itemable
 end

@@ -118,6 +118,7 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     hashie (3.4.1)
+    hirb (0.7.3)
     hitimes (1.2.2)
     i18n (0.7.0)
     jbuilder (2.2.13)
@@ -309,6 +310,7 @@ DEPENDENCIES
   figaro
   google-analytics-rails
   guard-rspec
+  hirb (~> 0.7.3)
   jbuilder (~> 2.0)
   jquery-rails
   mocha

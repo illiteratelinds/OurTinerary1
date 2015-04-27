@@ -16,6 +16,7 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
     @wishlist = Wishlist.find(params[:wishlist_id]) #destroy wishlist item from wishlist page
+    @activity.itinerary_items.build(:itinerary_id => params[:activity][:itinerary_id])
     if @activity.save
       @wishlist.destroy
       redirect_to :back, notice: 'Attraction was successfully added.'

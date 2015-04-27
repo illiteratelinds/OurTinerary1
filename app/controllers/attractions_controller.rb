@@ -22,7 +22,10 @@ class AttractionsController < ApplicationController
     end
     date = params["date"]
     date = Date.new(date["year"].to_i,date["month"].to_i,date["day"].to_i).to_s
-    attraction.activities.build(:itinerary_id => params[:itinerary_id], :date => date)
+    
+    activity= Activity.new(:itinerary_id => params[:itinerary_id], :date => date)
+    activity.itinerary_items.build(:itinerary_id => params[:itinerary_id])
+    attraction.activities << activity
     respond_to do |format|
       if attraction.save
         format.html { redirect_to itinerary, notice: 'attraction was successfully created.' }

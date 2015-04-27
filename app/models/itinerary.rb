@@ -1,13 +1,12 @@
 class Itinerary < ActiveRecord::Base
   belongs_to :user
-  has_many :activities
-  has_many :attractions, through: :activities
   has_many :reservations
-  has_many :hotels, through: :reservations
   has_many :meals
+  has_many :activities
+  has_many :hotels, through: :reservations
+  has_many :attractions, through: :activities
   has_many :restaurants, through: :meals
-  has_many :flights
-
+  has_many :itinerary_items
   validates_presence_of :title, :user_id
 
   def itinerary_display_pic?

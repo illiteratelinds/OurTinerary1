@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422172852) do
+ActiveRecord::Schema.define(version: 20150426020322) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "itinerary_id"
@@ -60,6 +60,17 @@ ActiveRecord::Schema.define(version: 20150422172852) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "itinerary_items", force: :cascade do |t|
+    t.integer  "itinerary_id"
+    t.integer  "itemable_id"
+    t.string   "itemable_type"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "position",      default: 0
+  end
+
+  add_index "itinerary_items", ["itemable_type", "itemable_id"], name: "index_itinerary_items_on_itemable_type_and_itemable_id"
 
   create_table "meals", force: :cascade do |t|
     t.integer  "itinerary_id"

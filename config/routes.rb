@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   resources :wishlists, only: [:index]
 
+  put '/update_position', to: "itineraries#update_position" 
+  
   resources :itineraries do
     resources :reservations, only: [:show] do 
       resources :comments, only: [:create, :show]
