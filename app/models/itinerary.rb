@@ -9,6 +9,7 @@ class Itinerary < ActiveRecord::Base
   has_many :itinerary_items
   validates_presence_of :title, :user_id
 
+
   def res_pins
     reservations = self.reservations.collect do |reservation, json|
       [reservation.id, reservation.hotel.latitude, reservation.hotel.longitude]
@@ -26,8 +27,6 @@ class Itinerary < ActiveRecord::Base
       [activity.id, activity.attraction.latitude, activity.attraction.longitude]
     end.to_json
   end
-  
-
 
   def itinerary_display_pic?
     if activities.first.nil? || activities.first.photos.first.nil?
