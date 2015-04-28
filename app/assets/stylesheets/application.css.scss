@@ -11,7 +11,7 @@
  * file per style scope.
  *
  *= require_tree ../../../vendor/assets/stylesheets/.
- *= require_tree .
+ *= require_tree ../../../vendor/assets/bootstrapARtheme/css/.
  *= require_self
  *= require owl.carousel
  *= require owl.theme
@@ -19,6 +19,7 @@
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.woff"
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.ttf"
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.svg"
+ *= require_tree .
  */
 @import "bootstrap";
 /* Some Style from the Bootstrap Default Theme */
@@ -98,19 +99,3 @@ a.btn-primary {
   position: absolute;
   top: 60px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -9,23 +9,28 @@ class Itinerary < ActiveRecord::Base
   has_many :itinerary_items
   validates_presence_of :title, :user_id
 
+  def date_range
+    start_date = self.start_date.to_date
+    end_date = self.end_date.to_date
+    itinerary_dates = (start_date..end_date).map{|date|date.strftime("%B %d, %Y")}
+  end
 
   def res_pins
     reservations = self.reservations.collect do |reservation, json|
-      [reservation.id, reservation.hotel.latitude, reservation.hotel.longitude]
-    end.to_json
+      [reservation.id, reservation.hotel.name, reservation.hotel.address, reservation.hotel.latitude, reservation.hotel.longitude, "reservations"]
+    end.to_json.html_safe
   end
 
   def meal_pins
     meal = self.meals.collect do |meal, json|
-      [meal.id, meal.restaurant.latitude, meal.restaurant.longitude]
-    end.to_json
+      [meal.id, meal.restaurant.name, meal.restaurant.address, meal.restaurant.latitude, meal.restaurant.longitude, "meals"]
+    end.to_json.html_safe
   end
 
   def activity_pins
     activities = self.activities.collect do |activity, json|
-      [activity.id, activity.attraction.latitude, activity.attraction.longitude]
-    end.to_json
+      [activity.id, activity.attraction.name, activity.attraction.address, activity.attraction.latitude, activity.attraction.longitude, "activities"]
+    end.to_json.html_safe
   end
 
   def itinerary_display_pic?

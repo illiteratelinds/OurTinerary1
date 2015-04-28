@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree ../../../vendor/assets/javascripts/.
+//= require_tree ../../../vendor/assets/bootstrapARtheme/js/.
 //= require owl.carousel
 //= require_tree .
 $(document).ready(function(){
