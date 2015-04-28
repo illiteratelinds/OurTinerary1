@@ -4,7 +4,7 @@ class Meal < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :photos, as: :imageable
   has_one :review, as: :reviewable
-  has_many :itinerary_items, as: :itemable
+  has_many :itinerary_items, as: :itemable, dependent: :destroy
 
   def itinerary_creator(user)
     itinerary.user == user
