@@ -72,9 +72,6 @@
 </script>
 <div id="map-canvas"></div>
 
-<% waka =  @itinerary.hotels.first %>
-<%= waka.distance_from([41.9116337, 12.4749301])%>
-
 
 <h1> <%= @itinerary.title %></h1>
     <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br><br><br><br> 
