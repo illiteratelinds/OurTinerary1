@@ -27,10 +27,12 @@
  }
        // google.maps.event.addDomListener(window, 'load', initialize);
  function addPin(iti) {
+   var id = iti[0]
    var name = iti[1];
-   var address = iti[2]
+   var address = iti[2];
    var lat = iti[3];
    var lon = iti[4];
+   var type = iti[5];
    var itiLatlng = new google.maps.LatLng(iti[3], iti[4]);
    var marker = new google.maps.Marker({
      map: map,
@@ -51,7 +53,8 @@
      infowindow.close();
    });
    google.maps.event.addListener(marker, "click", function(){
-    window.open("http://google.com");
+    window.open("/" + type.toString() + "/" + id.toString());
+
   });
  }
 

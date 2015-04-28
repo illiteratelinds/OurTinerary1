@@ -11,19 +11,19 @@ class Itinerary < ActiveRecord::Base
 
   def res_pins
     reservations = self.reservations.collect do |reservation, json|
-      [reservation.id, reservation.hotel.name, reservation.hotel.address, reservation.hotel.latitude, reservation.hotel.longitude]
+      [reservation.id, reservation.hotel.name, reservation.hotel.address, reservation.hotel.latitude, reservation.hotel.longitude, "reservations"]
     end.to_json.html_safe
   end
 
   def meal_pins
     meal = self.meals.collect do |meal, json|
-      [meal.id, meal.restaurant.name, meal.restaurant.address, meal.restaurant.latitude, meal.restaurant.longitude]
+      [meal.id, meal.restaurant.name, meal.restaurant.address, meal.restaurant.latitude, meal.restaurant.longitude, "meals"]
     end.to_json.html_safe
   end
 
   def activity_pins
     activities = self.activities.collect do |activity, json|
-      [activity.id, activity.attraction.name, activity.attraction.address, activity.attraction.latitude, activity.attraction.longitude]
+      [activity.id, activity.attraction.name, activity.attraction.address, activity.attraction.latitude, activity.attraction.longitude, "activities"]
     end.to_json.html_safe
   end
 
