@@ -33,13 +33,13 @@ function initialize() {
       }
       // google.maps.event.addDomListener(window, 'load', initialize);
  
-function addPin(res) {
-  var lat = res[1];
-  var lon = res[2];
-  var resLatlng = new google.maps.LatLng(res[1], res[2]);
+function addPin(iti) {
+  var lat = iti[1];
+  var lon = iti[2];
+  var itiLatlng = new google.maps.LatLng(iti[1], iti[2]);
 
   var marker = new google.maps.Marker({
     map: map,
-    position: resLatlng,
+    position: itiLatlng,
   });
 }

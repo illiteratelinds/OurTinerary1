@@ -6,22 +6,28 @@
     </style>
  
     <%= javascript_tag do %>
-      var pins = <%= @itinerary.pins %>;
+      var resPins = <%= @itinerary.res_pins %>;
+      var mealPins = <%= @itinerary.meal_pins %>;
+      var activityPins = <%= @itinerary.activity_pins %>;
       var firstRes = <%= @first_res %>;
     <% end %>
     <script src="https://maps.googleapis.com/maps/api/js?key=<%="#{ENV["GOOGLE_KEY"]}"%>"></script>
-    <script>
-      var myLatlng = new google.maps.LatLng(firstRes[0], firstRes[1]);
-    $(function() {
-      initialize()
-      $.each (pins, function(i, res) {
-        addPin(res);
-      })
-      }
-    )
+<script>
+  var myLatlng = new google.maps.LatLng(firstRes[0], firstRes[1]);
+  $(function() {
+    initialize()
+    $.each (resPins, function(i, res) {
+      addPin(res);
+    })
+    $.each (mealPins, function(i, res) {
+      addPin(res);
+    })
+    $.each (activityPins, function(i, res) {
+      addPin(res);
+    })
+    }
+  )
 </script>
-
-
  <br><br>   
 <div id="map-canvas"></div>
 
