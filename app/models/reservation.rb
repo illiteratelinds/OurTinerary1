@@ -11,7 +11,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def first_res_pin
-    [hotel.latitude, hotel.longitude]
+      [hotel.latitude, hotel.longitude]
   end
   
 end

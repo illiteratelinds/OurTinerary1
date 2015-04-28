@@ -8,8 +8,9 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
-    @itinerary.pins
-    @first_res = @itinerary.reservations.first.first_res_pin
+    if @itinerary.reservations.count > 0
+      @first_res = @itinerary.reservations.first.first_res_pin
+    end
     @itinerary_types = {
       Meal => "Restaurant",
       Reservation => "Hotel",
