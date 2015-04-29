@@ -8,7 +8,7 @@ class WishlistsController < ApplicationController
     @wishlistable = find_wishlistable
     @wishlist = @wishlistable.wishlists.build(wishlist_params)
     if @wishlist.save
-      flash[:notice] = "Successfully created wishlist."
+      flash[:notice] = "Added to your wishlist!."
       redirect_to :back
     else
       redirect_to :back
