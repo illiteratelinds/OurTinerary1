@@ -2,9 +2,9 @@
   <div class = "col-md-6">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3>Previous user's hotel</h3>
+        <h3>Select a Hotel</h3>
       </div>
-        <div class="panel-body">
+      <div class="panel-body">
         <%= form_for [@itinerary, @hotel] do |f| %>
           <div class = "form-group">
             <%= f.label :name %><br>
@@ -21,7 +21,7 @@
             <%= select_date Date.current, :prefix => 'end_date' %>
           </div>
           <div class="actions"><br>
-            <%= f.submit "Add this hotel to your itinerary", class: "btn btn-ar btn-primary" %>
+            <%= f.submit "Add Hotel", class: "btn btn-ar btn-primary" %>
           </div>
         <% end %>
       </div>
@@ -33,7 +33,7 @@
   <div class="col-md-6"> 
     <div class="panel panel-primary"> 
       <div class="panel-heading">
-        <h3>Add a new hotel</h3>
+        <h3>Add a Hotel</h3>
       </div>
       <div class="panel-body">
       <%= form_for [@itinerary, @hotel] do |f| %>
@@ -54,9 +54,10 @@
         <div class = "form-group">
           <%= label_tag :end_date %><br>
           <%= select_date Date.current, :prefix => 'end_date' %>
+        </div><br>
+        <div class="actions"><br>
+          <%= f.submit "Add Hotel", class: "btn btn-ar btn-primary" %>
         </div>
-<br>
-          <%= f.submit "Add this hotel to your itinerary", class: "btn btn-ar btn-primary" %>
       <% end %>
       </div>
   </div>

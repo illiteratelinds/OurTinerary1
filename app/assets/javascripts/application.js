@@ -22,3 +22,5 @@ $(document).ready(function(){
     $('#flash-wrapper').fadeOut();}, 1200);
 });
 
+
+
