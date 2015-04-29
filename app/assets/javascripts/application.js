@@ -14,8 +14,8 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
-
 //= require owl.carousel
+
 
 $(document).ready(function(){
   setTimeout(function(){
@@ -23,7 +23,8 @@ $(document).ready(function(){
 });
 
 $(document).ready(function() { 
-  $("#owl-demo").owlCarousel({
+
+  $(".owl-demo").owlCarousel({
       autoPlay: 3000, //Set AutoPlay to 3 seconds
       items : 4,
       itemsDesktop : [1199,3],

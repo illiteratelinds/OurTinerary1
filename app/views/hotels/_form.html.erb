@@ -1,55 +1,63 @@
 <div class = "row">
-
   <div class = "col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>Previous user's hotel</h3>
+      </div>
+        <div class="panel-body">
+        <%= form_for [@itinerary, @hotel] do |f| %>
+          <div class = "form-group">
+            <%= f.label :name %><br>
+            <%= f.collection_select(:id, Hotel.all, :id, :name, :include_blank => true)%>
+          </div>
 
-    <h3>Previous user's hotel</h3>
-    <%= form_for [@itinerary, @hotel] do |f| %>
-      <div class = "form-group">
-        <%= f.label :name %><br>
-        <%= f.collection_select(:id, Hotel.all, :id, :name, :include_blank => true)%>
-      </div>
+          <div class = "form-group">
+            <%= label_tag :start_date %><br>
+            <%= select_date Date.current, :prefix => 'start_date' %>
+          </div>
 
-      <div class = "form-group">
-        <%= label_tag :start_date %><br>
-        <%= select_date Date.current, :prefix => 'start_date' %>
+          <div class = "form-group">
+            <%= label_tag :end_date %><br>
+            <%= select_date Date.current, :prefix => 'end_date' %>
+          </div>
+          <div class="actions"><br>
+            <%= f.submit "Add this hotel to your itinerary", class: "btn btn-ar btn-primary" %>
+          </div>
+        <% end %>
       </div>
-
-      <div class = "form-group">
-        <%= label_tag :end_date %><br>
-        <%= select_date Date.current, :prefix => 'end_date' %>
-      </div>
-      <div class="actions"><br>
-        <%= f.submit "Add this hotel to your itinerary", class: "btn btn-primary" %>
-      </div>
-    <% end %>
+    </div>
   </div>
       
 
 
-  <div class="col-md-6">  
-    <h3>Add a new hotel</h3>
-    <%= form_for [@itinerary, @hotel] do |f| %>
+  <div class="col-md-6"> 
+    <div class="panel panel-primary"> 
+      <div class="panel-heading">
+        <h3>Add a new hotel</h3>
+      </div>
+      <div class="panel-body">
+      <%= form_for [@itinerary, @hotel] do |f| %>
 
-      <div class = "form-group">
-        <%= f.label :name %><br>
-        <%= f.text_field :name, class: "form-control"%><br>
-      </div>
-      <div class = "form-group">
-        <%= f.label :address %><br>
-        <%= f.text_field :address, class: "form-control"%><br>
-      </div>
-      <div class = "form-group">
-        <%= label_tag :start_date %><br>
-        <%= select_date Date.current, :prefix => 'start_date' %>
-      </div>
+        <div class = "form-group">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, class: "form-control"%><br>
+        </div>
+        <div class = "form-group">
+          <%= f.label :address %><br>
+          <%= f.text_field :address, class: "form-control"%><br>
+        </div>
+        <div class = "form-group">
+          <%= label_tag :start_date %><br>
+          <%= select_date Date.current, :prefix => 'start_date' %>
+        </div>
 
-      <div class = "form-group">
-        <%= label_tag :end_date %><br>
-        <%= select_date Date.current, :prefix => 'end_date' %>
+        <div class = "form-group">
+          <%= label_tag :end_date %><br>
+          <%= select_date Date.current, :prefix => 'end_date' %>
+        </div>
+<br>
+          <%= f.submit "Add this hotel to your itinerary", class: "btn btn-ar btn-primary" %>
+      <% end %>
       </div>
-      <div class="actions"><br>
-        <%= f.submit "Add this hotel to your itinerary", class: "btn btn-primary" %>
-      </div>
-    <% end %>
   </div>
 </div>

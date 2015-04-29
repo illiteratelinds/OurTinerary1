@@ -10,16 +10,16 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree ../../../vendor/assets/stylesheets/.
- *= require_tree ../../../vendor/assets/bootstrapARtheme/css/.
- *= require_self
- *= require owl.carousel
- *= require owl.theme
+
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.eot"
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.woff"
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.ttf"
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.svg"
  *= require_tree .
+ *= require_tree ../../../vendor/assets/bootstrapARtheme/css/.
+ *= require_self
+ *= require owl.carousel
+ *= require owl.theme
  */
 @import "bootstrap";
 /* Some Style from the Bootstrap Default Theme */
@@ -30,7 +30,7 @@ body {
   overflow-x: auto;
 }
 .thumbnail {
-  background-color: #e5e7fc;
+  border-radius: 0px;
 }
 .theme-dropdown .dropdown-menu {
   position: static;
@@ -57,20 +57,11 @@ body {
   padding-right: 25px;
   text-decoration: none;
 }
-.btn-primary {
-  background-color: #A16DAD;
-    border-color: #7e5389;
-    text-decoration: none;
-}
 
 a.visited {
     color: #2366F0;
 }
 
-.btn-primary:hover {
-  background-color: #500263;
-    border-color: #7e5389;
-}
 .pic-container{ 
   width:400px;
   height:600px;
@@ -107,6 +98,24 @@ body {
     color: black;
   }
 }
+
+.panel {
+  border-radius: 0px;
+}
+.panel-primary {
+  border-radius: 0px;
+}
+.panel-primary > .panel-heading {
+  border-radius: 0px;
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  line-height: 120%;
+  margin: 0px 0 0px 0;
+}
+
 .itinerary_items {
     width: 10000px;
     height:110%;

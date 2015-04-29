@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+
 <style type="text/css">
  #map-canvas { height: 350px; width: 80%; margin: 0; padding: 0;}
 </style>
@@ -77,7 +78,7 @@
   <div class="col-md-8">
     <h1> <%= @itinerary.title %></h1>
        <%= @itinerary.start_date.strftime("%B %d, %Y")%> - <%= @itinerary.end_date.strftime("%B %d, %Y")%><br><br>
-    <div id="map-canvas"></div><br><br><br>
+    <br><div id="map-canvas"></div><br>
   </div>
 
   <div class = "col-md-4">
@@ -91,7 +92,7 @@
      <% end %>
   </div>
 </div>
-<br><br>
+
 <div id="myWorkContent">
   <div class ="itinerary_items">
    <% if @itinerary_dates.count > 7 %>
@@ -101,12 +102,13 @@
    <% end%>
   </div>
 </div>
-
-<div id="owl-demo">
-<% @itinerary.itinerary_item_photos.each do |photo| %>
- <div class="item"><%= image_tag photo.url%> </center></div>
-<% end %>
+<br><br>
+<div class="owl-demo owl-carousel">
+  <% @itinerary.itinerary_item_photos.each do |photo| %>
+   <div class="item"> <%= image_tag photo.url %> </div>
+  <% end %>
 </div>
+
 <script>
  $(function() {
    $( "#sortable1, #sortable2" ).sortable({
