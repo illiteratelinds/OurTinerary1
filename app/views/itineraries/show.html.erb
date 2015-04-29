@@ -92,14 +92,16 @@ var dateRange = <%= @itinerary_dates.to_json.html_safe %>;
   </div>
 </div>
 <br><br>
-
-<div class="itinerary_items">
+<div id="myWorkContent">
+  <div class ="itinerary_items">
    <% if @itinerary_dates.count > 7 %>
       <%= render 'itinerary_item_two' %>
    <% else %>
       <%= render 'itinerary_items' %>
    <% end%>
+  </div>
 </div>
+
 <div id="owl-demo" class="owl-carousel owl-theme">
 <% @itinerary.itinerary_item_photos.each do |photo| %>
  <div class="item"><%= image_tag(photo.url)%> </center></div>
