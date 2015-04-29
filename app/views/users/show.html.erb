@@ -32,8 +32,9 @@
             <%= button_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary" %>
           <% end %>
         <% end %>
-
+<br><br>
         <h4>Friends</h4>
+<br>        
           <% @user.friends.each do |friend| %>
             <div class="list-group">
               <div class="list-group-item">
