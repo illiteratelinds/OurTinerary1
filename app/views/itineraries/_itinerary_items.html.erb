@@ -1,29 +1,35 @@
-<tr class="info">
-  <% i = 0 %>
-    <% @itinerary_dates.each do |date| %>
-    <% i += 1 %>
-      <th class = "date<%=i%>"><%= date %>
-       <ul id="sortable1" class="connectedSortable">
+<% i = 0 %>
+<% @itinerary_dates.each do |date| %>
+<% i += 1 %>
+<div class="col-md-4 col-sm-6">
+  <div class= "pricign-box pricign-box-pro animated fadeInUp animation-delay-9">
+    <div class="date<%=i%> pricing-box-header">
+      <h4><%= date %></h4>
+    </div>
+    <div class="pricing-box-price">Day <%=i%></div>
+      <div class="pricing-box-content">
+        <ul id="sortable1" class="connectedSortable">
           <% @itinerary.itinerary_items.order(:position).each do |ii| %>
             <% item = ii.itemable %>
             <% itinerary_type = @itinerary_types[item.class] %>
             <% if item.class == Reservation %>
               <% if (item.start_date.strftime("%B %d, %Y")..item.end_date.strftime("%B %d, %Y")).include? date %>
                 <%= content_tag :li, data: {position: ii.position}, id: "#{ii.id}" do -%>
-                  <%= content_tag :p, link_to("#{itinerary_type}: #{item.send(itinerary_type.downcase).name}", [@itinerary, item]) %>    
-                  <%= content_tag :p, "Address: #{item.send(itinerary_type.downcase).address}" %>
+                  <%= link_to("#{itinerary_type}: #{item.send(itinerary_type.downcase).name}", [@itinerary, item]) %>    
+                  <%= "#{item.send(itinerary_type.downcase).address}" %>
                 <% end -%>
               <% end %>
             <% else %>
               <% if item.date.strftime("%B %d, %Y") == date %>
                 <%= content_tag :li, data: {position: ii.position}, id: "#{ii.id}" do -%>
-                  <%= content_tag :p, link_to("#{itinerary_type}: #{item.send(itinerary_type.downcase).name}", [@itinerary, item]) %>
-                  <%= content_tag :p, "Address: #{item.send(itinerary_type.downcase).address}" %>
+                  <%= link_to("#{itinerary_type}: #{item.send(itinerary_type.downcase).name}", [@itinerary, item]) %>
+                  <%= "Address: #{item.send(itinerary_type.downcase).address}" %>
               <% end %>
             <% end %>
           <% end %>
-        <% end %>  
-      </ul>
-    </th>
-  <% end %>
-</tr>
+        <% end %> 
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>

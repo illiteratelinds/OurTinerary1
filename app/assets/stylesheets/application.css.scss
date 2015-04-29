@@ -62,11 +62,10 @@ body {
     text-decoration: none;
 }
 
-a.btn-primary {
-  &:visited {
-    color: white;
-  }
+a.visited {
+    color: #2366F0;
 }
+
 .btn-primary:hover {
   background-color: #500263;
     border-color: #7e5389;
@@ -98,4 +97,12 @@ a.btn-primary {
 #welcome {
   position: absolute;
   top: 60px;
+}
+body {
+  a:hover {
+    background-color:transparent;
+  }
+  a:visited {
+    color: black;
+  }
 }

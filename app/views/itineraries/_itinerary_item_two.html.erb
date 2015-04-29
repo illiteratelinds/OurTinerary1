@@ -1,38 +1,38 @@
 <% i = 0 %>
 <% @itinerary_dates.each_slice(7).to_a.each do |slice| %>
-<% slice.each do |date| %>
-  <% i += 1 %>
-<div class="col-md-4 col-sm-6">
-  <div class= "pricign-box pricign-box-pro animated fadeInUp animation-delay-9">
-    <div class="date<%=i%> pricing-box-header">
-      <h4><%= date %></h4>
-    </div>
-    <div class="pricing-box-price">Day <%=i%></div>
-      <div class="pricing-box-content">
-        <ul id="sortable1" class="connectedSortable">
-          <% @itinerary.itinerary_items.order(:position).each do |ii| %>
-            <% item = ii.itemable %>
-            <% itinerary_type = @itinerary_types[item.class] %>
-            <% if item.class == Reservation %>
-              <% if (item.start_date.strftime("%B %d, %Y")..item.end_date.strftime("%B %d, %Y")).include? date %>
-                <%= content_tag :li, data: {position: ii.position}, id: "#{ii.id}" do -%>
-                  <%= link_to("#{itinerary_type}: #{item.send(itinerary_type.downcase).name}", [@itinerary, item]) %>    
-                  <%= "#{item.send(itinerary_type.downcase).address}" %>
-                <% end -%>
+  <% slice.each do |date| %>
+    <% i += 1 %>
+    <div class="col-md-4 col-sm-6">
+      <div class= "pricign-box pricign-box-pro animated fadeInUp animation-delay-9">
+        <div class="date<%=i%> pricing-box-header">
+          <h4><%= date %></h4>
+        </div>
+        <div class="pricing-box-price">Day <%=i%></div>
+          <div class="pricing-box-content">
+            <ul id="sortable1" class="connectedSortable">
+              <% @itinerary.itinerary_items.order(:position).each do |ii| %>
+                <% item = ii.itemable %>
+                <% itinerary_type = @itinerary_types[item.class] %>
+                <% if item.class == Reservation %>
+                  <% if (item.start_date.strftime("%B %d, %Y")..item.end_date.strftime("%B %d, %Y")).include? date %>
+                    <%= content_tag :li, data: {position: ii.position}, id: "#{ii.id}" do -%>
+                      <%= link_to("#{itinerary_type}: #{item.send(itinerary_type.downcase).name}", [@itinerary, item]) %>    
+                      <%= "#{item.send(itinerary_type.downcase).address}" %>
+                    <% end -%>
+                  <% end %>
+                <% else %>
+                  <% if item.date.strftime("%B %d, %Y") == date %>
+                    <%= content_tag :li, data: {position: ii.position}, id: "#{ii.id}" do -%>
+                      <%= link_to("#{itinerary_type}: #{item.send(itinerary_type.downcase).name}", [@itinerary, item]) %>
+                      <%= "Address: #{item.send(itinerary_type.downcase).address}" %>
+                  <% end %>
+                <% end %>
               <% end %>
-            <% else %>
-              <% if item.date.strftime("%B %d, %Y") == date %>
-                <%= content_tag :li, data: {position: ii.position}, id: "#{ii.id}" do -%>
-                  <%= link_to("#{itinerary_type}: #{item.send(itinerary_type.downcase).name}", [@itinerary, item]) %>
-                  <%= "Address: #{item.send(itinerary_type.downcase).address}" %>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %> 
-        </ul>
+            <% end %> 
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
     <% end %>
-<% end %>
+  <% end %>
 </div>

@@ -23,7 +23,7 @@ var dateRange = <%= @itinerary_dates.to_json.html_safe %>;
    var geocoder = new google.maps.Geocoder();
    var mapOptions = {
      center: myLatlng,
-     zoom: 13
+     zoom: 11
    };
    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
  }
@@ -85,9 +85,9 @@ var dateRange = <%= @itinerary_dates.to_json.html_safe %>;
      <%= image_tag @itinerary.user.avatar.url(:medium) %><br>
      <% if current_user == @itinerary.user %>
        <h3>Add items to your itinerary!</h3>
-       <%= button_to "Add a Hotel", new_itinerary_hotel_path(@itinerary),  :method => "get", class: "button button-primary button-small" %><br>
-       <%= button_to "Add a Restaurant", new_itinerary_restaurant_path(@itinerary),  :method => "get", class: "button button-primary button-small" %><br>
-       <%= button_to "Add an Attraction", new_itinerary_attraction_path(@itinerary),  :method => "get", class: "button button-primary button-small" %>
+       <%= button_to "Add a Hotel", new_itinerary_hotel_path(@itinerary),  :method => "get", class: "button button-glow button-border button-rounded button-primary" %><br>
+       <%= button_to "Add a Restaurant", new_itinerary_restaurant_path(@itinerary),  :method => "get", class: "button button-glow button-border button-rounded button-primary" %><br>
+       <%= button_to "Add an Attraction", new_itinerary_attraction_path(@itinerary),  :method => "get", class: "button button-glow button-border button-rounded button-primary" %>
      <% end %>
   </div>
 </div>
