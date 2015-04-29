@@ -85,22 +85,21 @@ var dateRange = <%= @itinerary_dates.to_json.html_safe %>;
      <%= image_tag @itinerary.user.avatar.url(:medium) %><br>
      <% if current_user == @itinerary.user %>
        <h3>Add items to your itinerary!</h3>
-       <%= button_to "Add a Hotel", new_itinerary_hotel_path(@itinerary),  :method => "get", class: "btn-social foursquare" %><br>
-       <%= button_to "Add a Restaurant", new_itinerary_restaurant_path(@itinerary),  :method => "get", class: "btn-social foursquare" %><br>
-       <%= button_to "Add an Attraction", new_itinerary_attraction_path(@itinerary),  :method => "get", class: "btn-social foursquare" %>
+       <%= button_to "Add a Hotel", new_itinerary_hotel_path(@itinerary),  :method => "get", class: "button button-primary button-small" %><br>
+       <%= button_to "Add a Restaurant", new_itinerary_restaurant_path(@itinerary),  :method => "get", class: "button button-primary button-small" %><br>
+       <%= button_to "Add an Attraction", new_itinerary_attraction_path(@itinerary),  :method => "get", class: "button button-primary button-small" %>
      <% end %>
   </div>
 </div>
 <br><br>
 
 <div class="itinerary_items">
-   <% if @itinerary_dates.count < 8 %>
-     <%= render 'itinerary_items' %>
+   <% if @itinerary_dates.count > 7 %>
+      <%= render 'itinerary_item_two' %>
    <% else %>
-     <%= render 'itinerary_item_two' %>
+      <%= render 'itinerary_items' %>
    <% end%>
 </div>
-
 <div id="owl-demo" class="owl-carousel owl-theme">
 <% @itinerary.itinerary_item_photos.each do |photo| %>
  <div class="item"><%= image_tag(photo.url)%> </center></div>
