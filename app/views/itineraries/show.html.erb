@@ -2,11 +2,11 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <style type="text/css">
- #map-canvas { height: 350px; width: 700px; margin: 0; padding: 0;}
+ #map-canvas { height: 350px; width: 80%; margin: 0; padding: 0;}
 </style>
 
 <%= javascript_tag do %>
-var dateRange = <%= @itinerary_dates.to_json.html_safe %>;
+ var dateRange = <%= @itinerary_dates.to_json.html_safe %>;
  var resPins = <%= @itinerary.res_pins %>;
  var mealPins = <%= @itinerary.meal_pins %>;
  var activityPins = <%= @itinerary.activity_pins %>;
@@ -102,9 +102,9 @@ var dateRange = <%= @itinerary_dates.to_json.html_safe %>;
   </div>
 </div>
 
-<div id="owl-demo" class="owl-carousel owl-theme">
+<div id="owl-demo">
 <% @itinerary.itinerary_item_photos.each do |photo| %>
- <div class="item"><%= image_tag(photo.url)%> </center></div>
+ <div class="item"><%= image_tag photo.url%> </center></div>
 <% end %>
 </div>
 <script>

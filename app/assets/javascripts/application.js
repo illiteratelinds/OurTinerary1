@@ -13,12 +13,22 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree ../../../vendor/assets/javascripts/.
-//= require owl.carousel
 //= require_tree .
-//= require_tree ../../../vendor/assets/bootstrapARtheme/js/.
+
+//= require owl.carousel
+
 $(document).ready(function(){
   setTimeout(function(){
     $('#flash-wrapper').fadeOut();}, 1200);
 });
 
+$(document).ready(function() { 
+  $("#owl-demo").owlCarousel({
+      autoPlay: 3000, //Set AutoPlay to 3 seconds
+      items : 4,
+      itemsDesktop : [1199,3],
+      itemsDesktopSmall : [979,3]
+ 
+  });
+ 
+});
