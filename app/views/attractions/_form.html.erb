@@ -1,40 +1,51 @@
 <div class="row">
   <div class="col-md-6">
-    <h3>Select attraction</h3>
-     <%= form_for [@itinerary, @attraction] do |f| %>
-      <div class = "form-group">
-        <%= f.label :name %><br>
-        <%= f.collection_select(:id, Attraction.all, :id, :name, :include_blank => true)%>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>Select attraction</h3>
       </div>
-      <div class = "form-group">
-        <%= label_tag :date %><br>
-        <%= select_date Date.current %>
-      </div>
-      <div class = "actions"><br>
-        <%= f.submit "Add Attraction", class: "btn btn-primary" %>
-      </div>
-     <% end %>  
+      <div class="panel-body">
 
+        <%= form_for [@itinerary, @attraction] do |f| %>
+          <div class = "form-group">
+            <%= f.label :name %><br>
+            <%= f.collection_select(:id, Attraction.all, :id, :name, :include_blank => true)%>
+          </div>
+          <div class = "form-group">
+            <%= label_tag :date %><br>
+            <%= select_date Date.current %>
+          </div>
+          <div class = "actions"><br>
+            <%= f.submit "Add Attraction", class: "btn btn-ar btn-primary" %>
+          </div>
+         <% end %>  
+      </div>
+    </div>
   </div>
 
   <div class="col-md-6">
-  <h3>Add a attraction to Your Itinerary</h3>
-    <%= form_for [@itinerary, @attraction] do |f| %>
-      <div class = "form-group">
-        <%= f.label :name %><br>
-        <%= f.text_field :name, class: "form-control"%><br>
+    <div class="panel panel-primary"> 
+      <div class="panel-heading">
+        <h3>Add an Attraction</h3>
       </div>
-      <div class = "form-group">
-        <%= f.label :address %><br>
-        <%= f.text_field :address, class: "form-control"%><br>
-      </div>
-      <div class = "form-group">
-        <%= label_tag :date %><br>
-        <%= select_date Date.current%>
-      </div>
-      <div class = "actions"><br>
-        <%= f.submit "Add Attraction", class: "btn btn-primary" %>
-      </div>
-    <% end %>  
+      <div class="panel-body">
+        <%= form_for [@itinerary, @attraction] do |f| %>
+          <div class = "form-group">
+            <%= f.label :name %><br>
+            <%= f.text_field :name, class: "form-control"%><br>
+          </div>
+          <div class = "form-group">
+            <%= f.label :address %><br>
+            <%= f.text_field :address, class: "form-control"%><br>
+          </div>
+          <div class = "form-group">
+            <%= label_tag :date %><br>
+            <%= select_date Date.current%>
+          </div>
+          <div class = "actions"><br>
+            <%= f.submit "Add Attraction", class: "btn btn-ar btn-primary" %>
+          </div>
+        <% end %> 
+      </div> 
   </div>
 </div>
