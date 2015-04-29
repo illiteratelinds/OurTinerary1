@@ -10,9 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree ../../../vendor/assets/stylesheets/.
- *= require owl.carousel
- *= require owl.theme
+
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.eot"
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.woff"
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.ttf"
@@ -20,6 +18,8 @@
  *= require_tree .
  *= require_tree ../../../vendor/assets/bootstrapARtheme/css/.
  *= require_self
+ *= require owl.carousel
+ *= require owl.theme
  */
 @import "bootstrap";
 /* Some Style from the Bootstrap Default Theme */
@@ -109,7 +109,7 @@ h1, h2, h3, h4, h5, h6, p, a {
 #myWorkContent{
     width:100%;
     height:110%;
-    border: 5px solid #2366f0;
+    border: 1px solid #2366f0;
     overflow-x: scroll;
     overflow-y: hidden;
 }
@@ -119,4 +119,3 @@ h1, h2, h3, h4, h5, h6, p, a {
   width: 350px;
   padding: 10px;
 }
-

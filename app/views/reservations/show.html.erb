@@ -35,7 +35,7 @@
   </ul>
 
 
-  <div id="owl-demo" class="owl-carousel">
+  <div class= "owl-demo owl-carousel">
     <% @reservation.photos.each do |photo| %>
     <div class="item"><center> <%= link_to (image_tag photo.image.url), [@activity, photo] %> </center></div>
     <% end %>
