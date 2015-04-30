@@ -31,7 +31,7 @@ Location: <%= @hotel.address %><br>
             <div class="col-sm-6 timeline-left">
                 <div class='timeline-event timeline-event-left animated bounceInLeft animation-delay-<%"#{count}"%>'>
                     <div class="panel panel-primary">
-                        <div class="panel-heading"><%= reservation.itinerary.title%> (<%= reservation.start_date.strftime("%B %d, %Y") %> - <%= reservation.end_date.strftime("%B %d, %Y") %>)</div>
+                        <div class="panel-heading"><%= link_to reservation.itinerary.title, itinerary_path(reservation.itinerary)%> (<%= reservation.start_date.strftime("%B %d, %Y") %> - <%= reservation.end_date.strftime("%B %d, %Y") %>)</div>
                         <% reservation.photos.each do |photo| %>
                           <center><%= image_tag photo.image.url(:medium) %></center>
                         <% end %>
