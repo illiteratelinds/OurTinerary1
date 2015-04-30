@@ -33,7 +33,8 @@
           <% if current_user.requested?(@user) %>
             <p> Friend request sent </p>
           <% else %>
-            <%= button_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary" %>
+          <br>
+            <%= button_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-ar btn-primary" %>
           <% end %>
         <% end %>
 <br><br>
@@ -52,4 +53,3 @@
   </div>
 </div>
 
-<br><br><br><br><br><%= link_to 'Back', users_path %>
