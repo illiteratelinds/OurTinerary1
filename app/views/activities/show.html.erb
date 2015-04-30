@@ -5,7 +5,7 @@
   Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
   <% if logged_in? && !@review && @activity.itinerary_creator(current_user) %>
     <div class="form-group">
-      <%= link_to "Write a Review",  new_activity_review_path(@activity), class: "btn btn-primary" %>
+      <%= link_to "Write a Review",  new_activity_review_path(@activity), class: "btn btn-ar btn-primary" %>
     </div>
   <% end %>
   <% if @review %>
@@ -15,7 +15,7 @@
   <% if @wishlist_exists!=true && !@my_item %>
     <%= form_for [@wishlistable, Wishlist.new] do |f| %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.submit "Add to Wishlist", class: "btn btn-primary" %><br>
+      <%= f.submit "Add to Wishlist", class: "btn btn-ar btn-primary" %><br>
     <% end %>
   <% end %>
 </div>
@@ -32,7 +32,7 @@
   <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
     <%= form.file_field :image %>
      <div class = "actions"><br>
-        <%= form.submit "Add Photo", class: "btn btn-primary" %>
+        <%= form.submit "Add Photo", class: "btn btn-ar btn-primary" %>
     </div>
   <% end %>
 <% end %>
