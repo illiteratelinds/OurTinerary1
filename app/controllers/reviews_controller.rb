@@ -2,6 +2,13 @@ class ReviewsController < ApplicationController
   
   def new
     @reviewable = find_reviewable
+    if @reviewable.class == Reservation
+      @place = @reviewable.send("hotel")
+    elsif @reviewable.class == Meal
+      @place = @reviewable.send("restaurant")
+    elsif @reviewable.class == Activity
+      @place = @reviewable.send("attraction")
+    end
   end  
 
   def create

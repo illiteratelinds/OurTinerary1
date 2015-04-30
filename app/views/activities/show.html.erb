@@ -1,81 +1,82 @@
 <h2><%= link_to @activity.itinerary.title, itinerary_path(@activity.itinerary) %></h2>
 <div align = "center">
-<h1><%= link_to @activity.attraction.name, attraction_path(@activity.attraction) %></h1>
-Address: <%= @activity.attraction.address %><br>
-Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
-<% if logged_in? && !@review && @activity.itinerary_creator(current_user) %>
-  <div class="form-group">
-    <%= link_to "Write a Review",  new_activity_review_path(@activity), class: "btn btn-primary" %>
-  </div>
-<% end %>
-
+  <h1><%= link_to @activity.attraction.name, attraction_path(@activity.attraction) %></h1>
+  Address: <%= @activity.attraction.address %><br>
+  Date: <%= @activity.date.strftime("%B %d, %Y") %><br>
+  <% if logged_in? && !@review && @activity.itinerary_creator(current_user) %>
+    <div class="form-group">
+      <%= link_to "Write a Review",  new_activity_review_path(@activity), class: "btn btn-ar btn-primary" %>
+    </div>
+  <% end %>
   <% if @review %>
     <div class="star-rating" data-score= <%= @review.rating %>></div> 
-    <%= @review.creator.name %> reviewed: <%= @review.content %>
+    <%= @review.creator.name %> says "<%= @review.content %>""
   <% end %>
-
   <% if @wishlist_exists!=true && !@my_item %>
     <%= form_for [@wishlistable, Wishlist.new] do |f| %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.submit "Add to Wishlist", class: "btn btn-primary" %><br>
+      <%= f.submit "Add to Wishlist", class: "btn btn-ar btn-primary" %><br>
     <% end %>
   <% end %>
-  <br>
-  <iframe
-    width="400"
-    height="450"
-    frameborder="0" style="border:0"
-    src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@activity.attraction.name+@activity.attraction.address%>'>
-  </iframe>
 </div>
 
-<div id="owl-demo" class="owl-carousel">
+  <br>
+
+<div class= "owl-demo owl-carousel">
   <% @activity.photos.each do |photo| %>
   <div class="item"><center> <%= link_to (image_tag photo.image.url), [@activity, photo] %> </center></div>
   <% end %>
 </div>
-
+<u><h4> Add an image! </h4></u>
+<% if logged_in? && current_user.id == @activity.itinerary.user.id %>
+  <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
+    <%= form.file_field :image %>
+     <div class = "actions"><br>
+        <%= form.submit "Add Photo", class: "btn btn-ar btn-primary" %>
+    </div>
+  <% end %>
+<% end %>
+<br><br>
 
 <div class="row">
   <div class="col-md-4">
-    
-    <h2>All Comments</h2>
-      <ul>
-        <% @commentable.comments.each do |comment| %>
-        <li><div class="row">
-          <div class="col-md-3">
-            <%= image_tag comment.commenter.avatar.url(:medium), :class => "profile-icon img-responsive" %>
-            <%= comment.commenter_name %>
-          </div>
-          <div class= "col-md-6">
-            <%= comment.created_at.strftime("%B %d, %Y") %><br>
-            <strong><%= comment.content %></strong>
-          </div></div></li>
-        <% end %>
-      </ul>
-    <br><br>
-
-    <div class="form-group">
-      <% if logged_in? %>
-        <%= form_for [@commentable, Comment.new] do |f| %>
-            <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control"%><br>
-            <%= f.hidden_field :user_id, :value => current_user.id %>
-            <%= f.submit "Submit", class: "btn btn-primary"%><br>
-        <% end %>
-      <% end %>
+    <iframe
+      width="400"
+      height="450"
+      frameborder="0" style="border:0"
+      src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@activity.attraction.name+@activity.attraction.address%>'>
+    </iframe>
+  </div>
+  <div class="col-md-8">
+    <div class="panel panel-primary">
+        <div class="panel-heading">All Comments</div>
+          <div class="panel-body">
+            <ul>
+           <% @commentable.comments.each do |comment| %>
+           <li><div class="row">
+             <div class="col-md-3">
+               <%= link_to (image_tag comment.commenter.avatar.url(:medium), :class => "profile-icon img-responsive"), user_path(comment.commenter) %>
+               <%= link_to comment.commenter_name, user_path(comment.commenter) %>
+             </div>
+             <div class= "col-md-6">
+               <%= comment.created_at.strftime("%B %d, %Y") %><br>
+               <strong><%= comment.content %></strong>
+             </div></div></li>
+           <% end %>
+         </ul><br><br>
+         <div class="form-group">
+           <% if logged_in? %>
+             <%= form_for [@commentable, Comment.new] do |f| %>
+                 <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
+                 <%= f.hidden_field :user_id, :value => current_user.id %>
+                 <%= f.submit "Comment", class: "btn btn-ar btn-primary" %><br>
+             <% end %>
+           <% end %>
+         </div>
+      </div>
     </div>
   </div>
 </div>
-
-    <u><h4> Add an image! </h4></u>
-    <% if logged_in? && current_user.id == @activity.itinerary.user.id %>
-      <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
-        <%= form.file_field :image %>
-         <div class = "actions"><br>
-            <%= form.submit "Add Photo", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    <% end %>
 <%= link_to "Back", itinerary_path(@activity.itinerary) %>
 
 <script>
