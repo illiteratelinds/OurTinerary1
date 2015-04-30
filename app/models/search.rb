@@ -11,6 +11,12 @@ class Search < ActiveRecord::Base
     Attraction.where("name LIKE ?", "%#{keyword}%").each do |attraction|
       results << attraction
     end
+    Itinerary.where("title LIKE ?", "%#{keyword}%").each do |itinerary|
+      results << itinerary 
+    end
+    User.where("name LIKE ?", "%#{keyword}%").each do |user|
+      results << user
+    end
     results
   end
 
