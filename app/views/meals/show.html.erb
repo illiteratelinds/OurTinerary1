@@ -1,67 +1,31 @@
 <h2><%= link_to @meal.itinerary.title, itinerary_path(@meal.itinerary) %></h2>
-<h1><%= link_to @meal.restaurant.name, restaurant_path(@meal.restaurant) %></h1><br>
-Address: <%= @meal.restaurant.address %><br>
-Date: <%= @meal.date.strftime("%B %d, %Y") %>
-<% if logged_in? && !@review && @meal.itinerary_creator(current_user) %>
-  <div class="form-group">
-    <%= link_to "Write a Review",  new_meal_review_path(@meal), class: "btn btn-primary" %>
-  </div>
-<% end %>
-<br><br>
-
-  <% if @review %>
-    <div class="star-rating" data-score= <%= @review.rating %>></div> 
-    <%= @review.creator.name %> reviewed: <%= @review.content %><br>
+<div align="center">
+  <h1><%= link_to @meal.restaurant.name, restaurant_path(@meal.restaurant) %></h1><br>
+  Address: <%= @meal.restaurant.address %><br>
+  Date: <%= @meal.date.strftime("%B %d, %Y") %>
+    <% if @review %>
+      <div class="star-rating" data-score= <%= @review.rating %>></div> 
+      <%= @review.creator.name %> says "<%= @review.content %>"<br>
+    <% end %>
+  <% if logged_in? && !@review && @meal.itinerary_creator(current_user) %>
+    <div class="form-group">
+      <%= link_to "Write a Review",  new_meal_review_path(@meal), class: "btn btn-ar btn-primary" %>
+    </div>
   <% end %>
+  <br><br>
   <% if @wishlist_exists!=true && !@my_item%>
     <%= form_for [@wishlistable, Wishlist.new] do |f| %>
        <%= f.hidden_field :user_id, :value => current_user.id %>
        <%= f.submit "Add to Wishlist", class: "btn btn-primary" %><br>
      <% end %>
    <% end %>
-  <iframe
-    width="400"
-    height="450"
-    frameborder="0" style="border:0"
-    src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@meal.restaurant.name+@meal.restaurant.address%>'>
-  </iframe>
-<br><br><br>
-  <div id="owl-demo" class="owl-carousel">
+ </div>
+   
+  <div class= "owl-demo owl-carousel">
     <% @meal.photos.each do |photo| %>
     <div class="item"><center> <%= link_to (image_tag photo.image.url), [@meal, photo] %> </center></div>
     <% end %>
   </div>
-
-<div class="row">
-  <div class="col-md-8">
-
-   <h2>All Comments</h2>
-      <ul>
-        <% @commentable.comments.each do |comment| %>
-        <li><div class="row">
-          <div class="col-md-3">
-            <%= image_tag comment.commenter.avatar.url(:medium), :class => "profile-icon" %>
-            <%= comment.commenter_name %>
-          </div>
-          <div class= "col-md-6">
-            <%= comment.created_at.strftime("%B %d, %Y") %><br>
-            <strong><%= comment.content %></strong>
-          </div></div></li>
-        <% end %>
-      </ul>
-    <br><br>
-
-    <div class="form-group">
-    <% if logged_in? %>
-      <%= form_for [@commentable, Comment.new] do |f| %>
-          <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
-          <%= f.submit "Comment", class: "btn btn-primary" %><br>
-      <% end %>
-    <% end %>
-    </div>
-  </div>
-</div>
     <u><h4> Add an image! </h4></u>
     <% if logged_in? && current_user.id == @meal.itinerary.user.id %>
       <%= form_for [@imageable, Photo.new],  :html => { :multipart => true } do |form| %>
@@ -71,7 +35,48 @@ Date: <%= @meal.date.strftime("%B %d, %Y") %>
         </div><br>
       <% end %>
     <% end %>
-<%= link_to "Back", itinerary_path(@meal.itinerary) %>
+<div class="row">
+  <div class="col-md-4">
+    <iframe
+      width="400"
+      height="450"
+      frameborder="0" style="border:0"
+      src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@meal.restaurant.name+@meal.restaurant.address%>'>
+    </iframe>
+  <br><br><br>
+  </div>
+
+<div class="col-md-8">
+    <div class="panel panel-primary">
+        <div class="panel-heading">All Comments</div>
+          <div class="panel-body">
+            <ul>
+           <% @commentable.comments.each do |comment| %>
+           <li><div class="row">
+             <div class="col-md-3">
+               <%= link_to (image_tag comment.commenter.avatar.url(:medium), :class => "profile-icon img-responsive"), user_path(comment.commenter) %>
+               <%= link_to comment.commenter_name, user_path(comment.commenter) %>
+             </div>
+             <div class= "col-md-6">
+               <%= comment.created_at.strftime("%B %d, %Y") %><br>
+               <strong><%= comment.content %></strong>
+             </div></div></li>
+           <% end %>
+         </ul><br><br>
+         <div class="form-group">
+           <% if logged_in? %>
+             <%= form_for [@commentable, Comment.new] do |f| %>
+                 <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
+                 <%= f.hidden_field :user_id, :value => current_user.id %>
+                 <%= f.submit "Comment", class: "btn btn-ar btn-primary" %><br>
+             <% end %>
+           <% end %>
+         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
  $('.star-rating').raty({
@@ -82,3 +87,4 @@ Date: <%= @meal.date.strftime("%B %d, %Y") %>
     }
   });
 </script>
+<%= link_to "Back", itinerary_path(@meal.itinerary) %>

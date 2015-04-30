@@ -2,31 +2,32 @@
   <%= image_tag @photo.image.url, id: "photo_show" %><br><br><br>
 </div>
 
-<div class="col-md-8">
-  <h2>All Comments</h2>
-     <ul>
-       <% @commentable.comments.each do |comment| %>
-       <li><div class="row">
-         <div class="col-md-3">
-           <%= link_to (image_tag comment.commenter.avatar.url(:medium), :class => "profile-icon img-responsive"), user_path(comment.commenter) %>
-           <%= link_to comment.commenter_name, user_path(comment.commenter) %>
+<div class="col-md-12">
+    <div class="panel panel-primary">
+        <div class="panel-heading">All Comments</div>
+          <div class="panel-body">
+            <ul>
+           <% @commentable.comments.each do |comment| %>
+           <li><div class="row">
+             <div class="col-md-3">
+               <%= link_to (image_tag comment.commenter.avatar.url(:medium), :class => "profile-icon img-responsive"), user_path(comment.commenter) %>
+               <%= link_to comment.commenter_name, user_path(comment.commenter) %>
+             </div>
+             <div class= "col-md-6">
+               <%= comment.created_at.strftime("%B %d, %Y") %><br>
+               <strong><%= comment.content %></strong>
+             </div></div></li>
+           <% end %>
+         </ul><br><br>
+         <div class="form-group">
+           <% if logged_in? %>
+             <%= form_for [@commentable, Comment.new] do |f| %>
+                 <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
+                 <%= f.hidden_field :user_id, :value => current_user.id %>
+                 <%= f.submit "Comment", class: "btn btn-ar btn-primary" %><br>
+             <% end %>
+           <% end %>
          </div>
-         <div class= "col-md-6">
-           <%= comment.created_at.strftime("%B %d, %Y") %><br>
-           <strong><%= comment.content %></strong>
-         </div></div></li>
-       <% end %>
-     </ul><br><br>
-
-   <div class="form-group">
-     <% if logged_in? %>
-       <%= form_for [@commentable, Comment.new] do |f| %>
-           <%= f.text_area :content, :placeholder => "Write a comment...", class: "form-control" %><br>
-           <%= f.hidden_field :user_id, :value => current_user.id %>
-           <%= f.submit "Comment", class: "btn btn-primary" %><br>
-       <% end %>
-     <% end %>
-   </div>
+      </div>
+    </div>
   </div>
-
-</div>

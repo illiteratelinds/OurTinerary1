@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   
   def new
+    
     @reviewable = find_reviewable
   end  
 
