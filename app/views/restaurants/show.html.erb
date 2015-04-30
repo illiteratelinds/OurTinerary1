@@ -1,18 +1,81 @@
 <h3><%= @restaurant.name %></h3>
 Location: <%= @restaurant.address %><br>
-
-<% @restaurant.meals.each do |meal| %>
-  <% meal.photos.each do |photo| %>
-    <%= image_tag photo.image.url(:medium) %>
+<%= @restaurant.reviews.count %> reviews <br>
+  <% if @restaurant.reviews.count > 0 %>
+  Average Rating: <%= @restaurant.reviews.average(:rating).to_i %> out of 5
   <% end %>
-<% end %>
 
-<% @restaurant.meals.each do |meal| %>
-  <% if  meal.review %>
-    <div class="star-rating" data-score= <%= meal.review.rating %>></div>
-    <%= meal.review.creator.name %> reviewed: <%= meal.review.content %>
-  <%end %>
-<% end %>
+  <div class = "row">
+  <div class="col-md-4">
+  
+
+  <br><br>
+    <iframe
+        width= "100%"
+        height="450"
+        frameborder="0" style="border:0"
+        src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@restaurant.name+@restaurant.address%>'>
+      </iframe>
+ 
+  </div>
+
+<div class="col-md-8">
+  <!-- begin timeline -->
+    <div class="row timeline">
+    <% count = 0 %>
+        <% @restaurant.meals.each do |meal| %>
+          <% if count % 2 == 0 %>
+            <div class="col-sm-6 timeline-left">
+                <div class='timeline-event timeline-event-left animated bounceInLeft animation-delay-<%"#{count}"%>'>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><%= link_to meal.itinerary.title, itinerary_path(meal.itinerary) %> (<%= meal.date.strftime("%B %d, %Y") %>)</div>
+                        <% meal.photos.each do |photo| %>
+                          <center><%= image_tag photo.image.url(:medium) %></center>
+                        <% end %>
+                        <div class="panel-body">
+                          <% if meal.review %>
+                            <p>
+                            <strong><%= link_to meal.review.creator.name, user_path(meal.review.creator) %></strong>
+                            <div class="star-rating" data-score= <%= meal.review.rating %>></div><br>
+                            <%= meal.review.content %></p>
+                          <% end %>
+                          <% count += 1 %>
+                        </div>
+                    </div>
+                </div>
+              
+              </div>
+            <% else %>
+            <% count += 1 %>
+              <div class="col-sm-6 timeline-right">
+                <div class='timeline-event timeline-event-right animated bounceInRight animation-delay-<%="#{count}"%>'>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><%= meal.itinerary.title%> (<%= meal.date.strftime("%B %d, %Y") %>)</div>
+                        <% meal.photos.each do |photo| %>
+                          <center><%= image_tag photo.image.url(:medium) %></center>
+                        
+                        <% end %>
+                        <div class="panel-body">
+                          <% if meal.review %>
+                            <p>
+                            <strong><%= link_to meal.review.creator.name, user_path(meal.review.creator) %></strong> said: "<%= meal.review.content %>"
+                            <div class="star-rating" data-score= <%= meal.review.rating %>>
+                            </div><br>
+                            </p>
+                          <% end %>
+                          <% count += 1 %>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+          <% end %>
+          <% end %>
+        </div>
+  <!-- end timeline -->
+  </div>
+</div>
+
+
 
 
 <script>
