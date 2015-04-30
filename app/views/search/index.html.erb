@@ -1,9 +1,19 @@
 <% if @results.empty? %>
   <%= "No results matching that query." %>
   <% else %>
-    <ul>
+<div class="panel panel-primary">
+  <div class="panel-heading">Search Results</div>
+  <div class="panel-body">
+    <div class="list-group">
       <% @results.each do |result| %>
-        <li><%= link_to result.name, result %></li>
+        <% if result.class == Itinerary %>
+          <h4><%= link_to ("#{"("+result.class.to_s+") " + result.title}"), result, class:"list-group-item" %> </h4><br>
+        <% else %>
+          <h4><%= link_to ("#{"("+result.class.to_s+") " + result.name}"), result, class:"list-group-item" %> </h4><br>
+        <% end %>
+      <% end %>
+    </div>
     <% end %>
-    </ul>
-<% end %>
+
+  </div>
+</div>
