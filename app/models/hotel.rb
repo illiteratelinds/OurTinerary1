@@ -5,5 +5,6 @@ class Hotel < ActiveRecord::Base
   # polymorphic associations
   has_many :wishlists, as: :wishlistable
   geocoded_by :address
+  has_many :reviews, through: :reservations
   after_validation :geocode, :if => :address_changed?
 end
