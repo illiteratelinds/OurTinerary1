@@ -15,12 +15,27 @@
          <% if logged_in? %>
            <li><%= link_to current_user.name, users_current_path %></li>
          <% end %>
-         <li><%= login_logout_links %></li>
-         <% if logged_in? %>
-         <li><%= link_to "Wishlist", wishlists_path %>
-         <% end %>
         <li id="back"><%= link_to 'Back', :back %></li>
+        <li><%= login_logout_links %></li>
        </ul>
+   <nav class="top-nav">
+      <div class="dropdown animated fadeInDown animation-delay-11">
+                    <% if logged_in? %>
+                     <%= link_to "Wishlist", wishlists_path %>
+                     <% end %>          
+      </div> <!-- dropdown -->
+
+      <div class="dropdown animated fadeInDown animation-delay-13">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-search-box animated fadeInUp">
+          <%= form_tag("/search", method: "get") do %>
+            <%= label_tag(:keyword, "Search for:") %>
+            <%= text_field_tag(:keyword) %>
+            <%= submit_tag("Search") %>
+          <% end %>
+        </div>
      </div><!-- nav-collapse -->
    </div>
+      </div> <!-- dropdown -->
+    </nav>
  </div><!-- navbar -->

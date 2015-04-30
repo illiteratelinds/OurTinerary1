@@ -69,6 +69,6 @@ end
 
  get '/auth/facebook/callback', to: 'sessions#create'
  
-
+ get '/search', to: 'search#index'
 
 end
