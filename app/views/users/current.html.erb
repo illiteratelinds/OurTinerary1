@@ -55,11 +55,11 @@
     <div class="col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h4><u><%= link_to @user.name, user_path(@user) %></u></h4>
+          <h4><%= link_to @user.name, user_path(@user) %></h4>
         </div>
         <div class="panel-body">
           <%= link_to (image_tag @user.avatar.url(:medium)), user_path(@user) %><br>
-          <u><h4> Add/Change profile picture! </h4></u>
+          <h4> Add/Change profile picture! </h4>
           <%= form_for @user,  :html => { :multipart => true } do |form| %>
             <% if @user.errors.any? %>
               <div id="error_explanation">
@@ -72,7 +72,7 @@
               </div>
             <% end %>
             <%= form.file_field :avatar %>
-            <div class = "actions"><br>
+            <div class="actions"><br>
               <%= form.submit "Update Profile", class: "btn btn-ar btn-primary" %>
             </div>
             <% end %>
