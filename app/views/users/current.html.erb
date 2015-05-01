@@ -32,9 +32,9 @@
           <ul>
               <% @user.requested_friendships.each do |request| %>
                 <li>
-                  <%= request.name %> 
-                  <%= link_to "Accept", friendship_path(:id => request), :method => "put" %> 
-                  <%= link_to "Decline", friendship_path(:id => request), :method => :delete %>
+                  <h4 style><%= request.name %> </h4>
+                  <%= link_to "Accept", friendship_path(:id => request), :method => "put", class: "btn btn-ar btn-primary" %> 
+                  <%= link_to "Decline", friendship_path(:id => request), :method => :delete, class: "btn btn-ar btn-primary" %>
                 </li>
               <% end %>
           </ul>
