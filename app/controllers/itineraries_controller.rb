@@ -8,14 +8,14 @@ class ItinerariesController < ApplicationController
   end  
 
   def show
-    if @itinerary.reservations.count > 0
-      @first_res = @itinerary.reservations.first.first_res_pin
-    end
     @itinerary_types = {
       Meal => "Restaurant",
       Reservation => "Hotel",
       Activity => "Attraction"
     }
+    if @itinerary.reservations.count > 0
+      @first_res = @itinerary.reservations.first.first_res_pin
+    end
     @start_date = @itinerary.start_date.to_date
     @end_date = @itinerary.end_date.to_date
     @itinerary_dates = (@start_date..@end_date).map{|date|date.strftime("%B %d, %Y")}
