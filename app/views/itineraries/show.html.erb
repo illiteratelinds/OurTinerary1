@@ -90,6 +90,7 @@
      <% end %>
   </div>
 </div>
+<br>
 
 <div id="myWorkContent">
   <div class ="itinerary_items">
@@ -98,14 +99,14 @@
    <% else %>
       <%= render 'itinerary_items' %>
    <% end%>
-  </div>
-</div>
-<br><br>
+  </div><br><br><br>
 <div class="owl-demo owl-carousel">
   <% @itinerary.itinerary_item_photos.each do |photo| %>
    <div class="item"> <%= image_tag photo.url %> </div>
   <% end %>
 </div>
+</div>
+
 
 <script>
  $(function() {
