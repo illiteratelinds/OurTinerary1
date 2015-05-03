@@ -5,72 +5,74 @@ Location: <%= @attraction.address %><br>
   Average Rating: <%= @attraction.reviews.average(:rating).to_i %> out of 5
   <% end %>
 
-  <div class = "row">
+<div class = "row">
   <div class="col-md-4">
-  
-
   <br><br>
-    <iframe
-        width= "100%"
-        height="450"
-        frameborder="0" style="border:0"
-        src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@attraction.name+@attraction.address%>'>
-      </iframe>
+  <iframe
+      width= "100%"
+      height="450"
+      frameborder="0" style="border:0"
+      src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@attraction.name+@attraction.address%>'>
+    </iframe>
  
   </div>
 
-<div class="col-md-8">
-  <!-- begin timeline -->
+  <div class="col-md-8">
     <div class="row timeline">
-    <% count = 0 %>
-        <% @attraction.activities.each do |activity| %>
+    <% count = 2 %>
+      <% @attraction.activities.each do |activity| %>
+        <% if activity.photos.count > 0 %>
           <% if count % 2 == 0 %>
             <div class="col-sm-6 timeline-left">
-                <div class='timeline-event timeline-event-left animated bounceInLeft animation-delay-<%"#{count}"%>'>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading"><%= link_to activity.itinerary.title, itinerary_path(activity.itinerary) %> (<%= activity.date.strftime("%B %d, %Y") %>)</div>
-                        <% activity.photos.each do |photo| %>
-                          <center><%= image_tag photo.image.url(:medium) %></center>
-                        <% end %>
-                        <div class="panel-body">
-                          <% if activity.review %>
-                            <p>
-                            <strong><%= link_to activity.review.creator.name, user_path(activity.review.creator) %></strong>
-                            <div class="star-rating" data-score= <%= activity.review.rating %>></div><br>
-                            <%= activity.review.content %></p>
-                          <% end %>
-                          <% count += 1 %>
-                        </div>
+              <div class='timeline-event timeline-event-left animated bounceInLeft animation-delay-<%"#{count}"%>'>
+                <div class="panel panel-primary">
+                  <div class="panel-heading"><%= link_to activity.itinerary.title, itinerary_path(activity.itinerary) %> (<%= activity.date.strftime("%B %d, %Y") %>)
+                  </div>
+                  <center>
+                    <%= image_tag activity.photos.first.image.url(:medium) %>
+                  </center>
+                  <div class="panel-body">
+                    <% if activity.review %>
+                      <div class="star-rating" data-score= <%= activity.review.rating %>>
+                      </div>
+                      <p>
+                       "<%= activity.review.content %>"
+                      <strong> - <%= link_to activity.review.creator.name, user_path(activity.review.creator) %></strong>
+                      </p>
+                    <% end %>
+                    <% count += 1 %>
                     </div>
+                  </div>
                 </div>
-              
               </div>
-            <% else %>
-            <% count += 1 %>
+
+          <% else %>
               <div class="col-sm-6 timeline-right">
                 <div class='timeline-event timeline-event-right animated bounceInRight animation-delay-<%="#{count}"%>'>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading"><%= activity.itinerary.title%> (<%= activity.date.strftime("%B %d, %Y") %>)</div>
-                        <% activity.photos.each do |photo| %>
-                          <center><%= image_tag photo.image.url(:medium) %></center>
-                        
+                  <div class="panel panel-primary">
+                    <div class="panel-heading"><%= link_to activity.itinerary.title, itinerary_path(activity.itinerary) %> (<%= activity.date.strftime("%B %d, %Y") %>)</div>
+                      <center>
+                        <%= image_tag activity.photos.first.image.url(:medium) %>
+                      </center>
+                      <div class="panel-body">
+                        <% if activity.review %>
+                          <div class="star-rating" data-score= <%= activity.review.rating %>>
+                          </div>
+                          <p>
+                           "<%= activity.review.content %>"
+                          <strong> - <%= link_to activity.review.creator.name, user_path(activity.review.creator) %></strong>
+                          </p>
                         <% end %>
-                        <div class="panel-body">
-                          <% if activity.review %>
-                            <p>
-                            <strong><%= link_to activity.review.creator.name, user_path(activity.review.creator) %></strong> said: "<%= activity.review.content %>"
-                            <div class="star-rating" data-score= <%= activity.review.rating %>>
-                            </div><br>
-                            </p>
-                          <% end %>
-                          <% count += 1 %>
-                        </div>
+                        <% count += 1 %>
+                      </div>
                     </div>
-                </div>                
-            </div>
+                  </div>                
+                </div>
+              </div>
+            <% end %>
           <% end %>
-          <% end %>
-        </div>
+        <% end %>
+      </div>
   <!-- end timeline -->
   </div>
 </div>

@@ -39,7 +39,6 @@
               <% end %>
           </ul>
           <% if current_user.pending_friends.count > 0 %>
-            <u>Pending Friends</u>
             <ul>
               <% current_user.pending_friends.each do |friend| %>
                 <li>

@@ -21,20 +21,23 @@ Location: <%= @hotel.address %><br>
     <div class="row timeline">
     <% count = 0 %>
         <% @hotel.reservations.each do |reservation| %>
+        <% if reservation.photos.count >0 %>
           <% if count % 2 == 0 %>
             <div class="col-sm-6 timeline-left">
                 <div class='timeline-event timeline-event-left animated bounceInLeft animation-delay-<%"#{count}"%>'>
                     <div class="panel panel-primary">
                         <div class="panel-heading"><%= link_to reservation.itinerary.title, itinerary_path(reservation.itinerary)%> (<%= reservation.start_date.strftime("%B %d, %Y") %> - <%= reservation.end_date.strftime("%B %d, %Y") %>)</div>
-                        <% reservation.photos.each do |photo| %>
-                          <center><%= image_tag photo.image.url(:medium) %></center>
-                        <% end %>
+                        
+                          <center><%= image_tag reservation.photos.first.image.url(:medium) %></center>
+                        
                         <div class="panel-body">
                           <% if reservation.review %>
+                           <div class="star-rating" data-score= <%= reservation.review.rating %>>
+                            </div>
                             <p>
-                            <strong><%= link_to reservation.review.creator.name, user_path(reservation.review.creator) %></strong>
-                            <div class="star-rating" data-score= <%= reservation.review.rating %>></div><br>
-                            <%= reservation.review.content %></p>
+                             "<%= reservation.review.content %>"
+                            <strong> - <%= link_to reservation.review.creator.name, user_path(reservation.review.creator) %></strong>
+                            </p>
                           <% end %>
                           <% count += 1 %>
                         </div>
@@ -47,17 +50,15 @@ Location: <%= @hotel.address %><br>
               <div class="col-sm-6 timeline-right">
                 <div class='timeline-event timeline-event-right animated bounceInRight animation-delay-<%="#{count}"%>'>
                     <div class="panel panel-primary">
-                        <div class="panel-heading"><%= reservation.itinerary.title%> (<%= reservation.start_date.strftime("%B %d, %Y") %> - <%= reservation.end_date.strftime("%B %d, %Y") %>)</div>
-                        <% reservation.photos.each do |photo| %>
-                          <center><%= image_tag photo.image.url(:medium) %></center>
-                        
-                        <% end %>
+                        <div class="panel-heading"><%= link_to reservation.itinerary.title, itinerary_path(reservation.itinerary)%> (<%= reservation.start_date.strftime("%B %d, %Y") %> - <%= reservation.end_date.strftime("%B %d, %Y") %>)</div>
+                        <center><%= image_tag reservation.photos.first.image.url(:medium) %></center>
                         <div class="panel-body">
                           <% if reservation.review %>
-                            <p>
-                            <strong><%= link_to reservation.review.creator.name, user_path(reservation.review.creator) %></strong> said: "<%= reservation.review.content %>"
                             <div class="star-rating" data-score= <%= reservation.review.rating %>>
-                            </div><br>
+                            </div>
+                            <p>
+                             "<%= reservation.review.content %>"
+                            <strong> - <%= link_to reservation.review.creator.name, user_path(reservation.review.creator) %></strong>
                             </p>
                           <% end %>
                           <% count += 1 %>
@@ -65,6 +66,7 @@ Location: <%= @hotel.address %><br>
                     </div>
                 </div>                
             </div>
+          <% end %>
           <% end %>
           <% end %>
         </div>
