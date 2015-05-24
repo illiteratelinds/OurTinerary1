@@ -7,20 +7,14 @@ Location: <%= @hotel.address %><br>
   
 <div class = "row">
   <div class="col-md-4">
-  
-
   <br><br>
     <iframe
         width= "100%"
         height="450"
         frameborder="0" style="border:0"
         src='https://www.google.com/maps/embed/v1/place?key=<%="#{ENV["GOOGLE_KEY"]}"%>&q=<%=@hotel.name+@hotel.address%>'>
-      </iframe>
- 
+      </iframe> 
   </div>
-
-
-
 
  <div class="col-md-8">
   <!-- begin timeline -->
