@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150428013414) do
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
-    t.boolean "status"
+    t.string "status"
   end
 
   create_table "hotels", force: :cascade do |t|
