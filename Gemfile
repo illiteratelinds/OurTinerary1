@@ -51,7 +51,7 @@ group :development, :test do
 end
 
 group :test, :development do
-  gem 'rspec-rails'
+#   gem 'rspec-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'better_errors'
